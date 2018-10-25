@@ -266,7 +266,7 @@ function login(): Promise<void> {
     return interactiveLoginWithAuthResponse(loginOptions).then((response: AuthResponse) => {
         const credentials = response.credentials as any;
         if (!fs.existsSync(pcsTmpDir)) {
-            fs.mkdir(pcsTmpDir);
+            fs.mkdirSync(pcsTmpDir);
         }
         const data = {
             credentials,

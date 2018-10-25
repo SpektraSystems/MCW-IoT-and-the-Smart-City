@@ -29,63 +29,63 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 <!-- TOC -->
 
 - [IoT for business hands-on lab step-by-step](#iot-for-business-hands-on-lab-step-by-step)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Overview](#overview)
-    - [Solution architecture](#solution-architecture)
-    - [Requirements](#requirements)
-    - [Exercise 1: Set up IoT Remote Monitoring solution environment](#exercise-1-set-up-iot-remote-monitoring-solution-environment)
-        - [Help references](#help-references)
-        - [Task 1: Execute CLI commands](#task-1-execute-cli-commands)
-        - [Task 2: Open new web application and stop running device simulation](#task-2-open-new-web-application-and-stop-running-device-simulation)
-    - [Exercise 2: Provision additional Azure services](#exercise-2-provision-additional-azure-services)
-        - [Help references](#help-references-1)
-        - [Task 1: Create Service Bus queue](#task-1-create-service-bus-queue)
-        - [Task 2: Add consumer group to IoT Hub](#task-2-add-consumer-group-to-iot-hub)
-        - [Task 3: Add custom endpoint and route to IoT Hub](#task-3-add-custom-endpoint-and-route-to-iot-hub)
-        - [Task 4: Create custom IoT Hub route](#task-4-create-custom-iot-hub-route)
-        - [Task 5: Create Azure Time Series Insights instance](#task-5-create-azure-time-series-insights-instance)
-        - [Task 6: Provision Azure Container Registry](#task-6-provision-azure-container-registry)
-        - [Task 7: Provision new Linux virtual machine to run the IoT Edge device](#task-7-provision-new-linux-virtual-machine-to-run-the-iot-edge-device)
-    - [Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters](#exercise-3-create-bus-and-traffic-light-simulated-devices-and-add-alerts-and-filters)
-        - [Help references](#help-references-2)
-        - [Task 1: Configure the SimulationAgent and WebService projects to run locally](#task-1-configure-the-simulationagent-and-webservice-projects-to-run-locally)
-        - [Task 2: Finish configuring the simulated IoT device models and scripts](#task-2-finish-configuring-the-simulated-iot-device-models-and-scripts)
-        - [Task 3: Explore the remaining files to understand what is happening](#task-3-explore-the-remaining-files-to-understand-what-is-happening)
-        - [Task 4: Configure and run the Storage Adapter project](#task-4-configure-and-run-the-storage-adapter-project)
-        - [Task 5: Run the Simulator web app and create a new simulation](#task-5-run-the-simulator-web-app-and-create-a-new-simulation)
-        - [Task 6: Run the device simulation agent locally](#task-6-run-the-device-simulation-agent-locally)
-        - [Task 7: Create alerts and filters in the monitoring web app](#task-7-create-alerts-and-filters-in-the-monitoring-web-app)
-        - [Task 8: Send jobs to IoT devices](#task-8-send-jobs-to-iot-devices)
-    - [Exercise 4: Create IoT Edge device and custom modules](#exercise-4-create-iot-edge-device-and-custom-modules)
-        - [Help references](#help-references-3)
-        - [Task 1: Add a new IoT Edge device](#task-1-add-a-new-iot-edge-device)
-        - [Task 2: Install and start the IoT Edge runtime](#task-2-install-and-start-the-iot-edge-runtime)
-        - [Task 3: Create and deploy the custom C\# IoT Edge module for vehicle telemetry](#task-3-create-and-deploy-the-custom-c\-iot-edge-module-for-vehicle-telemetry)
-        - [Task 4: Create the Azure Stream Analytics IoT Edge module](#task-4-create-the-azure-stream-analytics-iot-edge-module)
-        - [Task 5: Deploy the custom modules to IoT Edge device](#task-5-deploy-the-custom-modules-to-iot-edge-device)
-    - [Exercise 5: Run a console app to view critical engine alerts from the Service Bus Queue](#exercise-5-run-a-console-app-to-view-critical-engine-alerts-from-the-service-bus-queue)
-        - [Help references](#help-references-4)
-        - [Task 1: Make sure the Service Bus Queue is receiving messages](#task-1-make-sure-the-service-bus-queue-is-receiving-messages)
-        - [Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2017](#task-2-configure-and-execute-the-readenginealerts-solution-in-visual-studio-2017)
-    - [Exercise 6: Create Azure Function App to ingest critical engine alerts and store them in Cosmos DB](#exercise-6-create-azure-function-app-to-ingest-critical-engine-alerts-and-store-them-in-cosmos-db)
-        - [Help references](#help-references-5)
-        - [Task 1: Create new Cosmos DB collection](#task-1-create-new-cosmos-db-collection)
-        - [Task 2: Create a new Function App](#task-2-create-a-new-function-app)
-        - [Task 3: Create a new Function](#task-3-create-a-new-function)
-        - [Task 4: Add an Azure Cosmos DB output to the messages collection](#task-4-add-an-azure-cosmos-db-output-to-the-messages-collection)
-        - [Task 5: Add an Azure Cosmos DB output to the critical-alerts collection](#task-5-add-an-azure-cosmos-db-output-to-the-critical-alerts-collection)
-        - [Task 6: Modify the function code](#task-6-modify-the-function-code)
-        - [Task 7: View data stored by the function in Azure Cosmos DB](#task-7-view-data-stored-by-the-function-in-azure-cosmos-db)
-        - [Task 8: View the critical engine alerts in the IoT Remote Monitoring web interface](#task-8-view-the-critical-engine-alerts-in-the-iot-remote-monitoring-web-interface)
-        - [Task 9: Add tag to IoT Edge's device twin and create new filter from it](#task-9-add-tag-to-iot-edges-device-twin-and-create-new-filter-from-it)
-    - [Exercise 7: View all data in Azure Time Series Insights](#exercise-7-view-all-data-in-azure-time-series-insights)
-        - [Help references](#help-references-6)
-        - [Task 1: Add your account as a Contributor to the Data Access Policies](#task-1-add-your-account-as-a-contributor-to-the-data-access-policies)
-        - [Task 2: Go to the Time Series Insights environment and use the data explorer](#task-2-go-to-the-time-series-insights-environment-and-use-the-data-explorer)
-        - [Task 3: View the simulated and IoT Edge bus data side-by-side](#task-3-view-the-simulated-and-iot-edge-bus-data-side-by-side)
-        - [Task 4: Use Perspective View to create a simultaneous view of up to four unique queries](#task-4-use-perspective-view-to-create-a-simultaneous-view-of-up-to-four-unique-queries)
-    - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Delete the Resource group in which you placed your Azure resources.](#task-1-delete-the-resource-group-in-which-you-placed-your-azure-resources)
+  - [Abstract and learning objectives](#abstract-and-learning-objectives)
+  - [Overview](#overview)
+  - [Solution architecture](#solution-architecture)
+  - [Requirements](#requirements)
+  - [Exercise 1: Set up IoT Remote Monitoring solution environment](#exercise-1-set-up-iot-remote-monitoring-solution-environment)
+    - [Help references](#help-references)
+    - [Task 1: Execute CLI commands](#task-1-execute-cli-commands)
+    - [Task 2: Open new web application and stop running device simulation](#task-2-open-new-web-application-and-stop-running-device-simulation)
+  - [Exercise 2: Provision additional Azure services](#exercise-2-provision-additional-azure-services)
+    - [Help references](#help-references-1)
+    - [Task 1: Create Service Bus queue](#task-1-create-service-bus-queue)
+    - [Task 2: Add consumer group to IoT Hub](#task-2-add-consumer-group-to-iot-hub)
+    - [Task 3: Add custom endpoint and route to IoT Hub](#task-3-add-custom-endpoint-and-route-to-iot-hub)
+    - [Task 4: Create custom IoT Hub route](#task-4-create-custom-iot-hub-route)
+    - [Task 5: Create Azure Time Series Insights instance](#task-5-create-azure-time-series-insights-instance)
+    - [Task 6: Provision Azure Container Registry](#task-6-provision-azure-container-registry)
+    - [Task 7: Provision new Linux virtual machine to run the IoT Edge device](#task-7-provision-new-linux-virtual-machine-to-run-the-iot-edge-device)
+  - [Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters](#exercise-3-create-bus-and-traffic-light-simulated-devices-and-add-alerts-and-filters)
+    - [Help references](#help-references-2)
+    - [Task 1: Configure the SimulationAgent and WebService projects to run locally](#task-1-configure-the-simulationagent-and-webservice-projects-to-run-locally)
+    - [Task 2: Finish configuring the simulated IoT device models and scripts](#task-2-finish-configuring-the-simulated-iot-device-models-and-scripts)
+    - [Task 3: Explore the remaining files to understand what is happening](#task-3-explore-the-remaining-files-to-understand-what-is-happening)
+    - [Task 4: Configure and run the Storage Adapter project](#task-4-configure-and-run-the-storage-adapter-project)
+    - [Task 5: Run the Simulator web app and create a new simulation](#task-5-run-the-simulator-web-app-and-create-a-new-simulation)
+    - [Task 6: Run the device simulation agent locally](#task-6-run-the-device-simulation-agent-locally)
+    - [Task 7: Create alerts and filters in the monitoring web app](#task-7-create-alerts-and-filters-in-the-monitoring-web-app)
+    - [Task 8: Send jobs to IoT devices](#task-8-send-jobs-to-iot-devices)
+  - [Exercise 4: Create IoT Edge device and custom modules](#exercise-4-create-iot-edge-device-and-custom-modules)
+    - [Help references](#help-references-3)
+    - [Task 1: Add a new IoT Edge device](#task-1-add-a-new-iot-edge-device)
+    - [Task 2: Install and start the IoT Edge runtime](#task-2-install-and-start-the-iot-edge-runtime)
+    - [Task 3: Create and deploy the custom C\# IoT Edge module for vehicle telemetry](#task-3-create-and-deploy-the-custom-c\-iot-edge-module-for-vehicle-telemetry)
+    - [Task 4: Create the Azure Stream Analytics IoT Edge module](#task-4-create-the-azure-stream-analytics-iot-edge-module)
+    - [Task 5: Deploy the custom modules to IoT Edge device](#task-5-deploy-the-custom-modules-to-iot-edge-device)
+  - [Exercise 5: Run a console app to view critical engine alerts from the Service Bus Queue](#exercise-5-run-a-console-app-to-view-critical-engine-alerts-from-the-service-bus-queue)
+    - [Help references](#help-references-4)
+    - [Task 1: Make sure the Service Bus Queue is receiving messages](#task-1-make-sure-the-service-bus-queue-is-receiving-messages)
+    - [Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2017](#task-2-configure-and-execute-the-readenginealerts-solution-in-visual-studio-2017)
+  - [Exercise 6: Create Azure Function App to ingest critical engine alerts and store them in Cosmos DB](#exercise-6-create-azure-function-app-to-ingest-critical-engine-alerts-and-store-them-in-cosmos-db)
+    - [Help references](#help-references-5)
+    - [Task 1: Create new Cosmos DB collection](#task-1-create-new-cosmos-db-collection)
+    - [Task 2: Create a new Function App](#task-2-create-a-new-function-app)
+    - [Task 3: Create a new Function](#task-3-create-a-new-function)
+    - [Task 4: Add an Azure Cosmos DB output to the messages collection](#task-4-add-an-azure-cosmos-db-output-to-the-messages-collection)
+    - [Task 5: Add an Azure Cosmos DB output to the critical-alerts collection](#task-5-add-an-azure-cosmos-db-output-to-the-critical-alerts-collection)
+    - [Task 6: Modify the function code](#task-6-modify-the-function-code)
+    - [Task 7: View data stored by the function in Azure Cosmos DB](#task-7-view-data-stored-by-the-function-in-azure-cosmos-db)
+    - [Task 8: View the critical engine alerts in the IoT Remote Monitoring web interface](#task-8-view-the-critical-engine-alerts-in-the-iot-remote-monitoring-web-interface)
+    - [Task 9: Add tag to IoT Edge's device twin and create new filter from it](#task-9-add-tag-to-iot-edges-device-twin-and-create-new-filter-from-it)
+  - [Exercise 7: View all data in Azure Time Series Insights](#exercise-7-view-all-data-in-azure-time-series-insights)
+    - [Help references](#help-references-6)
+    - [Task 1: Add your account as a Contributor to the Data Access Policies](#task-1-add-your-account-as-a-contributor-to-the-data-access-policies)
+    - [Task 2: Go to the Time Series Insights environment and use the data explorer](#task-2-go-to-the-time-series-insights-environment-and-use-the-data-explorer)
+    - [Task 3: View the simulated and IoT Edge bus data side-by-side](#task-3-view-the-simulated-and-iot-edge-bus-data-side-by-side)
+    - [Task 4: Use Perspective View to create a simultaneous view of up to four unique queries](#task-4-use-perspective-view-to-create-a-simultaneous-view-of-up-to-four-unique-queries)
+  - [After the hands-on lab](#after-the-hands-on-lab)
+    - [Task 1: Delete the Resource group in which you placed your Azure resources.](#task-1-delete-the-resource-group-in-which-you-placed-your-azure-resources)
 
 <!-- /TOC -->
 
@@ -112,6 +112,8 @@ The solution begins with an **IoT Edge Device** that would be installed on each 
 -   Microsoft Azure subscription (non-Microsoft subscription) where you are at least a co-administrator.
 
 -   **Global Administrator role** for Azure AD within your subscription.
+
+-   You have completed the steps in [Before the hands-on-lab setup guide](Before%20the%20HOL.md).
 
 -   Local machine or a virtual machine configured with (**complete the day before the lab!**):
 
@@ -178,7 +180,7 @@ In this exercise, you will execute a series of command-line scripts to provision
 
 1.  Open a new Command Prompt window (Select Start, then enter **cmd** and press **Enter**).
 
-2.  Browse to the **azure-iot-pcs-remote-monitoring-dotnet\\cli** subfolder within your IoTLab folder containing the extracted solution files. Example: C:\\IoTLab \\azure-iot-pcs-remote-monitoring-dotnet\\cli.
+2.  Browse to the **azure-iot-pcs-remote-monitoring-dotnet\\cli** subfolder within your Lab-files folder containing the extracted solution files. Example: C:\\MCW-IoT-for-business-master\\Hands-on lab\\Lab-files\\azure-iot-pcs-remote-monitoring-dotnet\\cli.
 
 3.  Enter **npm install** and press **Enter**.
 
@@ -188,13 +190,17 @@ In this exercise, you will execute a series of command-line scripts to provision
 
 5.  After the task runs and the tests have passed, execute **npm link**.
 
-6.  Sign into your Azure subscription by executing **pcs login**. When prompted, browse to <https://aka.ms/devicelogin> and enter the provided code. This will generate an authentication token that is linked with the Azure CLI, after logging in.
+6.  Change directories to `C:\Users\demouser\AppData\Roaming\npm`: **cd C:\Users\demouser\AppData\Roaming\npm**.
+
+7.  Install the `iot-solutions` CLI with the following command: **npm install -g iot-solutions**.
+
+8.  Sign into your Azure subscription by executing **pcs login**. When prompted, browse to <https://aka.ms/devicelogin> and enter the provided code. This will generate an authentication token that is linked with the Azure CLI, after logging in.
 
     ![In the Device Login window, the code displays.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image15.png "Device Login window")
 
-7.  After you have authenticated, and the web page indicates you can close the browser, switch back to the Command Prompt window and execute the following command for a basic deployment: **pcs**.
+9.  After you have authenticated, and the web page indicates you can close the browser, switch back to the Command Prompt window and execute the following command for a basic deployment: **pcs**.
 
-8.  Enter the information for each of the prompts that follow:
+10. Enter the information for each of the prompts that follow:
 
     a.  Enter a **solution name**: type in a unique name for your solution. This will be your sub-domain as well as your new Azure Resource Group.
 
@@ -210,9 +216,9 @@ In this exercise, you will execute a series of command-line scripts to provision
 
     g.  **Confirm** your password.
 
-9.  If you receive an error after submitting, it can be caused by the solution name already existing in Azure Active Directory, or the prefix for azurewebsites.net not being available. This is indicated by a 400 status code (bad request). If this happens, enter **Ctrl+C** to cancel. This will take you back to the command prompt. Enter **pcs** once again and follow the prompts, choosing different values.
+11. If you receive an error after submitting, it can be caused by the solution name already existing in Azure Active Directory, or the prefix for azurewebsites.net not being available. This is indicated by a 400 status code (bad request). If this happens, enter **Ctrl+C** to cancel. This will take you back to the command prompt. Enter **pcs** once again and follow the prompts, choosing different values.
 
-10. After provisioning is complete, you will see an output containing your new Azure Resource Group name. This will be where the remaining services will be deployed for the lab. **Copy the URL**.
+12. After provisioning is complete, you will see an output containing your new Azure Resource Group name. This will be where the remaining services will be deployed for the lab. **Copy the URL**.
 
     ![In the Command Window, ot lab-2018 and the URL are called out, and results for both display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image16.png "Command window")
 
@@ -551,11 +557,11 @@ You will need to finish configuring these files for the simulator.
 
 In this task, you will open the device-simulation solution in Visual Studio 2017 and configure the SimulationAgent and WebService projects to run locally.
 
-1.  Browse to the device-simulation solution in the following location: \[your-IoTLab-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\device-simulation.
+1.  Browse to the device-simulation solution in the following location: \[your-Lab-files-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\device-simulation.
 
 2.  Open **device-simulation.sln**.
 
-    ![File Explorer displays with the previous path and file called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image40.png "File Explorer")
+    ![File Explorer displays with the previous path and file called out.](media/device-simulation-folder-explorer.png "File Explorer")
 
 3.  Right-click the **SimulationAgent** project in the Solution Explorer, then select **Properties**.
 
@@ -795,11 +801,11 @@ Below is a table containing file paths and an explanation of what each does in t
 
 The Storage Adapter project (pcs-storage-adapter) is another microservice that constantly runs and provides REST-based endpoints to manage simple key/value data in Cosmos DB. It is used by several services, including the web service within the device-simulator project, as seen in the previous task. This needs to be configured, then executed to run before creating and running simulations on the new devices locally.
 
-1.  Browse to the storage-adapter solution in the following location: \[your-IoTLab-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\storage-adapter.
+1.  Browse to the storage-adapter solution in the following location: \[your-Lab-files-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\storage-adapter.
 
 2.  Open **pcs-storage-adapter.sln**.
 
-    ![File Explorer is open to the the previously defined path, and the .sln file is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image52.png "File Explorer")
+    ![File Explorer is open to the the previously defined path, and the .sln file is selected.](media/storage-adapter-file-explorer.png "File Explorer")
 
 3.  Right-click the **WebService** project in the Solution Explorer, then select **Properties**.
 
@@ -1418,7 +1424,7 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ![Under Inputs, Vehicle Telemetry is selected, and from its right-click menu, Upload sample data from file is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image103.png "Inputs section")
 
-25. Use the browse button to select the **sample-vehicle-telemetry.json** file extracted to the IoTLab folder from the starter solution zip file you downloaded. This file contains \~5000 JSON records of simulated vehicle telemetry.
+25. Use the browse button to select the **sample-vehicle-telemetry.json** file extracted to the Lab-files folder from the starter solution zip file you downloaded. This file contains \~5000 JSON records of simulated vehicle telemetry.
 
     ![In the Upload test data blade, the browse field is set to the previously defined file.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image104.png "Upload test data blade")
 
@@ -1581,7 +1587,7 @@ As you remember, you created an Azure Service Bus Queue to ingest messages flagg
 
 ### Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2017
 
-1.  Browse to the IoTLab folder containing the extracted solution files for the lab.
+1.  Browse to the Lab-files folder containing the extracted solution files for the lab.
 
 2.  Open **ReadEngineAlerts\\ReadEngineAlerts.sln**.
 
