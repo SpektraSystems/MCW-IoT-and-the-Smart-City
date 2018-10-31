@@ -29,7 +29,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [IoT for business whiteboard design session student guide](#iot-for-business-whiteboard-design-session-student-guide)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-      - [Customer situation](#customer-situation)
+    - [Customer situation](#customer-situation)
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
