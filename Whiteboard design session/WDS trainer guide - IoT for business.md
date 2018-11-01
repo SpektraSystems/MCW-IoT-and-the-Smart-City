@@ -1,5 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
-
+![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 IoT for business
@@ -10,9 +9,8 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-August 2018
+October 2018
 </div>
-
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
 
@@ -29,31 +27,30 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
 <!-- TOC -->
 
 - [Trainer information](#trainer-information)
-    - [Role of the trainer](#role-of-the-trainer)
-    - [Whiteboard design session flow](#whiteboard-design-session-flow)
-    - [Before the whiteboard design session: how to prepare](#before-the-whiteboard-design-session-how-to-prepare)
-    - [During the whiteboard design session: tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
+  - [Role of the trainer](#role-of-the-trainer)
+  - [Whiteboard design session flow](#whiteboard-design-session-flow)
+  - [Before the whiteboard design session: How to prepare](#before-the-whiteboard-design-session-how-to-prepare)
+  - [During the whiteboard design session: Tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
 - [IoT for business whiteboard design session student guide](#iot-for-business-whiteboard-design-session-student-guide)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-        - [Customer situation](#customer-situation)
-        - [Customer needs](#customer-needs)
-        - [Customer objections](#customer-objections)
-        - [Infographic for common scenarios](#infographic-for-common-scenarios)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-    - [Step 3: Present the solution](#step-3-present-the-solution)
-    - [Step 3: Present the solution](#step-3-present-the-solution-1)
-    - [Wrap-up](#wrap-up)
-    - [Additional references](#additional-references)
+  - [Abstract and learning objectives](#abstract-and-learning-objectives)
+  - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
+    - [Customer situation](#customer-situation)
+    - [Customer needs](#customer-needs)
+    - [Customer objections](#customer-objections)
+    - [Infographic for common scenarios](#infographic-for-common-scenarios)
+  - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
+  - [Step 3: Present the solution](#step-3-present-the-solution)
+  - [Wrap-up](#wrap-up)
+  - [Additional references](#additional-references)
 - [IoT for business whiteboard design session trainer guide](#iot-for-business-whiteboard-design-session-trainer-guide)
-    - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
-    - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
-    - [Step 3: Present the solution](#step-3-present-the-solution-2)
-    - [Wrap-up](#wrap-up-1)
-    - [Preferred target audience](#preferred-target-audience)
-    - [Preferred solution](#preferred-solution)
-    - [Checklist of preferred objection handling](#checklist-of-preferred-objection-handling)
-    - [Customer quote (to be read back to the attendees at the end)](#customer-quote-to-be-read-back-to-the-attendees-at-the-end)
+  - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
+  - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
+  - [Step 3: Present the solution](#step-3-present-the-solution-1)
+  - [Wrap-up](#wrap-up-1)
+  - [Preferred target audience](#preferred-target-audience)
+  - [Preferred solution](#preferred-solution)
+  - [Checklist of preferred objection handling](#checklist-of-preferred-objection-handling)
+  - [Customer quote (to be read back to the attendees at the end)](#customer-quote-to-be-read-back-to-the-attendees-at-the-end)
 
 <!-- /TOC -->
 
@@ -65,27 +62,27 @@ Thank you for taking time to support the whiteboard design sessions as a trainer
 
 An amazing trainer:
 
--   Creates a safe environment in which learning can take place.
+- Creates a safe environment in which learning can take place.
 
--   Stimulates the participant's thinking.
+- Stimulates the participant's thinking.
 
--   Involves the participant in the learning process.
+- Involves the participant in the learning process.
 
--   Manages the learning process (on time, on topic, and adjusting to benefit participants).
+- Manages the learning process (on time, on topic, and adjusting to benefit participants).
 
--   Ensures individual participant accountability.
+- Ensures individual participant accountability.
 
--   Ties it all together for the participant.
+- Ties it all together for the participant.
 
--   Provides insight and experience to the learning process.
+- Provides insight and experience to the learning process.
 
--   Effectively leads the whiteboard design session discussion.
+- Effectively leads the whiteboard design session discussion.
 
--   Monitors quality and appropriateness of participant deliverables.
+- Monitors quality and appropriateness of participant deliverables.
 
--   Effectively leads the feedback process.
+- Effectively leads the feedback process.
 
-## Whiteboard design session flow 
+## Whiteboard design session flow
 
 Each whiteboard design session uses the following flow:
 
@@ -95,11 +92,11 @@ Each whiteboard design session uses the following flow:
 
 Analyze your customer's needs.
 
--   Customer's background, situation, needs and technical requirements
+- Customer's background, situation, needs and technical requirements
 
--   Current customer infrastructure and architecture
+- Current customer infrastructure and architecture
 
--   Potential issues, objectives and blockers
+- Potential issues, objectives and blockers
 
 **Step 2: Design a proof of concept solution (60 minutes)**
 
@@ -107,13 +104,13 @@ Analyze your customer's needs.
 
 Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
--   Determine your target customer audience.
+- Determine your target customer audience.
 
--   Determine customer's business needs to address your solution.
+- Determine customer's business needs to address your solution.
 
--   Design and diagram your solution.
+- Design and diagram your solution.
 
--   Prepare to present your solution.
+- Prepare to present your solution.
 
 **Step 3: Present the solution (30 minutes)**
 
@@ -121,29 +118,29 @@ Design a solution and prepare to present the solution to the target customer aud
 
 Present solution to your customer:
 
--   Present solution
+- Present solution
 
--   Respond to customer objections
+- Respond to customer objections
 
--   Receive feedback
+- Receive feedback
 
 **Wrap-up (15 minutes)**
 
--   Review preferred solution
+- Review preferred solution
 
 ## Before the whiteboard design session: How to prepare
 
 Before conducting your first whiteboard design session:
 
--   Read the Student guide (including the case study) and Trainer guide.
+- Read the Student guide (including the case study) and Trainer guide.
 
--   Become familiar with all key points and activities.
+- Become familiar with all key points and activities.
 
--   Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions.
+- Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions.
 
--   Prior to the whiteboard design session, discuss the case study to pick up more ideas.
+- Prior to the whiteboard design session, discuss the case study to pick up more ideas.
 
--   Make notes for later.
+- Make notes for later.
 
 ## During the whiteboard design session: Tips for an effective whiteboard design session
 
@@ -153,13 +150,13 @@ Before conducting your first whiteboard design session:
 
 When participants are doing activities, you can **look ahead to refresh your memory**.
 
--   **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing.
+- **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing.
 
--   **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
+- **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
 
--   **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
+- **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
 
-***Have fun**! Encourage participants to have fun and share!*
+**\*Have fun**! Encourage participants to have fun and share!\*
 
 **Involve your participants.** Talk and share your knowledge but always involve your participants, even while you are the one speaking.
 
@@ -169,15 +166,15 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 **Wait for responses**. If you ask a question such as, "What's your experience with (fill in the blank)?" then wait. Do not be afraid of a little silence. If you leap into the silence, your participants will feel you are not serious about involving them and will become passive. Give participants a chance to think, and if no one answers, patiently ask again. You will usually get a response.
 
-#  IoT for business whiteboard design session student guide
+# IoT for business whiteboard design session student guide
 
-## Abstract and learning objectives 
+## Abstract and learning objectives
 
 This whiteboard design session is designed to help you gain a better understanding of implementing architectures that use IoT data in new and innovative ways. You will design an IoT workflow that begins with a local IoT edge device that collects and analyzes data from various sensors that are connected to it, and intelligently aggregates and sends that data to the cloud when anomalies are detected. Once the data is uploaded, it is sent to a time-series database for rapid analysis alongside other classes of IoT data to spot and act on correlated information in real-time. You will also configure alerts when certain thresholds are exceeded and configure a custom-built application that manages and sends control messages to IoT devices located within the city limits.
 
 At the end of this whiteboard design session, you will be better able to design an end-to-end IoT solution that processes and analyzes data both in the field and in the cloud.
 
-## Step 1: Review the customer case study 
+## Step 1: Review the customer case study
 
 **Outcome**
 
@@ -213,7 +210,7 @@ Relecloud has been contracted to build a cloud-based architecture based on these
 
 Following this same mandate of ease of use and future flexibility without overtaxing an already busy city IT department, Relecloud is seeking options for capturing and displaying time series data that allows the end user to easily combine all of the data in any number of ways, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added. Additionally, this data needs to be accessible by an external web application for managing alerts and device management and must be able to display the raw data within a given timeframe, without pre-aggregation, at scale.
 
-### Customer needs 
+### Customer needs
 
 1.  Reduce bus maintenance costs by analyzing city bus telemetry and applying predictive analysis provided by a trained machine learning model.
 
@@ -233,7 +230,7 @@ Following this same mandate of ease of use and future flexibility without overta
 
 9.  Have a custom web application to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
 
-### Customer objections 
+### Customer objections
 
 1.  If bus data is collected offline and sent later on, how can we be certain that the time series data is not displayed out of order from when it was captured?
 
@@ -243,7 +240,7 @@ Following this same mandate of ease of use and future flexibility without overta
 
 ### Infographic for common scenarios
 
-![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessiontrainerguide-IoTforbusinessimages/media/image2.png "Common Scenario for IoT")
+![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessiontrainerguide-IoTforbusinessimages/media/image2.png 'Common Scenario for IoT')
 
 ## Step 2: Design a proof of concept solution
 
@@ -255,7 +252,7 @@ Timeframe: 60 minutes
 
 **Business needs**
 
-Directions:  With all participants at your table, answer the following questions and list the answers on a flip chart:
+Directions: With all participants at your table, answer the following questions and list the answers on a flip chart:
 
 1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
 
@@ -265,11 +262,11 @@ Directions:  With all participants at your table, answer the following questions
 
 Directions: With all participants at your table, respond to the following questions on a flip chart:
 
- *High-level architecture*
+_High-level architecture_
 
 1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the bus and traffic light IoT devices, data ingestion, storage, and visualization.
 
-*IoT Devices*
+_IoT Devices_
 
 1.  Which data ingest service would you use for this scenario, IoT Hub or Event Hubs? Be specific.
 
@@ -281,7 +278,7 @@ Directions: With all participants at your table, respond to the following questi
 
 5.  Using your ingest service, how would you handle critical messages separately to route them to custom endpoints based on message properties?
 
-*Data and visualization*
+_Data and visualization_
 
 1.  Keeping the requirement for ease of use and flexibility in mind, how would you propose storing time series data for all the IoT devices? Is there a need for secondary storage?
 
@@ -291,7 +288,7 @@ Directions: With all participants at your table, respond to the following questi
 
 4.  What would you recommend using to combine bus and traffic light information, filtering the data by the close proximity of both types of IoT devices, then by average bus speed information based on predefined speed thresholds for detecting slow traffic near the traffic lights? How can this data be used to send alerts and cloud-to-device traffic light timing change messages?
 
-*Location-based data and mapping*
+_Location-based data and mapping_
 
 1.  Relecloud wants to integrate map visualization to show the location of buses, traffic lights, and other devices. They would like to use a mapping service that does not require them to send data to an external resource, can be used with other Azure services like Stream Analytics, and supports data privacy and compliance when needed.
 
@@ -335,80 +332,80 @@ Directions:
 
 7.  Tables switch roles and repeat Steps 2-6.
 
-##  Wrap-up 
+## Wrap-up
 
 Timeframe: 15 minutes
 
 Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
-##  Additional references
+## Additional references
 
-|    |            |
-|----------|:-------------:|
-| Hi-resolution version of blueprint                                       | <https://msdn.microsoft.com/dn630664#fbid=rVymR_3WSRo>                                        |
-| What is Azure IoT Edge?                                                  | <https://docs.microsoft.com/en-us/azure/iot-edge/how-iot-edge-works>                          |
-| Understand the requirements and tools for developing IoT Edge modules    | <https://docs.microsoft.com/en-us/azure/iot-edge/module-development>                          |
-| Deploy Azure Machine Learning as an IoT Edge module                      | <https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-deploy-machine-learning>              |
-| Deploy and monitor IoT Edge modules at scale                             | <https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-monitor>                         |
-| Understand and use device twins in IoT Hub                               | <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twins>                  |
-| Routing messages with IoT Hub                                            | <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-process-d2c>              |
-| Use message routes and custom endpoints for device-to-cloud messages     | <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-custom>          |
-| Send cloud-to-device messages from IoT Hub                               | <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-c2d>                  |
-| Schedule jobs on multiple devices                                        | <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-jobs>                          |
-| What is Azure Time Series Insights?                                      | <https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-overview>     |
-| Azure Time Series Insights explorer                                      | <https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-explorer>     |
-| About Azure Cosmos DB                                                    | <https://docs.microsoft.com/en-us/azure/cosmos-db/introduction>                                 |
-| Target Azure Cosmos DB for JSON output from Stream Analytics             | <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-documentdb-output>    |
-| Using reference data or lookup tables in a Stream Analytics input stream | <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-use-reference-data>   |
+|                                                                          |                                                                                                 |
+| ------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------: |
+| Hi-resolution version of blueprint                                       |                     <https://msdn.microsoft.com/dn630664#fbid=rVymR_3WSRo>                      |
+| What is Azure IoT Edge?                                                  |              <https://docs.microsoft.com/en-us/azure/iot-edge/how-iot-edge-works>               |
+| Understand the requirements and tools for developing IoT Edge modules    |              <https://docs.microsoft.com/en-us/azure/iot-edge/module-development>               |
+| Deploy Azure Machine Learning as an IoT Edge module                      |       <https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-deploy-machine-learning>        |
+| Deploy and monitor IoT Edge modules at scale                             |             <https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-monitor>             |
+| Understand and use device twins in IoT Hub                               |         <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twins>          |
+| Routing messages with IoT Hub                                            |       <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-process-d2c>        |
+| Use message routes and custom endpoints for device-to-cloud messages     |     <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-custom>      |
+| Send cloud-to-device messages from IoT Hub                               |         <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-c2d>          |
+| Schedule jobs on multiple devices                                        |             <https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-jobs>              |
+| What is Azure Time Series Insights?                                      |   <https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-overview>   |
+| Azure Time Series Insights explorer                                      |   <https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-explorer>   |
+| About Azure Cosmos DB                                                    |                 <https://docs.microsoft.com/en-us/azure/cosmos-db/introduction>                 |
+| Target Azure Cosmos DB for JSON output from Stream Analytics             |  <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-documentdb-output>   |
+| Using reference data or lookup tables in a Stream Analytics input stream |  <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-use-reference-data>  |
 | Run Azure Functions with Azure Stream Analytics jobs                     | <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-with-azure-functions> |
-| Azure Stream Analytics on IoT Edge                     | <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-edge>                |
-| GeoSpatial Functions                                   | <https://msdn.microsoft.com/en-us/library/mt778980.aspx>                                       |
-| About Azure Location Based Services                    | <https://docs.microsoft.com/en-us/azure/location-based-services/about-location-based-services> |
-| Using the Azure Location Based Services Search service | <https://docs.microsoft.com/en-us/azure/location-based-services/how-to-search-for-address>     |
+| Azure Stream Analytics on IoT Edge                                       |         <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-edge>         |
+| GeoSpatial Functions                                                     |                    <https://msdn.microsoft.com/en-us/library/mt778980.aspx>                     |
+| About Azure Location Based Services                                      | <https://docs.microsoft.com/en-us/azure/location-based-services/about-location-based-services>  |
+| Using the Azure Location Based Services Search service                   |   <https://docs.microsoft.com/en-us/azure/location-based-services/how-to-search-for-address>    |
 
 # IoT for business whiteboard design session trainer guide
 
 ## Step 1: Review the customer case study
 
--   Check in with your table participants to introduce yourself as the trainer.
+- Check in with your table participants to introduce yourself as the trainer.
 
--   Ask, "What questions do you have about the customer case study?"
+- Ask, "What questions do you have about the customer case study?"
 
--   Briefly review the steps and timeframes of the whiteboard design session.
+- Briefly review the steps and timeframes of the whiteboard design session.
 
--   Ready, set, go! Let the table participants begin.
+- Ready, set, go! Let the table participants begin.
 
 ## Step 2: Design a proof of concept solution
 
--   Check in with your tables to ensure that they are transitioning from step to step on time.
+- Check in with your tables to ensure that they are transitioning from step to step on time.
 
--   Provide some feedback on their responses to the business needs and design.
+- Provide some feedback on their responses to the business needs and design.
 
-    -   Try asking questions first that will lead the participants to discover the answers on their own.
+  - Try asking questions first that will lead the participants to discover the answers on their own.
 
--   Provide feedback for their responses to the customer's objections.
+- Provide feedback for their responses to the customer's objections.
 
-    -   Try asking questions first that will lead the participants to discover the answers on their own.
+  - Try asking questions first that will lead the participants to discover the answers on their own.
 
 ## Step 3: Present the solution
 
--   Determine which table will be paired with your table before Step 3 begins.
+- Determine which table will be paired with your table before Step 3 begins.
 
--   For the first round, assign one table as the presenting team and the other table as the customer.
+- For the first round, assign one table as the presenting team and the other table as the customer.
 
--   Have the presenting team present their solution to the customer team.
+- Have the presenting team present their solution to the customer team.
 
-    -   Have the customer team provide one objection for the presenting team to respond to.
+  - Have the customer team provide one objection for the presenting team to respond to.
 
-    -   The presentation, objections, and feedback should take no longer than 15 minutes.
+  - The presentation, objections, and feedback should take no longer than 15 minutes.
 
-    -   If needed, the trainer may also provide feedback.
+  - If needed, the trainer may also provide feedback.
 
 ## Wrap-up
 
--   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
+- Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
 
-##  Preferred target audience
+## Preferred target audience
 
 Rodrigo Romani, Chief Technical Officer (CTO), Relecloud
 
@@ -416,17 +413,17 @@ The primary audience is the business decision makers and technology decision mak
 
 ## Preferred solution
 
-*High-level architecture*
+_High-level architecture_
 
 1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the license plate processing serverless components, OCR capabilities, data export workflow, and monitoring plus DevOps.
 
-    ![The Solution Architecture diagram is described in the text following the diagram.](images/Whiteboarddesignsessiontrainerguide-IoTforbusinessimages/media/image3.png "Solution Architecture diagram")
+    ![The Solution Architecture diagram is described in the text following the diagram.](images/Whiteboarddesignsessiontrainerguide-IoTforbusinessimages/media/image3.png 'Solution Architecture diagram')
 
     The solution begins with an IoT Edge device installed on each city bus, which is responsible for reading the vehicle telemetry from the bus, such as speed, fuel level, oil level, engine temperature, etc. A trained Azure Machine Learning predictive maintenance module is loaded on the IoT Edge device to detect anomalies and potential issues. An Azure Stream Analytics module is added to the IoT Edge device to filter the output of the predictive maintenance module and send only the anomaly data to IoT Hub. A GPS IoT device is separately added to the bus to periodically send location and speed data to IoT Hub. An IoT device is added to various traffic lights to send maintenance-related telemetry, such as voltage readings and whether a light is no longer functional. It is registered as a device in IoT Hub, including properties such as its longitude and latitude and serial number. It can receive cloud-to-device messages through IoT Hub, allowing upstream services to send updates like the timing of its lights based on traffic congestion information. An additional consumer group is added to IoT Hub's messages/events endpoint, allowing a Time Series Insights instance and a Stream Analytics instance to simultaneously read the incoming data. Time Series Insights is used to store the raw time series data and provides advanced filtering, custom ad-hoc queries, and visualizations that can overlay data from several classes of IoT devices. Stream Analytics is used to collect the bus GPS and traffic light data, joining the two using geospatial queries to find buses within close proximity to traffic lights, and using reference data to filter the data based on average bus speeds. The filtered data indicating traffic congestion is sent to Azure Functions to evaluate the data and compare it against traffic data stored in Cosmos DB. If it appears traffic congestion is changing, the function updates Cosmos DB accordingly. Another function is triggered when traffic timing control messages appear in a Cosmos DB collection, whether automatically added by the previous function, or manually added by the web app. It sends a cloud-to-device control message to IoT Hub to send a timing change request to a specific traffic light if needed. Stream Analytics also inserts unfiltered bus location data to Cosmos DB. A custom-built web app uses the Time Series Insights REST Query APIs to display a custom view of the captured IoT data. It uses Azure Location Based Services to plot the devices on a map and display geocode data such as posted speed limits and road use. The web app connects to Cosmos DB to manage alert rules and device control messages. It is also used to provision new IoT devices and send manual cloud-to-device messages through IoT Hub. At the bottom of the diagram is the Stream Analytics reference data update process, orchestrated by Azure Data Factory. The reference data stores speed limit information and speed alert threshold data for the traffic lights.
 
->**Note**: The preferred solution is only one of many possible, viable approaches.
+> **Note**: The preferred solution is only one of many possible, viable approaches.
 
-*IoT Devices*
+_IoT Devices_
 
 1.  Which data ingest service would you use for this scenario, IoT Hub or Event Hubs? Be specific.
 
@@ -444,11 +441,11 @@ The primary audience is the business decision makers and technology decision mak
 
     Traffic lights will have IoT devices installed that send maintenance-related telemetry, such as voltage readings, state (which light is currently illuminated), bulb status, etc. When the IoT device is provisioned in IoT Hub, its device twin will contain metadata properties for the serial number, latitude, longitude, and street information. The custom web application will populate this data and handle device provisioning for this and other IoT devices. The device will update its reported properties for its maintenance and state telemetry through device-to-cloud messages. One-way notifications can be sent to the device via cloud-to-device messages sent through IoT Hub that can be used to modify the light timing (how long a light stays green or red). In addition, the back-end service that sends the cloud-to-device message can request feedback from the device, letting it know whether the command was successfully processed. This allows the sender to implement retry or compensation logic.
 
-5.  Using your ingest service, how would you handle critical messages separately to route them to custom endpoints based on message properties? 
+5.  Using your ingest service, how would you handle critical messages separately to route them to custom endpoints based on message properties?
 
     Use custom endpoints and routes in IoT Hub to route device-to-cloud messages to a service-facing endpoint such as a Service Bus Queue, based on the message property. This will make sure critical messages, such as a traffic light outage or mechanical failure on a bus, to be processed separately if needed. This is accomplished by creating a new Service Bus Queue in the same subscription and region as IoT Hub, then creating a custom endpoint in IoT Hub that for the queue. Create a new route using DeviceMessages as its data source, the custom endpoint you created for the route endpoint, and a query parameter that filters on a device property, such as: level="critical". Device messages flowing into IoT Hub that meet the new routing rule will be sent to your Service Bus Queue, where any downstream services or applications can act upon the message data.
 
-*Data and visualization*
+_Data and visualization_
 
 1.  Keeping the requirement for ease of use and flexibility in mind, how would you propose storing time series data for all the IoT devices? Is there need for secondary storage?
 
@@ -522,11 +519,12 @@ The primary audience is the business decision makers and technology decision mak
     lights.serial_number, lights.light_device_id,
     buses.bus_enqueued_time,
     TumblingWindow(Duration(minute, 2), Offset(millisecond, -1))
+    ```
 
 
     ```
 
-*Location-based data and mapping*
+_Location-based data and mapping_
 
 1.  Relecloud wants to integrate map visualization to show the location of buses, traffic lights, and other devices. They would like to use a mapping service that does not require them to send data to an external resource, can be used with other Azure services like Stream Analytics, and supports data privacy and compliance when needed.
 
@@ -574,7 +572,6 @@ The primary audience is the business decision makers and technology decision mak
             }
         ]
     }
-
     ```
 
 ## Checklist of preferred objection handling
@@ -596,4 +593,3 @@ The primary audience is the business decision makers and technology decision mak
 "We were amazed when our Microsoft rep introduced us to IoT Edge devices! We were already familiar with IoT Hub, Streaming Analytics, and Azure Machine Learning, but when we found out that some of these same components can be run on a modestly powered device on our buses through IoT Edge, we couldn't wait to get started. The best part about our new solution is that we were able to use the same powerful capabilities for working with our IoT devices both offline and in the cloud. Having ready-made services online in minutes that help us handle, and manage, a huge number of devices was just the cherry on top!"
 
 --- Rodrigo Romani, CTO, Relecloud
-
