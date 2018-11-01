@@ -125,9 +125,9 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 7.  Login to the LABVM using the following credentials:
 
-    a. Username: demouser
+    - Username: demouser
 
-    b. Password: Password.1!!
+    - Password: Password.1!!
 
     ![Enter demouser as the username, and Password.1!! as the password](images/Setup/image8.png 'Login credential fields')
 
@@ -178,3 +178,5 @@ There are several artifacts that will be used in this hands-on lab. All of these
    ![Change the destination path to C:\ and click on Extract](media/extract-lab-files-dialog.png 'Extract Compressed Folders Dialog')
 
 6. The lab files are located here: `C:\MCW-IoT-for-business-master\Hands-on lab\Lab-files`.
+
+You should follow all steps provided *before* performing the Hands-on lab.
