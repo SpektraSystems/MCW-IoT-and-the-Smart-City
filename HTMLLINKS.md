@@ -7,5 +7,3 @@
 
 [HOL step-by-step - IoT for business.html](https://cloudworkshop.blob.core.windows.net/iot-for-business/Hands-on%20lab/HOL%20step-by-step%20-%20IoT%20for%20business.html)
 
-[HOL unguided - IoT for business.html](https://cloudworkshop.blob.core.windows.net/iot-for-business/Hands-on%20lab/HOL%20unguided%20-%20IoT%20for%20business.html)
-
