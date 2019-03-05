@@ -95,10 +95,12 @@ function main(context, previousState) {
     state.latitude = coords.latitude;
     state.longitude = coords.longitude;
 
-    // 30 +/- 50%,  Min 0, Max 80
+    // 42 +/- 50%,  Min 0, Max 80
+    // TODO: 3 - finish this line of code:
     state.speed = vary(42, 50, 0, 80);
 
-    // 70 +/- 25%,  Min 2, Max 80
+    // 53 +/- 25%,  Min 2, Max 80
+    // TODO: 4 - finish this line of code:
     state.fuellevel = vary(53, 25, 2, 80);
 
     return state;

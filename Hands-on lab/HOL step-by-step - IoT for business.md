@@ -526,15 +526,24 @@ In this task, you will open the device-simulation solution in Visual Studio 2017
 
     ![The Assembly name and Target framework fields display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image42.png "Simulator fields")
 
-5.  Select **Debug** from the left-hand menu. In the Environment variables section, edit the PCS\_IOTHUB\_CONNSTRING value, replacing "EnterHubConnString" with the IoT Hub connection string you copied earlier.
+5.  Select **Debug** from the left-hand menu. In the Environment variables section, add the PCS\_IOTHUB\_CONNSTRING variable, replacing the value with the IoT Hub connection string you copied earlier.
 
-    ![On the SimulationAgent tab, Debug is selected, and in the Environment variables section, the value for PCS\_IOTHUB-CONNSTRING is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image43.png "SimulationAgent tab")
+    ![On the SimulationAgent properties, Debug tab is selected, and in the Environment variables section, the value for PCS\_IOTHUB_CONNSTRING is added.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image43.png "SimulationAgent project debug properties")
 
-6.  Save your changes to the file.
+6.  In the same Environment variables section, add the PCS\_STORAGEADAPTER\_WEBSERVICE\_URL variable, replacing the value with **http://localhost:9022/v1**.
 
-7.  Right-click the **WebService** project, go to **Properties**. Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
+    ![On the SimulationAgent properties, Debug tab is selected, and in the Environment variables section, the value for PCS\_STORAGEADAPTER\_WEBSERVICE\_URL is added.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image187.png "SimulationAgent project debug properties")
 
-8.  Next, select **Debug** from the left-hand menu. Edit the PCS\_IOTHUB\_CONNSTRING environment variable with the same value you supplied for the SimulationAgent, then save.
+7.  Save your changes to the file.
+
+8.  Right-click the **WebService** project, go to **Properties**. Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
+
+9.  Next, select **Debug** from the left-hand menu. Add the PCS\_IOTHUB\_CONNSTRING environment variable with the same value you supplied for the SimulationAgent.
+
+10. On the same **Debug** screen, under **Web Server Settings** change the **App URL** value to **http://localhost:9022/v1/status**.
+ ![On the WebService project properties, Debug tab is selected, and in the Web Server Settings the App Url value is set.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image188.png "WebService project properties")
+
+11.  Save your changes to the file.
 
 ### Task 2: Finish configuring the simulated IoT device models and scripts
 
@@ -672,7 +681,7 @@ In this task, you will finish configuring the device models we have provided for
 
 14. Open **trafficlight-02.json**.
 
-15. Add the [same]{.underline} **CloudToDeviceMethods** that you added to trafficlight-01.json.
+15. Add the same **CloudToDeviceMethods** that you added to trafficlight-01.json.
 
 16. Save your changes.
 
@@ -745,7 +754,7 @@ Below is a table containing file paths and an explanation of what each does in t
             - Connect to IoT Hub
             - Bootstrap the device to retrieve it, create if necessary, and update the device twin state 
             - Update the device state using the state scripts we created, in order to send telemetry
-            - Sends telemetry using the message template provided, as seen in the bus and traffic light device model scripts you edited earlier. Uses the DeviceClient class to send the message through the Device SDK for Azure IoT Devices |
+            - Sends telemetry using the message template provided, as seen in the bus and traffic light device model scripts you edited earlier. Uses the DeviceClient class to send the message through the Device SDK for Azure IoT Devices.
 
     - Visual Studio Project: WebService
         - File Path: v1\\Controllers\\SimulationsController 
@@ -770,7 +779,7 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
     ![The Assembly name and Target framework fields display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image54.png "Simulator fields")
 
-5.  Select **Debug** from the left-hand menu. In the Environment variables section, edit the PCS\_STORAGEADAPTER\_DOCUMENTDB\_CONNSTRING value, replacing "..." with the Cosmos DB connection string. To find your connection string, do the following:
+5.  Select **Debug** from the left-hand menu. In the Environment variables section, add the PCS\_STORAGEADAPTER\_DOCUMENTDB\_CONNSTRING value, replacing "..." with the Cosmos DB connection string. To find your connection string, do the following:
 
     a.  Open your Cosmos DB instance from within your lab's resource group.
 
