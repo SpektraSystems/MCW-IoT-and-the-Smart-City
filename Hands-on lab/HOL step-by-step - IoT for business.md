@@ -538,12 +538,19 @@ In this task, you will open the device-simulation solution in Visual Studio 2017
 
 8.  Right-click the **WebService** project, go to **Properties**. Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
 
-9.  Next, select **Debug** from the left-hand menu. Add the PCS\_IOTHUB\_CONNSTRING environment variable with the same value you supplied for the SimulationAgent.
+9.  Next, select **Debug** from the left-hand menu. 
 
-10. On the same **Debug** screen, under **Web Server Settings** change the **App URL** value to **http://localhost:9022/v1/status**.
- ![On the WebService project properties, Debug tab is selected, and in the Web Server Settings the App Url value is set.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image188.png "WebService project properties")
+    a.  Ensure the **Launch Browser** checkbox is checked and that its value is set to **http://localhost:9003/v1/status**.
 
-11.  Save your changes to the file.
+    b.  Add the **PCS\_IOTHUB\_CONNSTRING** environment variable with the same value you supplied for the SimulationAgent.
+
+    c. Add another Environment variable named **PCS\_STORAGEADAPTER\_WEBSERVICE\_URL** and set its value to **http://localhost:9022/v1**.
+
+    d. Remaining on the **Debug** screen, in the **Web Server Settings** section, ensure the **App URL** property is set to **http://localhost:9003/**.
+
+![On the WebService project properties, Debug tab is selected](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image190.png "WebService project debug properties")
+
+10.  Save your changes to the file.
 
 ### Task 2: Finish configuring the simulated IoT device models and scripts
 
@@ -787,21 +794,32 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
     c.  Copy the **Primary Connection String**.
 
+    d. Paste the value in the PCS\_STORAGEADAPTER\_DOCUMENTDB\_CONNSTRING environment variable value.
+
 ![In the Azure Cosmos DB account blade, under Settings, Keys is selected. On the Read-write keys tab, the copy button is selected for the Primary Connection String.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image55.png "Azure Cosmos DB account blade")
+
 
 ![On the WebService tab, Debug is selected, and the Environment variables value is called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image56.png "WebService tab")
 
-6.  Save your changes to the file.
+6.  Remaining in your **Debug** screen:
+    
+    a. Ensure the **Launch Browser** checkmark is checked, and has the value **http://localhost:9022/v1/status**.
 
-7.  Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
+    b. In the **Web Server Settings** section, ensure the **App URL** is set to **http://localhost:9022/**.
+
+    ![On the WebService tab, Debug is selected, and the Launch Browser and App Url settings are set.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image56.png "WebService Properties Debug tab")
+
+7.  Save your changes to the file.
+
+8.  Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
 
     ![In Solution Explorer, WebService is selected, and from its right-click menu, Debug, and then Start new instance are selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image57.png "Solution Explorer")
 
-8.  The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is OK.
+9.  The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is OK.
 
     ![The status response of \"OK: Alive and well\" is highlighted in the Web service window.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image58.png "Web service window")
 
-9.  Leave the project running in debug mode for the duration of the lab.
+10.  Leave the project running in debug mode for the duration of the lab.
 
 ### Task 5: Run the Simulator web app and create a new simulation
 
@@ -898,11 +916,13 @@ Run the simulator and let it continue running in the background.
 
 The IoT Remote Monitoring web interface enables you to create filters that help group devices by type or other parameters. You can also create alerts that are fired when certain criteria are met, enabling you to see the alerts alongside your device data or on the map. In this task, you will create filters for your buses and traffic lights, then create an alert for traffic lights whose voltage exceed a predefined level.
 
-1.  Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is \[your solution name\].azurewebsites.net. You may need to refresh the browser window if it has been running for some time and is unresponsive.
+1.  Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is **https://\[your solution name\].azurewebsites.net/dashboard. You may need to refresh the browser window if it has been running for some time and is unresponsive.
 
-2.  One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map over New York City. In the screenshot below, the new voltage telemetry option is selected, and data for the two new traffic lights appear beneath.
+2.  One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map over New York City. In the screenshot below, the new fuel level telemetry option is selected, and data for the two new buses appear beneath.
 
     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image67.png "Monitoring Web App dashboard")
+
+     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image191.png "Monitoring Web App dashboard")
 
 3.  Create a new device group by selecting **Manage device groups** on the upper-right portion of the dashboard.
 
@@ -970,6 +990,8 @@ The IoT Remote Monitoring web interface enables you to create filters that help 
 
     ![Fields in the New rule section are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image72.png "New rule section")
 
+     ![Fields in the New rule section are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image192.png "New rule section")
+
 11. Select **Apply**. Notice that it shows 2 devices are affected by this rule.
 
 12. Navigate back to the dashboard. It may take a few minutes for the alerts to start appearing. When you filter by Traffic Lights and zoom in on the map over New York, you will see both traffic lights pinned to the map. One with the critical alert. Also notice the alarm count on the left.
@@ -994,7 +1016,7 @@ In this task, you will send a job to one of the traffic light devices, using the
 
     ![In the Telemetry section, timing (2) is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image75.png "Telemetry section")
 
-3.  Navigate to **Devices** using the left-hand menu.
+3.  Navigate to **Device Explorer** using the left-hand menu.
 
 4.  Check the box next to **Simulated.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list).
 
