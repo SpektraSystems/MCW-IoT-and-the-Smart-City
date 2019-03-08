@@ -388,15 +388,10 @@ Azure Time Series Insights is the first fully managed time series database on th
 
 3.  Select **Event Sources** from the left-hand menu.
 
-4.  Select the IoT Hub Event Source.
+4.  View the IoT Hub Event Source.
 
     ![Event Sources is selected under Environment Toplogy, and the Add button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image185.png "Event Sources blade")
 
-5.  On the event source blade, paste the primary key that you saved in the last excercise into the IoT Hub Policy Key Field.
-
-    ![Add Hub Policy Key to the Event Source](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image186.png "Event source blade")
-
-6. Press **Save**.
 
 ### Task 6: Provision Azure Container Registry
 
@@ -1059,7 +1054,7 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 
 2.  Open **IoT Hub** in your solution's resource group.
 
-3.  Select **IoT Edg**e from the left-hand menu, then select **+ Add to IoT Edge Device**.
+3.  Select **IoT Edge** from the left-hand menu, then select **+ Add to IoT Edge Device**.
 
     ![The Add IoT Edge Device button is selected in the IoT Hub blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image78.png "IoT Hub blade")
 
