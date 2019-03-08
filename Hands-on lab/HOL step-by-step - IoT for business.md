@@ -1076,59 +1076,85 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 
     ![In the Device Details blade, the copy button for the Connection string - primary key is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image80.png "Device Details blade")
 
-### Task 2: Install and start the IoT Edge runtime
+### Task 2: Create an IoT Edge VM and start the IoT Edge runtime
 
-The IoT Edge runtime is deployed to all IoT Edge devices. It consists of two modules: The IoT Edge agent, which facilitates deployment and monitoring of modules on the device, and IoT Edge Hub, which manages communication between modules on the IoT Edge device, and between the device and IoT Hub. You will install and start the IoT Edge runtime on the Linux VM that you provisioned in Exercise 2.
+The IoT Edge runtime is deployed to all IoT Edge devices. It consists of two modules: The IoT Edge agent, which facilitates deployment and monitoring of modules on the device, and IoT Edge Hub, which manages communication between modules on the IoT Edge device, and between the device and IoT Hub. You will be creating an IoT Edge VM that uses the IoT Edge runtime on a Linux VM.
 
-1.  Navigate to the **Azure Management** portal, <http://portal.azure.com>.
+1.  Navigate to the **Azure Marketplace** portal, and either search for "Azure IoT Edge on Ubuntu" or use this [convenient link](https://aka.ms/azure-iot-edge-ubuntuvm).
 
-2.  Browse to your solution's resource group and select the **Docker Virtual Machine**.
+2.  Press **Get It Now**, and **Continue** when asked if you'd like to create the app in Azure. Finally, when brought back to the Azure Portal press the **Create** button.
 
-    ![In the Resource group blade, the MyDockerVM virtual machine is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image81.png "Resource group")
+    ![Installing an Ubuntu IoT Edge image from the Azure Marketplace](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image193.png "Azure Marketplace")
 
-3.  On the VM's overview blade, select **Connect**. Copy the SSH command.
+3.  On the **Create a virtual machine** screen
+    
+    a.  Select the appropriate subscription and resource group.
+
+    b. Give your vm a name, in this example the name IoTEdgeVM is given.
+
+    c.  Select the region nearest you.
+
+    d. Ensure **Ubuntu Server 16.04 LTS + Azure IoT Edge runtime** is selected as the image.
+
+    e. Standard B1ms is a sufficient size for our purposes
+
+    ![Azure IoT Edge Ubuntu VM creation](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image194.png "Virtual machine creation")
+
+    f. Change the Administrator account to **Password**
+
+    g. Assign and record the username and password for future use.
+
+    h.  In the **Inbound Port Rules**, select the **Allow selected ports** radio button, and in the drop down list, select SSH (port 22). 
+
+    i. Press the **Review + Create** button
+
+     ![Azure IoT Edge Ubuntu VM creation](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image195.png "Virtual machine creation")
+
+    j. Azure will now validate the vm, once that has completed press the **Create** button to create the VM.
+
+4.  Once created, access the VM's overview blade, select **Connect**. Copy the SSH command.
 
     ![The ssh command is highlighted, and the Connect button is selected in the Virtual machine blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image82.png "Virtual machine blade")
 
-4.  Open your Bash client and paste the SSH command, then press **Enter**.
+5.  Open your Bash client and paste the SSH command, then press **Enter**.
 
-5.  When asked whether you want to continue connecting, enter **yes**.
+6.  When asked whether you want to continue connecting, enter **yes**.
 
-6.  Enter the password you provided when provisioned the IoT Remote Monitoring solution.
+7.  Enter the password you provided when provisioned the IoT Remote Monitoring solution.
 
     ![In the Bash window, the SSH command and the Yes response are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image83.png "Bash window")
 
-7.  Enter the following command to update the package repository list:
+8.  Enter the following command to update the package repository list:
     
     ```
     sudo apt-get update
     ```
 
-8.  Enter the following command to install Pip (enter y when prompted whether you wish to install the package):
+9.  Enter the following command to install Pip (enter y when prompted whether you wish to install the package):
     
     ```
     sudo apt-get install python-pip
     ```
 
-9.  When Pip has finished installing, execute the following to install the IoT Edge control script:
+10.  When Pip has finished installing, execute the following to install the IoT Edge control script:
     
     ```
     sudo pip install -U azure-iot-edge-runtime-ctl
     ```
 
-10. Enter the following to configure the runtime with your IoT Edge device connection string:
+11. Enter the following to configure the runtime with your IoT Edge device connection string:
     
     ```
     sudo iotedgectl setup --connection-string "{device connection string}" --auto-cert-gen-force-no-passwords
     ```
 
-11. Start the runtime:
+12. Start the runtime:
     
     ```
     sudo iotedgectl start
     ```
 
-12. After starting the IoT Edge runtime, you should see a status of "Runtime started".
+13. After starting the IoT Edge runtime, you should see a status of "Runtime started".
 
     ![In the Bash window, the start command and the Runtime started response are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image84.png "Bash window")
 
@@ -1197,20 +1223,31 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     // TODO: 7 - Have the DeviceClient send the event message asynchronously, using the specified output name
     await ioTHubModuleClient.SendEventAsync(outputName, message);
     ```
-
 10. Save your changes.
 
-11. Sign in to Docker by entering the following command in the VS Code integrated terminal:
+11. Setup your Container Registry for username/password authentication. 
+
+    a.  In the Azure Portal, from the list of All Resources, select the **Container Registry** that you created earlier in this lab.
+     ![Container Registry](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image196.png "Container Registry")
+    
+    b. Under **Settings**, select the **Access Keys** menu item. Ensure **Admin User** is enabled, then make note of the login server, username and password of the registry.
+     ![Container Registry Login Information](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image197.png "Container Registry Login Information")
+
+12. In VS Code, open **manifest.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
+ ![Image Repository](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image199.png "Image Repository")
+
+
+13. Sign in to Docker by entering the following command in the VS Code integrated terminal, using the credentials and login server information you have just recorded:
     
     ```
     docker login -u <username>    -p <password>    <Login server>
     ```
 
-12. To build the project and Push it to the IoT Edge Module Image, right-click the **module.json** file in the Explorer and select **Build and Push IoT edge Module Image**. 
+14. To build the project and Push it to the IoT Edge Module Image, right-click the **module.json** file in the Explorer and select **Build and Push IoT edge Module Image**. 
 
     ![Right-click the VehicleTelemetrySimulator.csproj file, then select Convert to IoT Edge Module.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image89.png "Convert to IoT Edge module")
 
-13. In the pop-up text box at the top of the VS Code window, enter the image name. For example: \<your container registry address\>/vehicle-telemetry-simulator. The Container Registry address is the same as the login server that you copied from your registry. It should be in the form of \<your container registry name\>.azurecr.io. 
+15. In the pop-up text box at the top of the VS Code window, enter the image name. For example: \<your container registry address\>/vehicle-telemetry-simulator. The Container Registry address is the same as the login server that you copied from your registry. It should be in the form of \<your container registry name\>.azurecr.io. 
 
 >**Note**: **Make note of the image name**, including the registry path. This will be used later.
 
@@ -1230,7 +1267,7 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     sudo iotedgectl login \--address \<your container registry address\    \--username \<username\    \--password \<password\>
     ```
 
-19. If you logged in successfully, you will see your container registry added to the Registries configuration for the IoT Edge runtime.
+18. If you logged in successfully, you will see your container registry added to the Registries configuration for the IoT Edge runtime.
 
     ![In the Bash window, the login and registries information are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image93.png "Bash window")
 

@@ -112,12 +112,12 @@ namespace VehicleTelemetrySimulator
             if (moduleTwinCollection["VIN"] != null)
             {
                 // TODO: 5 - Set the vin to the value in the module's twin
-                //vin =  //To be Completed
+                vin = moduleTwinCollection["VIN"];
             }
             if (moduleTwinCollection["Borough"] != null)
             {
                 // TODO: 6 - Set the borough to the value in the module's twin
-                //borough = //To be Completed
+                borough = moduleTwinCollection["Borough"];
             }
 
             // Attach callback for Twin desired properties updates
@@ -189,7 +189,7 @@ namespace VehicleTelemetrySimulator
                     Console.WriteLine($"{DateTime.Now} > Sending message: {serializedString}");
                     var message = new Message(Encoding.UTF8.GetBytes(serializedString));
                     // TODO: 7 - Have the ModuleClient send the event message asynchronously, using the specified output name
-                    //await //To be completed
+                    await ioTHubModuleClient.SendEventAsync(outputName, message);
                 }
                 catch (AggregateException ex)
                 {
