@@ -10,7 +10,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-August 2018
+March 2019
 </div>
 
 
@@ -20,7 +20,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only, and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third-party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx    are trademarks of the Microsoft group of companies. All other trademarks are the property of their respective owners.
 
@@ -166,77 +166,61 @@ The solution begins with an **IoT Edge Device** that would be installed on each 
 
 **Duration:** 30 Minutes
 
-In this exercise, you will execute a series of command-line scripts to provision the components used by the IoT Remote Monitoring solution. This includes an Azure Resource Group, IoT Hub, Azure Storage account, App Service for hosting the monitoring web application, Virtual Machine and related components that host the Docker-based microservices responsible for creating, capturing, and processing IoT device messages, and a Cosmos DB instance for storing reference, alert, and telemetry data.
+In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft Azure IoT Solution Accelerator. This accelerator will provision the components required to implement the IoT Remote Monitoring solution. This includes an Azure Resource Group, IoT Hub, Azure Storage account, App Service for hosting the monitoring web application, Device Provisioning Services, Virtual Machine, and related components that host the Function Application microservices responsible for creating, capturing, and processing IoT device messages, and a Cosmos DB instance for storing reference, alert, and telemetry data.
 
 ### Help references
 
 |    |            |
 |----------|:-------------:|
 | **Description** | **Links** |
-|   Remote Monitoring preconfigured solution with Azure IoT  | <https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet>     |
+|   Remote Monitoring solution accelerator for Azure IoT  | <https://www.azureiotsolutions.com/Accelerators#description/remote-monitoring>     |
 
 
-### Task 1: Execute CLI commands
+### Task 1: Provision the Remote Monitoring Solution
 
-1.  Open a new Command Prompt window (Select Start, then enter **cmd** and press **Enter**).
+1.  Open a new web browser tab, and access **https://www.azureiotsolutions.com**.
 
-2.  Browse to the **azure-iot-pcs-remote-monitoring-dotnet\\cli** subfolder within your Lab-files folder containing the extracted solution files. Example: C:\\MCW-IoT-for-business-master\\Hands-on lab\\Lab-files\\azure-iot-pcs-remote-monitoring-dotnet\\cli.
+2.  Select the **User Icon** in the upper right corner, and sign in with your **Azure Credentials**.
+    ![Sign in with your Azure credentials](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image175.png "Sign in")
 
-3.  Enter **npm install** and press **Enter**.
+3.  In the **Deploy a Microsoft solution accelerator** section, select the **Remote Monitoring** solution.
+    ![Select the Remote Monitoring Solution](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image176.png "Remote Monitoring Solution")
 
-4.  When that is finished running, execute **npm start**.
+4.  This will bring you to a description screen for the Remote Monitoring Accelerator. This screen provides details surrounding the benefits of the template, the documentation, github links, and the Azure Services that will be provisioned. Provisioning of these Azure Services is automated. Press the **Try Now** button to start the provisioning process.
 
-    ![In the Command Window, npm install and npm start are called out, and results for both display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image14.png "Command Window")
+5.  The first step in provisioning the accelerator is to provide a deployment name. Enter **iot-remote-monitoring**, select the desired Azure subscription, for Deployment Options, select **C# Microservices**, then select the Azure Location nearest you. Finally, press the **Create** button.
+    ![Remote Monitoring accelerator provisioning](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image177.png "Remote Monitoring Solution Provisioning")
 
-5.  After the task runs and the tests have passed, execute **npm link**.
+6.  The second step to provisioning the accelerator requires no intervention on your part. A checklist of provisioning steps will be displayed and is updated in real-time as they are completed. Please wait until provisioning has completed. ![Provisioning Checklist](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image178.png "Provisioning Checklist")
 
-6.  Change directories to `C:\Users\demouser\AppData\Roaming\npm`: **cd C:\Users\demouser\AppData\Roaming\npm**.
+7.  Once completed, you will be shown a success screen with a link allowing you to view your installed solution accelerator.
+![Provisioning Completed](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image179.png "Provisioning Completed")
 
-7.  Install the `iot-solutions` CLI with the following command: **npm install -g iot-solutions**.
+8.  Alternatively, you may access installed accelerators in your account by clicking the **My Solutions** link on the (Azure IoT Solution Accelerators website)[https://www.azureiotsolutions.com].
+    ![Launching the Remote Monitoring Solution](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image180.png "Launch Solution")
 
-8.  Sign into your Azure subscription by executing **pcs login**. When prompted, browse to <https://aka.ms/devicelogin> and enter the provided code. This will generate an authentication token that is linked with the Azure CLI, after logging in.
+9.  Upon launching the Remote Monitoring accelerator, you may be prompted to consent to accessing the Azure Portal to view the resources provisioned. Simply check the **Consent on behalf of your organization** and press the **Accept** button.
+ ![Consent Dialog](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image181.png "Consent Dialog")
 
-    ![In the Device Login window, the code displays.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image15.png "Device Login window")
+10.  When the Remote Monitoring solution is loaded, it will bring you into the Dashboard view. A series of simulated devices are feeding the portal with live data that is displayed in maps, charts, and metrics.
+![Remote Monitoring Dashboard](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image183.png "Remote Monitoring Dashboard")
 
-9.  After you have authenticated, and the web page indicates you can close the browser, switch back to the Command Prompt window and execute the following command for a basic deployment: **pcs**.
+11. Make a note of the URL of your Remote Monitoring web application - you will be utilizing this throughout this lab.
 
-10. Enter the information for each of the prompts that follow:
+12. In the Azure Portal, you are able to see a listing of the resources provisioned to support the Remote Monitoring Accelerator solution. Access the [Azure Portal](https://portal.azure.com) and log in with your Azure credentials.
 
-    a.  Enter a **solution name**: type in a unique name for your solution. This will be your sub-domain as well as your new Azure Resource Group.
+13.  View the resources provisioned by the accelerator by choosing **Resource Groups** in the left-hand menu, then selecting the resource group that you entered in step 5 of this excercise, **iot-remote-monitoring**.
+![Remote Monitoring Solution Accelerator Resources](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image182.png "Remote Monitoring Solution Accelerator Resources")
 
-    b.  Select a **subscription**: use the arrow keys to highlight the Azure subscription you will deploy to, then hit Enter.
+### Task 2: Stop running device simulation in the Remote Monitoring Solution
 
-    c.  Select a **location**: use the arrow keys to highlight and select the region you will deploy to. Make note of the region and use it for the remaining services throughout the lab.
+1.  Navigate to your Remote Monitoring web application by pasting the URL in a browser window.
 
-    d.  Enter **prefix** for .azurewebsites.net: this will be how you access your deployed website. Try entering the same value you used for the solution name.
+2.  When the site loads, select the **gear** icon on the upper-right corner.
 
-    e.  Enter a **user name** for the virtual machine: enter **labadmin**.
+5.  Shift the **Flowing** switch to stop the current device simulation. We will replace the simulated devices with our own.
 
-    f.  Enter a **password** for the virtual machine: enter a strong password and make note of it in case you need it later.
-
-    g.  **Confirm** your password.
-
-11. If you receive an error after submitting, it can be caused by the solution name already existing in Azure Active Directory, or the prefix for azurewebsites.net not being available. This is indicated by a 400 status code (bad request). If this happens, enter **Ctrl+C** to cancel. This will take you back to the command prompt. Enter **pcs** once again and follow the prompts, choosing different values.
-
-12. After provisioning is complete, you will see an output containing your new Azure Resource Group name. This will be where the remaining services will be deployed for the lab. **Copy the URL**.
-
-    ![In the Command Window, ot lab-2018 and the URL are called out, and results for both display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image16.png "Command window")
-
-### Task 2: Open new web application and stop running device simulation
-
-1.  Navigate to the new Remote Monitoring web application by pasting the URL in a new browser window.
-
-2.  When prompted, log in with your Azure account you used to provision the solution.
-
-3.  Select **Accept** to allow the application to sign you in and read your profile.
-
-    ![In the Azure account login page, under Sign you in and read your profile, a message displays asking if you trust the publisher, and the Accept button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image17.png "Azure account login page")
-
-4.  When the site finally loads, select the **gear** icon on the upper-right corner.
-
-5.  Select **Stop** to stop the current device simulation, then select **Apply**. We will replace the simulated devices with our own.
-
-    ![In the Azure IoT Suite Remote Monitoring Preview window, the Settings (gear) icon is selected. Simulation Data is set to Stop, and the Apply button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image18.png "Azure IoT Suite Remote Monitoring Preview window")
+    ![In the Azure IoT Suite Remote Monitoring Preview window, the Settings (gear) icon is selected. Simulation Data is set to Stop.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image18.png "Azure IoT Remote Monitoring window")
 
 6.  After stopping the simulation, take a moment to browse through the site. You will notice an interactive map as the centerpiece, provided by the Bing Maps and the Bing Maps API for Enterprise service that was provisioned as part of the solution. This will display each of your IoT devices that have location information.
 
@@ -248,13 +232,13 @@ In this exercise, you will execute a series of command-line scripts to provision
 
     d. To the right of the chart is a list of system KPIs (key performance indicators) that shows the number of alarms by device type and whether that number is increasing or decreasing.
     
-    ![Screenshot of the Azure IoT Suite Remote Monitoring Preview window.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image19.png "Azure IoT Suite Remote Monitoring Preview window")
+    ![Screenshot of the Azure IoT Suite Remote Monitoring Preview window.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image183.png "Azure IoT Suite Remote Monitoring Preview window")
 
 ## Exercise 2: Provision additional Azure services
 
 **Duration:** 45 minutes
 
-Explore the components automatically provisioned by the CLI scripts in the previous exercise. Use the Azure portal to create services that will be used by the overall IoT solution environment. First, you will create an additional consumer group on the default messages/events IoT Hub endpoint. This will allow us to add more readers that can read the massive amounts of incoming IoT data being ingested by IoT Hub. This will help prevent conflicts from multiple readers attempting to modify the checkpoints and offsets of the partitions holding the messages. Next, you will add a custom endpoint and route to IoT Hub specifically for engine alerts arriving from your IoT Edge device that you will create later. Finally, you will provision a new Azure Time Series Insights instance to collect, filter, and display all-time series data flowing in from your simulated IoT devices as well as your IoT Edge device.
+Explore the components automatically provisioned by the Remote Monitoring Accelerator the previous exercise. Use the Azure portal to create services that will be used by the overall IoT solution environment. First, you will create an additional consumer group on the default messages/events IoT Hub endpoint. This will allow us to add more readers that can read the massive amounts of incoming IoT data being ingested by IoT Hub. This will help prevent conflicts from multiple readers attempting to modify the checkpoints and offsets of the partitions holding the messages. Next, you will add a custom endpoint and route to IoT Hub specifically for engine alerts arriving from your IoT Edge device that you will create later. Finally, you will provision a new Azure Time Series Insights instance to collect, filter, and display all-time series data flowing in from your simulated IoT devices as well as your IoT Edge device.
 
 ### Help references
 
@@ -311,9 +295,9 @@ In this task, you will provision a new Service Bus queue that will be used for r
 
 9.  Select **Create**.
 
-### Task 2: Add consumer group to IoT Hub
+### Task 2: Review the time series consumer group in the IoT Hub
 
-In this task, you will add a new consumer group to the default messages/events IoT Hub endpoint, for the Time Series Insights service to use.
+In this task, you will review the consumer group that was added to the default messages/events IoT Hub endpoint, for the Time Series Insights service to use.
 
 1.  Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
 
@@ -323,19 +307,19 @@ In this task, you will add a new consumer group to the default messages/events I
 
     ![In the Azure Portal, Resource group blade, under Name, IoT Hub is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image24.png "Azure Portal, Resource group blade")
 
-4.  Select **Endpoints** from the left-hand menu of the IoT Hub blade.
+4.  Select **Built-in endpoints** from the **Settings** section in the left-hand menu of the IoT Hub blade.
 
-5.  Select the **Events** (messages/events) built-in endpoint.
+5.  The top section shows the **Events** (messages/events) built-in endpoint.
 
-6.  Add a new **consumer group** named timeseries, then select **Save**.
+6.  Verify under **CONSUMER GROUPS** that there exists one named **timeseriesinsightsconsumergroup**. If this does not exist, then create one by typing it into the textbox and pressing the **Save** button at the top of the screen.
 
-    ![In the IoT Hub blade, under Messaging, Endpoints is selected, and under Name, Events is selected. In the Properties blade, the timeseries field is called out, and the Save butotn is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image25.png "IoT Hub and Properties blades")
+    ![In the IoT Hub blade, under Settings, Endpoints is selected, and under Name, Events is selected. In the Properties blade, the timeseries field is called out, and the Save butotn is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image25.png "IoT Hub and Properties blades")
 
 ### Task 3: Add custom endpoint and route to IoT Hub
 
 IoT Hub allows you to add up to 10 custom endpoints. These custom endpoints allow you to differentiate between messages arriving to the hub by filtering those messages in custom-defined routes and then directing them to either your custom endpoints or a built-in one, such as Events. In this task, you will create a custom endpoint that sends messages routed to it, directly to the Service Bus queue you created. This will allow us to process critical alerts differently from standard telemetry, opening up a new pipeline to which different business rules and actions can be applied.
 
-1.  While still on the Endpoints blade within your IoT Hub, select **+ Add** to create a new custom endpoint.
+1.  While still on the IoT Hub blade, select **Message Routing** from the left-hand menu, select the **Custom Endpoint** tab, then press **+ Add** to create a new custom endpoint.
 
     ![The Add button is selected in the Endpoints blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image26.png "Endpoints blade")
 
@@ -357,19 +341,19 @@ IoT Hub allows you to add up to 10 custom endpoints. These custom endpoints allo
 
 In this task, you will create a new routing rule to send bus engine alert messages to the Service Bus queue, by way of your custom endpoint.
 
-1.  Select **Routes** in the left-hand menu of your IoT Hub blade.
+1.  Select **Message routing** in the left-hand menu of your IoT Hub blade.
 
-2.  Select **+ Add** on top of the Routes blade.
+2.  Enure the **Routes** tab is selected, then press **+ Add** on top of the Routes blade.
 
-    ![Under Messaging in the IoT Hub blade, Routes is selected. On the top menu bar, the Add button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image28.png "IoT Hub blade")
+    ![Under Message routing in the IoT Hub blade, Routes is selected. On the top menu bar, the Add button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image28.png "IoT Hub blade")
 
 3.  In the **Create a new route** blade, specify the following configuration options:
 
     a.  **Name**: CriticalMessageRule
 
-    b.  **Data source**: Device Messages
+    b.  **Endpoint**: Select your CriticalQueue custom endpoint.
 
-    c.  **Endpoint**: Select your CriticalQueue custom endpoint.
+    c.  **Data source**: Device Telemetry Messages
 
     d.  **Enable Rule**: On
 
@@ -379,9 +363,9 @@ In this task, you will create a new routing rule to send bus engine alert messag
 
     ![The Edit a route blade displays with the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image29.png "Edit a route blade")
 
-4.  Select **Save**.
+4.  Press **Save**.
 
-5.  After the route is added, ensure the following option is turned **On** in the Routes blade: Device messages which do not match any rules will be written to the Events (messages/events) endpoint.
+5.  After the route is added, ensure the the fallback route is enabled. This setting is identified by the button shown above the Routes table. If the button states **Enable fallback route**, you will need to press it to enable the fallback route. This route is to ensure device messages which do not match any rules will be written to the Events (messages/events) endpoint.
 
     ![The Device messages setting is turned on.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image30.png "Device messages setting")
 
@@ -393,55 +377,21 @@ In this task, you will create a new routing rule to send bus engine alert messag
 
     ![In the IoT Hub blade, under Settings, Shared access policies is selected. Under Policy, iothubowner is selected. In the iothubowner blade, the copy button for the Connection string - primary key is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image31.png "IoT Hub and iothubowner blades")
 
-### Task 5: Create Azure Time Series Insights instance
+### Task 5: Review the Azure Time Series Insights instance
 
-Azure Time Series Insights is the first fully managed time series database on the Azure platform. It was developed primarily with high volume IoT data in mind, where having a single location in which you can quickly view this information and derive insights on it is typically no small feat. Although the IoT Remote Monitoring solution you provisioned stores its simulated device data in Cosmos DB, you will be able to ingest that same data into Time Series Insights, along with data generated by your IoT Edge device. This is because all data flows through IoT Hub as the initial point of ingress. You created a new consumer group on the Events endpoint specifically for Time Series Insights to be able to simultaneously read and store the same data that will land in Cosmos DB, as well as the added IoT Edge data. After creating the Time Series Insights instance, you will configure it to use the IoT Hub consumer group as an input.
+Azure Time Series Insights is the first fully managed time series database on the Azure platform. It was developed primarily with high volume IoT data in mind, where having a single location in which you can quickly view this information and derive insights on it is typically no small feat. Although the IoT Remote Monitoring solution you provisioned stores its simulated device data in Cosmos DB, you will be able to ingest that same data into Time Series Insights, along with data generated by your IoT Edge device. This is because all data flows through IoT Hub as the initial point of ingress. You have a time series consumer group on the Events endpoint specifically for Time Series Insights to be able to simultaneously read and store the same data that will land in Cosmos DB, as well as the added IoT Edge data. After reviewing the Time Series Insights instance, you will see how it's configured to use the IoT Hub consumer group as an input.
 
 1.  Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
 
-2.  Select **+ Create a resource**, then type **time series insights** into the search box on top. Select **Time Series Insights** from the results.
+2.  Select the resource group that you created when deploying the Remote Monitoring Accelerator. In the list of resources, select the item with the type **Time Series Insights environment**. 
+    ![Time Series Insights environment resource.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image184.png "Time Series Insights environment")
 
-    ![Time series insight is typed in the New blade search field.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image32.png "New blade")
+3.  Select **Event Sources** from the left-hand menu.
 
-3.  Select the **Create** button on the **Time Series Insights overview** blade.
+4.  View the IoT Hub Event Source.
 
-4.  On the **Create Time Series Insights environment** blade, specify the following configuration options:
+    ![Event Sources is selected under Environment Toplogy, and the Add button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image185.png "Event Sources blade")
 
-    a.  **Name**: Unique value for the environment name (ensure the green check mark appears).
-
-    b.  Specify your **Resource Group**, ensuring it's the same one in which your new components have been created.
-
-    c.  Select the same **Location** as your Resource Group and other services.
-
-    d.  Select the **S1** SKU, with a capacity of **1**. This can always be increased later if you exceed the 1 million events/day limit.
-
-    ![Fields in the Time series insights environment blade are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image33.png "Time series insights environment blade")
-
-5.  Select **Create**.
-
-6.  Open the resource once provisioning has completed.
-
-7.  Select **Event Sources** from the left-hand menu.
-.
-8.  Select **+ Add** at the top of the **Event Sources** blade
-
-    ![Event Sources is selected under Environment Toplogy, and the Add button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image34.png "Event Sources blade")
-
-9.  On the New event source blade, specify the following configuration options:
-
-    a.  **Name:** IoTHub
-
-    b.  **Source**: IoT Hub
-
-    c.  Select your **subscription** and the **IoT Hub** that was provisioned earlier.
-
-    d.  **IoT Hub policy name**: iothubowner
-
-    e.  **IoT Hub consumer group**: Select the timeseries consumer group you created.
-
-    ![In the New event source blade, fields are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image35.png "New event source blade")
-
-10. Select **Create**.
 
 ### Task 6: Provision Azure Container Registry
 
@@ -503,7 +453,7 @@ In this task, you will provision a new Linux virtual machine that will be used t
 
     ![The Quickstart template displays with the fields set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image39.png "Quickstart template")
 
-4.  Accept the terms and conditions, then select **Purchase**.
+4.  Then select **Purchase**.
 
 ## Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters
 
@@ -571,15 +521,31 @@ In this task, you will open the device-simulation solution in Visual Studio 2017
 
     ![The Assembly name and Target framework fields display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image42.png "Simulator fields")
 
-5.  Select **Debug** from the left-hand menu. In the Environment variables section, edit the PCS\_IOTHUB\_CONNSTRING value, replacing "EnterHubConnString" with the IoT Hub connection string you copied earlier.
+5.  Select **Debug** from the left-hand menu. In the Environment variables section, add the PCS\_IOTHUB\_CONNSTRING variable, replacing the value with the IoT Hub connection string you copied earlier.
 
-    ![On the SimulationAgent tab, Debug is selected, and in the Environment variables section, the value for PCS\_IOTHUB-CONNSTRING is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image43.png "SimulationAgent tab")
+    ![On the SimulationAgent properties, Debug tab is selected, and in the Environment variables section, the value for PCS\_IOTHUB_CONNSTRING is added.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image43.png "SimulationAgent project debug properties")
 
-6.  Save your changes to the file.
+6.  In the same Environment variables section, add the PCS\_STORAGEADAPTER\_WEBSERVICE\_URL variable, replacing the value with **http://localhost:9022/v1**.
 
-7.  Right-click the **WebService** project, go to **Properties**. Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
+    ![On the SimulationAgent properties, Debug tab is selected, and in the Environment variables section, the value for PCS\_STORAGEADAPTER\_WEBSERVICE\_URL is added.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image187.png "SimulationAgent project debug properties")
 
-8.  Next, select **Debug** from the left-hand menu. Edit the PCS\_IOTHUB\_CONNSTRING environment variable with the same value you supplied for the SimulationAgent, then save.
+7.  Save your changes to the file.
+
+8.  Right-click the **WebService** project, go to **Properties**. Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
+
+9.  Next, select **Debug** from the left-hand menu. 
+
+    a.  Ensure the **Launch Browser** checkbox is checked and that its value is set to **http://localhost:9003/v1/status**.
+
+    b.  Add the **PCS\_IOTHUB\_CONNSTRING** environment variable with the same value you supplied for the SimulationAgent.
+
+    c. Add another Environment variable named **PCS\_STORAGEADAPTER\_WEBSERVICE\_URL** and set its value to **http://localhost:9022/v1**.
+
+    d. Remaining on the **Debug** screen, in the **Web Server Settings** section, ensure the **App URL** property is set to **http://localhost:9003/**.
+
+![On the WebService project properties, Debug tab is selected](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image190.png "WebService project debug properties")
+
+10.  Save your changes to the file.
 
 ### Task 2: Finish configuring the simulated IoT device models and scripts
 
@@ -717,7 +683,7 @@ In this task, you will finish configuring the device models we have provided for
 
 14. Open **trafficlight-02.json**.
 
-15. Add the [same]{.underline} **CloudToDeviceMethods** that you added to trafficlight-01.json.
+15. Add the same **CloudToDeviceMethods** that you added to trafficlight-01.json.
 
 16. Save your changes.
 
@@ -790,7 +756,7 @@ Below is a table containing file paths and an explanation of what each does in t
             - Connect to IoT Hub
             - Bootstrap the device to retrieve it, create if necessary, and update the device twin state 
             - Update the device state using the state scripts we created, in order to send telemetry
-            - Sends telemetry using the message template provided, as seen in the bus and traffic light device model scripts you edited earlier. Uses the DeviceClient class to send the message through the Device SDK for Azure IoT Devices |
+            - Sends telemetry using the message template provided, as seen in the bus and traffic light device model scripts you edited earlier. Uses the DeviceClient class to send the message through the Device SDK for Azure IoT Devices.
 
     - Visual Studio Project: WebService
         - File Path: v1\\Controllers\\SimulationsController 
@@ -815,7 +781,7 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
     ![The Assembly name and Target framework fields display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image54.png "Simulator fields")
 
-5.  Select **Debug** from the left-hand menu. In the Environment variables section, edit the PCS\_STORAGEADAPTER\_DOCUMENTDB\_CONNSTRING value, replacing "..." with the Cosmos DB connection string. To find your connection string, do the following:
+5.  Select **Debug** from the left-hand menu. In the Environment variables section, add the PCS\_STORAGEADAPTER\_DOCUMENTDB\_CONNSTRING value, replacing "..." with the Cosmos DB connection string. To find your connection string, do the following:
 
     a.  Open your Cosmos DB instance from within your lab's resource group.
 
@@ -823,21 +789,32 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
     c.  Copy the **Primary Connection String**.
 
+    d. Paste the value in the PCS\_STORAGEADAPTER\_DOCUMENTDB\_CONNSTRING environment variable value.
+
 ![In the Azure Cosmos DB account blade, under Settings, Keys is selected. On the Read-write keys tab, the copy button is selected for the Primary Connection String.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image55.png "Azure Cosmos DB account blade")
+
 
 ![On the WebService tab, Debug is selected, and the Environment variables value is called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image56.png "WebService tab")
 
-6.  Save your changes to the file.
+6.  Remaining in your **Debug** screen:
+    
+    a. Ensure the **Launch Browser** checkmark is checked, and has the value **http://localhost:9022/v1/status**.
 
-7.  Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
+    b. In the **Web Server Settings** section, ensure the **App URL** is set to **http://localhost:9022/**.
+
+    ![On the WebService tab, Debug is selected, and the Launch Browser and App Url settings are set.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image56.png "WebService Properties Debug tab")
+
+7.  Save your changes to the file.
+
+8.  Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
 
     ![In Solution Explorer, WebService is selected, and from its right-click menu, Debug, and then Start new instance are selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image57.png "Solution Explorer")
 
-8.  The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is OK.
+9.  The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is OK.
 
     ![The status response of \"OK: Alive and well\" is highlighted in the Web service window.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image58.png "Web service window")
 
-9.  Leave the project running in debug mode for the duration of the lab.
+10.  Leave the project running in debug mode for the duration of the lab.
 
 ### Task 5: Run the Simulator web app and create a new simulation
 
@@ -934,11 +911,13 @@ Run the simulator and let it continue running in the background.
 
 The IoT Remote Monitoring web interface enables you to create filters that help group devices by type or other parameters. You can also create alerts that are fired when certain criteria are met, enabling you to see the alerts alongside your device data or on the map. In this task, you will create filters for your buses and traffic lights, then create an alert for traffic lights whose voltage exceed a predefined level.
 
-1.  Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is \[your solution name\].azurewebsites.net. You may need to refresh the browser window if it has been running for some time and is unresponsive.
+1.  Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is **https://\[your solution name\].azurewebsites.net/dashboard. You may need to refresh the browser window if it has been running for some time and is unresponsive.
 
-2.  One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map over New York City. In the screenshot below, the new voltage telemetry option is selected, and data for the two new traffic lights appear beneath.
+2.  One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map over New York City. In the screenshot below, the new fuel level telemetry option is selected, and data for the two new buses appear beneath.
 
     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image67.png "Monitoring Web App dashboard")
+
+     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image191.png "Monitoring Web App dashboard")
 
 3.  Create a new device group by selecting **Manage device groups** on the upper-right portion of the dashboard.
 
@@ -972,7 +951,7 @@ The IoT Remote Monitoring web interface enables you to create filters that help 
 
     e.  **Type**: Text
 
-7.  After creating both device groups, you may select them using the filter drop-down list to the left of the map. In the screenshot below, we have selected Traffic Lights. Notice that in the telemetry graph, it shows just the two traffic light devices. Also notice that one traffic light has consistently higher voltage than the other, as dictated by the traffic device model state script modified earlier. Now we'll create a new alert for traffic lights whose voltage is too high.
+7.  After creating both device groups, you may select them using the filter drop-down list to the left of the map. In the screenshot below, we have selected Traffic Lights. Notice that in the telemetry graph, it shows just the two traffic light devices. Also notice that one traffic light has consistently higher voltage than the other, as dictated by the traffic device model state script modified earlier. Now we'll create a new alert for traffic lights whose voltage is too high. **As of this writing the chart showing voltage data in the Accelerator dashboard is not functional, this is an older screenshot.**
 
     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image70.png "Monitoring Web App dashboard")
 
@@ -1006,6 +985,8 @@ The IoT Remote Monitoring web interface enables you to create filters that help 
 
     ![Fields in the New rule section are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image72.png "New rule section")
 
+     ![Fields in the New rule section are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image192.png "New rule section")
+
 11. Select **Apply**. Notice that it shows 2 devices are affected by this rule.
 
 12. Navigate back to the dashboard. It may take a few minutes for the alerts to start appearing. When you filter by Traffic Lights and zoom in on the map over New York, you will see both traffic lights pinned to the map. One with the critical alert. Also notice the alarm count on the left.
@@ -1030,7 +1011,7 @@ In this task, you will send a job to one of the traffic light devices, using the
 
     ![In the Telemetry section, timing (2) is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image75.png "Telemetry section")
 
-3.  Navigate to **Devices** using the left-hand menu.
+3.  Navigate to **Device Explorer** using the left-hand menu.
 
 4.  Check the box next to **Simulated.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list).
 
@@ -1073,7 +1054,7 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 
 2.  Open **IoT Hub** in your solution's resource group.
 
-3.  Select **IoT Edg**e from the left-hand menu, then select **+ Add to IoT Edge Device**.
+3.  Select **IoT Edge** from the left-hand menu, then select **+ Add to IoT Edge Device**.
 
     ![The Add IoT Edge Device button is selected in the IoT Hub blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image78.png "IoT Hub blade")
 
@@ -1095,59 +1076,85 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 
     ![In the Device Details blade, the copy button for the Connection string - primary key is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image80.png "Device Details blade")
 
-### Task 2: Install and start the IoT Edge runtime
+### Task 2: Create an IoT Edge VM and start the IoT Edge runtime
 
-The IoT Edge runtime is deployed to all IoT Edge devices. It consists of two modules: The IoT Edge agent, which facilitates deployment and monitoring of modules on the device, and IoT Edge Hub, which manages communication between modules on the IoT Edge device, and between the device and IoT Hub. You will install and start the IoT Edge runtime on the Linux VM that you provisioned in Exercise 2.
+The IoT Edge runtime is deployed to all IoT Edge devices. It consists of two modules: The IoT Edge agent, which facilitates deployment and monitoring of modules on the device, and IoT Edge Hub, which manages communication between modules on the IoT Edge device, and between the device and IoT Hub. You will be creating an IoT Edge VM that uses the IoT Edge runtime on a Linux VM.
 
-1.  Navigate to the **Azure Management** portal, <http://portal.azure.com>.
+1.  Navigate to the **Azure Marketplace** portal, and either search for "Azure IoT Edge on Ubuntu" or use this [convenient link](https://aka.ms/azure-iot-edge-ubuntuvm).
 
-2.  Browse to your solution's resource group and select the **Docker Virtual Machine**.
+2.  Press **Get It Now**, and **Continue** when asked if you'd like to create the app in Azure. Finally, when brought back to the Azure Portal press the **Create** button.
 
-    ![In the Resource group blade, the MyDockerVM virtual machine is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image81.png "Resource group")
+    ![Installing an Ubuntu IoT Edge image from the Azure Marketplace](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image193.png "Azure Marketplace")
 
-3.  On the VM's overview blade, select **Connect**. Copy the SSH command.
+3.  On the **Create a virtual machine** screen
+    
+    a.  Select the appropriate subscription and resource group.
+
+    b. Give your vm a name, in this example the name IoTEdgeVM is given.
+
+    c.  Select the region nearest you.
+
+    d. Ensure **Ubuntu Server 16.04 LTS + Azure IoT Edge runtime** is selected as the image.
+
+    e. Standard B1ms is a sufficient size for our purposes
+
+    ![Azure IoT Edge Ubuntu VM creation](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image194.png "Virtual machine creation")
+
+    f. Change the Administrator account to **Password**
+
+    g. Assign and record the username and password for future use.
+
+    h.  In the **Inbound Port Rules**, select the **Allow selected ports** radio button, and in the drop down list, select SSH (port 22). 
+
+    i. Press the **Review + Create** button
+
+     ![Azure IoT Edge Ubuntu VM creation](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image195.png "Virtual machine creation")
+
+    j. Azure will now validate the vm, once that has completed press the **Create** button to create the VM.
+
+4.  Once created, access the VM's overview blade, select **Connect**. Copy the SSH command.
 
     ![The ssh command is highlighted, and the Connect button is selected in the Virtual machine blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image82.png "Virtual machine blade")
 
-4.  Open your Bash client and paste the SSH command, then press **Enter**.
+5.  Open your Bash client and paste the SSH command, then press **Enter**.
 
-5.  When asked whether you want to continue connecting, enter **yes**.
+6.  When asked whether you want to continue connecting, enter **yes**.
 
-6.  Enter the password you provided when provisioned the IoT Remote Monitoring solution.
+7.  Enter the password you provided when provisioned the IoT Remote Monitoring solution.
 
     ![In the Bash window, the SSH command and the Yes response are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image83.png "Bash window")
 
-7.  Enter the following command to update the package repository list:
+8.  Enter the following command to update the package repository list:
     
     ```
     sudo apt-get update
     ```
 
-8.  Enter the following command to install Pip (enter y when prompted whether you wish to install the package):
+9.  Enter the following command to install Pip (enter y when prompted whether you wish to install the package):
     
     ```
     sudo apt-get install python-pip
     ```
 
-9.  When Pip has finished installing, execute the following to install the IoT Edge control script:
+10.  When Pip has finished installing, execute the following to install the IoT Edge control script:
     
     ```
     sudo pip install -U azure-iot-edge-runtime-ctl
     ```
 
-10. Enter the following to configure the runtime with your IoT Edge device connection string:
+11. Enter the following to configure the runtime with your IoT Edge device connection string:
     
     ```
     sudo iotedgectl setup --connection-string "{device connection string}" --auto-cert-gen-force-no-passwords
     ```
 
-11. Start the runtime:
+12. Start the runtime:
     
     ```
     sudo iotedgectl start
     ```
 
-12. After starting the IoT Edge runtime, you should see a status of "Runtime started".
+13. After starting the IoT Edge runtime, you should see a status of "Runtime started".
 
     ![In the Bash window, the start command and the Runtime started response are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image84.png "Bash window")
 
@@ -1216,20 +1223,31 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     // TODO: 7 - Have the DeviceClient send the event message asynchronously, using the specified output name
     await ioTHubModuleClient.SendEventAsync(outputName, message);
     ```
-
 10. Save your changes.
 
-11. Sign in to Docker by entering the following command in the VS Code integrated terminal:
+11. Setup your Container Registry for username/password authentication. 
+
+    a.  In the Azure Portal, from the list of All Resources, select the **Container Registry** that you created earlier in this lab.
+     ![Container Registry](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image196.png "Container Registry")
+    
+    b. Under **Settings**, select the **Access Keys** menu item. Ensure **Admin User** is enabled, then make note of the login server, username and password of the registry.
+     ![Container Registry Login Information](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image197.png "Container Registry Login Information")
+
+12. In VS Code, open **manifest.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
+ ![Image Repository](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image199.png "Image Repository")
+
+
+13. Sign in to Docker by entering the following command in the VS Code integrated terminal, using the credentials and login server information you have just recorded:
     
     ```
     docker login -u <username>    -p <password>    <Login server>
     ```
 
-12. To build the project and Push it to the IoT Edge Module Image, right-click the **module.json** file in the Explorer and select **Build and Push IoT edge Module Image**. 
+14. To build the project and Push it to the IoT Edge Module Image, right-click the **module.json** file in the Explorer and select **Build and Push IoT edge Module Image**. 
 
     ![Right-click the VehicleTelemetrySimulator.csproj file, then select Convert to IoT Edge Module.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image89.png "Convert to IoT Edge module")
 
-13. In the pop-up text box at the top of the VS Code window, enter the image name. For example: \<your container registry address\>/vehicle-telemetry-simulator. The Container Registry address is the same as the login server that you copied from your registry. It should be in the form of \<your container registry name\>.azurecr.io. 
+15. In the pop-up text box at the top of the VS Code window, enter the image name. For example: \<your container registry address\>/vehicle-telemetry-simulator. The Container Registry address is the same as the login server that you copied from your registry. It should be in the form of \<your container registry name\>.azurecr.io. 
 
 >**Note**: **Make note of the image name**, including the registry path. This will be used later.
 
@@ -1249,7 +1267,7 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     sudo iotedgectl login \--address \<your container registry address\    \--username \<username\    \--password \<password\>
     ```
 
-19. If you logged in successfully, you will see your container registry added to the Registries configuration for the IoT Edge runtime.
+18. If you logged in successfully, you will see your container registry added to the Registries configuration for the IoT Edge runtime.
 
     ![In the Bash window, the login and registries information are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image93.png "Bash window")
 

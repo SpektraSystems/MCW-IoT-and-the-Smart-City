@@ -2,7 +2,7 @@
     "$schema-version": "0.0.1",
     "description": "",
     "image": {
-        "repository": "iotlabacr.azurecr.io/vehicletelemetrysimulator",
+        "repository": "smartcityregistry.azurecr.io/vehicletelemetrysimulator",
         "tag": {
             "version": "0.0.1",
             "platforms": {

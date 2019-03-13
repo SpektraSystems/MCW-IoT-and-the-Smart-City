@@ -81,7 +81,7 @@ function main(context, previousState) {
     state.state = varystate(state.state, 1, 3);
 
     // 68.4 +/- 25%,  Min 57.5, Max 83.48
-    state.voltage = vary(68.4, 25, 47.5, 83.48);
+    state.voltage = vary(68.4, 25, 57.5, 83.48);
 
     return state;
 }
