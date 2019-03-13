@@ -951,7 +951,7 @@ The IoT Remote Monitoring web interface enables you to create filters that help 
 
     e.  **Type**: Text
 
-7.  After creating both device groups, you may select them using the filter drop-down list to the left of the map. In the screenshot below, we have selected Traffic Lights. Notice that in the telemetry graph, it shows just the two traffic light devices. Also notice that one traffic light has consistently higher voltage than the other, as dictated by the traffic device model state script modified earlier. Now we'll create a new alert for traffic lights whose voltage is too high.
+7.  After creating both device groups, you may select them using the filter drop-down list to the left of the map. In the screenshot below, we have selected Traffic Lights. Notice that in the telemetry graph, it shows just the two traffic light devices. Also notice that one traffic light has consistently higher voltage than the other, as dictated by the traffic device model state script modified earlier. Now we'll create a new alert for traffic lights whose voltage is too high. **As of this writing the chart showing voltage data in the Accelerator dashboard is not functional, this is an older screenshot.**
 
     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image70.png "Monitoring Web App dashboard")
 
