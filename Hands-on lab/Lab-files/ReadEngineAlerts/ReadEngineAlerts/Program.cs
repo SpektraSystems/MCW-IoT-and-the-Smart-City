@@ -12,7 +12,7 @@ namespace ReadEngineAlerts
             var count = 1;
             ConsoleColor[] colors = { ConsoleColor.White, ConsoleColor.Cyan, ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow };
             Console.WriteLine("Receive critical messages. Ctrl-C to exit.\n");
-            var connectionString = "{YOUR-CONNECTION-STRING}";
+            var connectionString = "Endpoint=sb://iotlab-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=PTjcuDPQXWclfwxMx3AiVe4qcgbSfRTre0spJfVdyhU=";
             var queueName = "alert-q";
 
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);

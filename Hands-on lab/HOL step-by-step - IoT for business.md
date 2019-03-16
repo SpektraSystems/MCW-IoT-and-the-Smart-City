@@ -393,68 +393,6 @@ Azure Time Series Insights is the first fully managed time series database on th
     ![Event Sources is selected under Environment Toplogy, and the Add button is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image185.png "Event Sources blade")
 
 
-### Task 6: Provision Azure Container Registry
-
-IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics that runs on the device, Azure Machine Learning, and Azure Functions. Each of these modules is hosted within a Docker container. We will be creating two modules for the IoT Edge device: a custom C\# module, and an Azure Stream Analytics module. In both cases, you will be creating a container image from the files. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
-
-1.  Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
-
-2.  Select **+ Create a resource**, then type **container registry** into the search box on top. Select **Container Registry** from the results.
-
-    ![The search field in the New blade displays Azure Container Registry.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image36.png "New blade")
-
-3.  Select the **Create** button on the **Container Registry overview** blade.
-
-4.  On the **Create container registry** blade, specify the following configuration options:
-
-    a.  **Name**: Unique value for the registry name (ensure the green check mark appears).
-
-    b.  Specify your **Resource Group**, ensuring it's the same one in which your new components have been created.
-
-    c.  Select the same **Location** as your Resource Group and other services.
-
-    d.  **Enable** the Admin user.
-
-    e.  Select the **Basic** SKU.
-
-    ![The Create container registry blade displays with the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image37.png "Create container registry blade")
-
-5.  Select **Create**.
-
-6.  After provisioning is complete, go to your resource and select **Access keys** from the left-hand menu.
-
-7.  Copy the **Login server**, **Username**, and **Password** values and save them for later.
-
-    ![In the Container registry blade, under Settings, Access keys is selected. The copy buttons for Login server, Username, and password are all called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image38.png "Container registry blade")
-
-### Task 7: Provision new Linux virtual machine to run the IoT Edge device
-
-In this task, you will provision a new Linux virtual machine that will be used to run the IoT Edge device, using an Azure quick start template for Ubuntu pre-installed with Docker. Be certain to select Ubuntu OS Version 16.04.0-LTS or later.
-
-1.  Open the following URL in a new browser window: <https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fdocker-simple-on-ubuntu%2Fazuredeploy.json>.
-
-2.  Log in with the same Azure account you are currently using.
-
-3.  Complete the quickstart template form with the following parameters:
-
-    a.  **Subscription**: Select the same subscription you've been using for the lab.
-
-    b.  **Resource group**: Select the same resource group you've been using.
-
-    c.  **Location**: Should be the same as the location of your resource group and other services.
-
-    d.  **Admin Username**: labadmin
-
-    e.  **Admin Password**: **Make note of this password** so you can use it later.
-
-    f.  **DNS Name for Public IP**: Enter a valid name.
-
-    g.  **Ubuntu OS Version**: Select **16.04.0-LTS** or later.
-
-    ![The Quickstart template displays with the fields set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image39.png "Quickstart template")
-
-4.  Then select **Purchase**.
-
 ## Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters
 
 **Duration:** 60 minutes
@@ -1030,7 +968,6 @@ In this task, you will send a job to one of the traffic light devices, using the
     ![In the Telemetry section, the decrease is circled on the graph.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image77.png "Telemetry section")
 
 ## Exercise 4: Create IoT Edge device and custom modules
-
 **Duration:** 60 minutes
 
 Azure IoT Edge devices can run on in locations where there is little to no internet connectivity, yet they allow you to run powerful modules locally, enabling you to apply your business logic in place. This is especially powerful when coupled with sensors that generate a lot of data, and you only want to send the most important data to the cloud.
@@ -1047,8 +984,42 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 | Develop and deploy a C\# IoT Edge module to your simulated device   | <https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-csharp-module>  |
 | Azure Stream Analytics on IoT Edge   | <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-edge>  |
 
+### Task 1: Provision Azure Container Registry
 
-### Task 1: Add a new IoT Edge device
+IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics that runs on the device, Azure Machine Learning, and Azure Functions. Each of these modules is hosted within a Docker container. We will be creating two modules for the IoT Edge device: a custom C\# module, and an Azure Stream Analytics module. In both cases, you will be creating a container image from the files. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
+
+1.  Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
+
+2.  Select **+ Create a resource**, then type **container registry** into the search box on top. Select **Container Registry** from the results.
+
+    ![The search field in the New blade displays Azure Container Registry.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image36.png "New blade")
+
+3.  Select the **Create** button on the **Container Registry overview** blade.
+
+4.  On the **Create container registry** blade, specify the following configuration options:
+
+    a.  **Name**: Unique value for the registry name (ensure the green check mark appears).
+
+    b.  Specify your **Resource Group**, ensuring it's the same one in which your new components have been created.
+
+    c.  Select the same **Location** as your Resource Group and other services.
+
+    d.  **Enable** the Admin user.
+
+    e.  Select the **Basic** SKU.
+
+    ![The Create container registry blade displays with the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image37.png "Create container registry blade")
+
+5.  Select **Create**.
+
+6.  After provisioning is complete, go to your resource and select **Access keys** from the left-hand menu.
+
+7.  Copy the **Login server**, **Username**, and **Password** values and save them for later.
+
+    ![In the Container registry blade, under Settings, Access keys is selected. The copy buttons for Login server, Username, and password are all called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image38.png "Container registry blade")
+
+
+### Task 2: Add a new IoT Edge device
 
 1.  Navigate to the Azure Management portal, <http://portal.azure.com>.
 
@@ -1076,92 +1047,69 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 
     ![In the Device Details blade, the copy button for the Connection string - primary key is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image80.png "Device Details blade")
 
-### Task 2: Create an IoT Edge VM and start the IoT Edge runtime
 
-The IoT Edge runtime is deployed to all IoT Edge devices. It consists of two modules: The IoT Edge agent, which facilitates deployment and monitoring of modules on the device, and IoT Edge Hub, which manages communication between modules on the IoT Edge device, and between the device and IoT Hub. You will be creating an IoT Edge VM that uses the IoT Edge runtime on a Linux VM.
+### Task 3: Provision new Linux virtual machine to run as the IoT Edge device
 
-1.  Navigate to the **Azure Marketplace** portal, and either search for "Azure IoT Edge on Ubuntu" or use this [convenient link](https://aka.ms/azure-iot-edge-ubuntuvm).
+In this task, you will provision a new Linux virtual machine that will be used to run the IoT Edge device, using an Azure IoT Edge on Ubuntu virtual machine available from the Azure Marketplace.
 
-2.  Press **Get It Now**, and **Continue** when asked if you'd like to create the app in Azure. Finally, when brought back to the Azure Portal press the **Create** button.
+1.  Open the following URL in a new browser window: <https://azuremarketplace.microsoft.com/en-us/marketplace/apps/microsoft_iot_edge.iot_edge_vm_ubuntu?tab=overview>.
 
-    ![Installing an Ubuntu IoT Edge image from the Azure Marketplace](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image193.png "Azure Marketplace")
+2.  Log in with the same Azure account you are currently using.
 
-3.  On the **Create a virtual machine** screen
+3.  Press the **GET IT NOW** button, then **Continue** to open the deployment template in the Azure Portal.
+
+    ![In the Marketplace web page for Azure IoT Edge on Ubuntu, press the GET IT NOW button](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image200.png "Azure Marketplace")
+
+4.  In the Azure portal press the **Create** button to initiate the provisioning.
+
+5.  Complete the quickstart template form with the following parameters:
+
+    a.  **Subscription**: Select the same subscription you've been using for the lab.
+
+    b.  **Resource group**: Select the same resource group you've been using.
+
+    c.  **Region**: Should be the same as the location of your resource group and other services.
+
+    d.  **Image**: Select **Ubuntu Server 16.04 LTS + Azure IoT Edge runtime**
+
+    e.  **Size**: **Standard B1ms** is sufficient for this exercise.    
     
-    a.  Select the appropriate subscription and resource group.
+    ![Ubuntu Virtual Machine Settings](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image201.png "Create a Virtual Machine Blade")
 
-    b. Give your vm a name, in this example the name IoTEdgeVM is given.
+    f.  **Authentication**: select **Password**
 
-    c.  Select the region nearest you.
+    g.  **Admin Username**: **Make note of the username you enter** so you can use it later.
 
-    d. Ensure **Ubuntu Server 16.04 LTS + Azure IoT Edge runtime** is selected as the image.
+    h.  **Admin Password**: **Make note of the password you enter** so you can use it later.
 
-    e. Standard B1ms is a sufficient size for our purposes
+    i.  **Public inbound ports**: select **Allow selected ports**
 
-    ![Azure IoT Edge Ubuntu VM creation](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image194.png "Virtual machine creation")
+    j.  **Select inbound ports**: select **SSH (22)**  
+    
+    ![Ubuntu Virtual Machine Settings](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image201.png "Create a Virtual Machine Blade")
 
-    f. Change the Administrator account to **Password**
+6.  Then select **Review + create**, theen after validation passes, press the **Create** button to deploy the Virtual Machine.
 
-    g. Assign and record the username and password for future use.
-
-    h.  In the **Inbound Port Rules**, select the **Allow selected ports** radio button, and in the drop down list, select SSH (port 22). 
-
-    i. Press the **Review + Create** button
-
-     ![Azure IoT Edge Ubuntu VM creation](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image195.png "Virtual machine creation")
-
-    j. Azure will now validate the vm, once that has completed press the **Create** button to create the VM.
-
-4.  Once created, access the VM's overview blade, select **Connect**. Copy the SSH command.
+7.  Once created, access the VM's overview blade, select **Connect**. Copy the SSH command.
 
     ![The ssh command is highlighted, and the Connect button is selected in the Virtual machine blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image82.png "Virtual machine blade")
 
-5.  Open your Bash client and paste the SSH command, then press **Enter**.
+8.  Open your Bash client and paste the SSH command, then press **Enter**.
 
-6.  When asked whether you want to continue connecting, enter **yes**.
+9.  When asked whether you want to continue connecting, enter **yes**.
 
-7.  Enter the password you provided when provisioned the IoT Remote Monitoring solution.
-
+10.  Enter the password you provided when provisioned the IoT Remote Monitoring solution.
     ![In the Bash window, the SSH command and the Yes response are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image83.png "Bash window")
 
-8.  Enter the following command to update the package repository list:
+11.  Enter the following command to update the container device connection string:
     
     ```
-    sudo apt-get update
+    sudo /etc/iotedge/configedge.sh "{IoT Hub -> IoT Edge sdevice connection string}" 
     ```
-
-9.  Enter the following command to install Pip (enter y when prompted whether you wish to install the package):
+12. Execute the following Docker command to see that the IoT Edge agent is running as a module:
     
     ```
-    sudo apt-get install python-pip
-    ```
-
-10.  When Pip has finished installing, execute the following to install the IoT Edge control script:
-    
-    ```
-    sudo pip install -U azure-iot-edge-runtime-ctl
-    ```
-
-11. Enter the following to configure the runtime with your IoT Edge device connection string:
-    
-    ```
-    sudo iotedgectl setup --connection-string "{device connection string}" --auto-cert-gen-force-no-passwords
-    ```
-
-12. Start the runtime:
-    
-    ```
-    sudo iotedgectl start
-    ```
-
-13. After starting the IoT Edge runtime, you should see a status of "Runtime started".
-
-    ![In the Bash window, the start command and the Runtime started response are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image84.png "Bash window")
-
-13. Execute the following Docker command to see that the IoT Edge agent is running as a module:
-    
-    ```
-    sudo docker ps\
+    sudo iotedge list
     ```
 
     ![The Bash window displays with the previous docker command.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image85.png "Bash window")
@@ -1176,17 +1124,13 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
 
     ![File/Open Folder is selected in the Visual Studio Code window.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image86.png "Visual Studio Code window")
 
-3.  Browse to the lab-files in the Hands-on lab folder. Select **Folder**.
+3.  Browse to the lab-files in the Hands-on lab folder. Select the **VehicleTelemetrySimulator**.
 
 4.  You may see one or more errors about unresolved dependencies or needing to add build and debug assets. Dismiss these messages, as they are not pertinent to the IoT Edge module project.
 
     ![In the Visual Studio Code window, the Don\'t ask again and Close buttons are called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image87.png "Visual Studio Code window")
 
-5.  Expand the **VehicleTelemetrySimulator** folder.
-
-    ![In the Explorer window, the VehicleTelemetrySimulator folder is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image88.png "Explorer window")
-
-6.  Open **Program.cs** under the **modules** folder.
+5.  Open **Program.cs** under the **modules** folder.
 
 ![In the Explorer window, the modules folder is open and Program.cs is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/imageModuleProgramcs.png "Explorer window")
 
@@ -1195,21 +1139,16 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     a.  Within the **Init** method:
 
     - Set the local vin value to the VIN specified in the module's twin.
-
-    - Set the local borough value to the Borough specified in the module's twin.
-
-    b.  Within the **GenerateMessage** method:
-
-    - Use the DeviceClient instance (IoTHubModuleClient) to asynchronously send the event message, using the specified output name (outputName).
-
-8.  Completed code for the **Init** method:
-
     ```
     if (moduleTwinCollection["VIN"] != null)
     {
         // TODO: 5 - Set the vin to the value in the module's twin
         vin = moduleTwinCollection["VIN"];
     }
+    ```
+
+    - Set the local borough value to the Borough specified in the module's twin.
+    ```
     if (moduleTwinCollection["Borough"] != null)
     {
         // TODO: 6 - Set the borough to the value in the module's twin
@@ -1217,27 +1156,20 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     }
     ```
 
-9.  Completed code for the **GenerateMessage** method:
+    b.  Within the **GenerateMessage** method:
 
-    ```
+    - Use the DeviceClient instance (IoTHubModuleClient) to asynchronously send the event message, using the specified output name (outputName).
+     ```
     // TODO: 7 - Have the DeviceClient send the event message asynchronously, using the specified output name
     await ioTHubModuleClient.SendEventAsync(outputName, message);
     ```
-10. Save your changes.
+8. Save your changes.
 
-11. Setup your Container Registry for username/password authentication. 
-
-    a.  In the Azure Portal, from the list of All Resources, select the **Container Registry** that you created earlier in this lab.
-     ![Container Registry](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image196.png "Container Registry")
-    
-    b. Under **Settings**, select the **Access Keys** menu item. Ensure **Admin User** is enabled, then make note of the login server, username and password of the registry.
-     ![Container Registry Login Information](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image197.png "Container Registry Login Information")
-
-12. In VS Code, open **manifest.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
+9. In VS Code, open **manifest.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
  ![Image Repository](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image199.png "Image Repository")
 
 
-13. Sign in to Docker by entering the following command in the VS Code integrated terminal, using the credentials and login server information you have just recorded:
+10. Sign in to Docker by entering the following command in the VS Code integrated terminal, using the Container Registry credentials and server information:
     
     ```
     docker login -u <username>    -p <password>    <Login server>
@@ -1247,29 +1179,14 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
 
     ![Right-click the VehicleTelemetrySimulator.csproj file, then select Convert to IoT Edge Module.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image89.png "Convert to IoT Edge module")
 
-15. In the pop-up text box at the top of the VS Code window, enter the image name. For example: \<your container registry address\>/vehicle-telemetry-simulator. The Container Registry address is the same as the login server that you copied from your registry. It should be in the form of \<your container registry name\>.azurecr.io. 
-
->**Note**: **Make note of the image name**, including the registry path. This will be used later.
-
-14. select **amd64** as the platform of choice. This will create a Linux-based Docker image.
+15. select **amd64** as the platform of choice. This will create a Linux-based Docker image.
 
     ![Select amd64 as the platform choice.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image91.png "Select Platform")
 
-15. Watch the VS Code terminal window. You should see a success status when the build is complete. **Take note of the tag applied to your vehicle-telemetry-simulator image**. You will need to use this tag when you add the module to your IoT Edge device via the portal later on.
+16. Watch the VS Code terminal window. You should see a success status when the build is complete. **Take note of the tag applied to your vehicle-telemetry-simulator image**. You will need to use this tag when you add the module to your IoT Edge device via the portal later on.
 
     ![Next to \"Successfully tagged,\" the tag is called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image92.png "VS Code terminal window")
 
-16. Go back to your Bash session where you have the IoT Edge runtime running on the Linux VM. If the session has closed, follow the steps once again to SSH into it.
-
-17. Add the Container Registry credentials to the IoT Edge runtime. These credentials will give it access to pull the container.
-
-    ```
-    sudo iotedgectl login \--address \<your container registry address\    \--username \<username\    \--password \<password\>
-    ```
-
-18. If you logged in successfully, you will see your container registry added to the Registries configuration for the IoT Edge runtime.
-
-    ![In the Bash window, the login and registries information are both called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image93.png "Bash window")
 
 ### Task 4: Create the Azure Stream Analytics IoT Edge module
 
@@ -1472,7 +1389,10 @@ In this task, you will deploy the vehicle telemetry module and Stream Analytics 
 
     ![Set Modules is selected in the Device Details blade top menu.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image108.png "Device Details blade")
 
-4.  From the **Deployment Modules** section Select **Add IoT Edge Module**.
+4.  In the **Container Registry Settings** add an entry with your container registry name, username and password.
+    ![Add IoT Edge Container Registry connection information.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image204.png "Container Registry connection information")
+
+5.  From the **Deployment Modules** section Select **Add IoT Edge Module**.
 
     ![Add IoT Edge Module is selected in the Device Details blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image109.png "Device Details blade")
 
@@ -1508,16 +1428,25 @@ In this task, you will deploy the vehicle telemetry module and Stream Analytics 
 8.  Select your Azure subscription, then the Stream Analytics job you created in the previous task.
 
 9.  if you are missing a storage account setting, click on the link to set it up.
+    ![Missing Storage Account.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image205.png "Missing Storage Account")
 
-10. Choose the same subscription, then select the Storage account to which you added the asa-container Container at the beginning of the previous task.
+10. Once the Stream Analytics Job Storage Account Settings blade is opened, press the **Add storage account** button.
+    
+    a.  **Storage Account Settings**: select **Select storage account from your subscriptions**.
 
-11. Choose to use existing container, and select **asa-container**.
+    b.  **Subscription**: select your desired subscription.
 
-    ![In the Edge deployment blade, fields are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image112.png "Edge deployment blade")
+    c.  **Storage account**: select the storage account in which you created the **asa-container** blob earlier.
 
-12. Select **Save**.
+    d.  **Container**: select **Use existing**, then select **asa-container**
 
-13. Copy the name of your Stream Analytics module.
+     ![In the Edge deployment blade, fields are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image112.png "Edge deployment blade")
+
+11. Select **Save**.
+
+12. Return to the Stream Analytics - Edge job blade, and press **Save**, this will publish the module.
+
+13. Once published, copy the name of your Stream Analytics module.
 
     ![iot-lab-edge is selected on the Set Modules page on the Set Modules blade.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image113.png "Set Modules blade, Set Modules page")
 
@@ -1528,11 +1457,10 @@ In this task, you will deploy the vehicle telemetry module and Stream Analytics 
     ```
     {
         "routes": {
-            "alertsToCloud": "FROM /messages/modules/{moduleName}/* INTO $upstream",
-            "telemetryToAsa": "FROM /messages/modules/VehicleTelemetry/* INTO BrokeredEndpoint(\"/modules/{moduleName}/inputs/VehicleTelemetry\")"
+            "alertsToCloud": "FROM /messages/modules/{moduleName}/outputs/* INTO $upstream",
+            "telemetryToAsa": "FROM /messages/modules/VehicleTelemetry/outputs/* INTO BrokeredEndpoint(\"/modules/{moduleName}/inputs/VehicleTelemetry\")"
         }
     }
-
     ```
 
     ![The previously designated code displays in the code window on the Specify Routes page.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image114.png "Set Modules blade, Specify Routes page")
@@ -1541,7 +1469,7 @@ In this task, you will deploy the vehicle telemetry module and Stream Analytics 
 
 17. In the Review Template step, select **Submit**.
 
-18. Return to the device details page and select **Refresh**. You should see the two new modules running, along with the IoT Edge agent module and the IoT Edge hub.
+18. After approximately 4 minutes, return to the device details page. You should see the two new modules running, along with the IoT Edge agent module and the IoT Edge hub.
 
     ![On the Deployed Modules tab, under Name, iot-lab-edge and VehicleTelemetry are called out.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image115.png "Device Details page Deployed Modules tab")
 
@@ -1550,22 +1478,30 @@ In this task, you will deploy the vehicle telemetry module and Stream Analytics 
 20. Execute the following to make sure all the modules are running in Docker:
     
     ```
-    docker ps\
+    sudo iotedge list
     ```
 
     ![Displays the list of docker images running in the IoT Edge simulator VM.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image116.png "Bash shell")
 
 21. You should have four containers running at this point.
 
-22. View the Stream Analytics module logs to see the telemetry it is reading, as well as any outputs it generates based on anomalies. You should see a large degree more vehicle telemetry feeding into the Stream Analytics module than what it sends out. This, of course, is by design. Replace {moduleName} with the Stream Analytics module name.\
+22. View the Stream Analytics module logs to see the telemetry it is reading, as well as any outputs it generates based on anomalies. You should see a large degree more vehicle telemetry feeding into the Stream Analytics module than what it sends out. This, of course, is by design. Replace {moduleName} with the Stream Analytics module name. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
     
     ```
-    docker logs -f {moduleName}
+    sudo iotedge logs -f {moduleName}
+    ```
+
+     ![In the Output window, results from the Stream Analytics module logs display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image206.png "Output window")
+
+23. View the generated data by viewing the log for the VehicleTelemetry module as follows. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
+    
+    ```
+    sudo iotedge logs -f VehicleTelemetry
     ```
 
 23. Notice the log output as shown below. There are many "Received message Name: \[VehicleTelemetry\]" events, and one output generated (highlighted). The output name is **alert**, matching one of the two outputs we created in the Stream Analytics module. The message content is sent to IoT Hub, including the additional fields added by the Stream Analytics query. In this case, the telemetry data is flagged as aggressive driving (aggressivedriving: 1).
 
-    ![In the Output window, results from the Stream Analytics module logs display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image117.png "Output window")
+   ![In the Output window, results from the Vehicle Telemetry module logs display.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image207.png "Output window")
 
 24. Leave the IoT Edge device running for the remainder of the lab.
 
@@ -1700,15 +1636,19 @@ The function will output to two different Cosmos DB collections. The first colle
 
     a.  **Name**: Unique value for the app name (ensure the green check mark appears).
 
-    b.  Specify your **Resource Group**, ensuring it's the same one in which your new components have been created.
+    b.  **Subscription**: select a valid subscription.
 
-    c.  **OS**: Windows
+    c.  Specify your **Resource Group**, ensuring it's the same one in which your new components have been created.
 
-    d.  **Hosting Plan**: Consumption Plan
+    d.  **OS**: Windows
 
-    e.  Select the same **location** as your Resource Group and other services.
+    e.  **Hosting Plan**: Consumption Plan
 
-    f.  Select **Create new** under storage.
+    f.  Select the same **location** as your Resource Group and other services.
+
+    g.  **Runtime Stack**: select **JavaScript**
+
+    h.  Select **Create new** under storage.
 
     ![In the Function App blade, fields display with the previously defined settings.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image128.png "Function App blade")
 
@@ -1724,21 +1664,21 @@ The function will output to two different Cosmos DB collections. The first colle
 
 3.  Type **service bus** in the search box to filter the template list.
 
-4.  Select **JavaScript** on the **Service Bus Queue trigger** template.
+4.  Select the **Azure Service Bus Queue trigger** template.
 
-    ![On the Choose a template page, Service bus is typed in the search field. In the Service Bus Queue trigger pop-up, JavaScript is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image130.png "Choose a template page")
+    ![On the Choose a template page, Service bus is typed in the search field.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image130.png "Choose a template page")
+
+5.  You may be prompted to install an extension, press **Install** if you see this message.
+
+    ![Install extensions if prompted](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image208.png "Install Extension")
 
 5.  In the form that follows, provide the following configuration values:
 
-    a.  **Language**: JavaScript
+    a.  **Name**: BusEngineAlert
 
-    b.  **Name**: BusEngineAlert
+    b.  **Service Bus connection**: Select **new**, then find and select your Service Bus in the dialog box.
 
-    c.  **Service Bus connection**: Select **new**, then find and select your Service Bus in the dialog box.
-
-    d.  **Access rights**: Manage
-
-    e.  **Queue name**: alert-q
+    c.  **Queue name**: alert-q
 
     ![The Connection window displays](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image131.png "Connection window")
 >
@@ -1761,8 +1701,11 @@ The function will output to two different Cosmos DB collections. The first colle
 
     ![Under Outputs, New Output is selected, and below, the Azure Cosmos DB tile is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image134.png "Integrate section")
 
-5.  Select **new** next to **Azure Cosmos DB account connection**, then select your account from the list.
+5.  You may be prompted once again to install an extension, press the **Install** link if you see this message.  
 
+     ![Install Cosmos DB Extensions](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image209.png "Install Extensions")
+
+6.   Select **new** next to **Azure Cosmos DB account connection**, then select your account from the list.
     ![In the DocumentDB Account blade, documentdb-rk2gj is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image135.png "DocumentDB Account blade")
 
 6.  Provide the following values for the Azure Cosmos DB output:
@@ -1789,7 +1732,7 @@ The function will output to two different Cosmos DB collections. The first colle
 
 4.  Select **Select**.
 
-    ![Under Outputs, New Output is selected, and below, the Azure Cosmos DB tile is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image134.png "Integrate section")
+    ![Under Outputs, New Output is selected, and below, the Azure Cosmos DB tile is selected.](images/Hands-onlabstep-by-step-IoTforbusinessimages/media/image210.png "Integrate section")
 
 5.  Provide the following values for the Azure Cosmos DB output:
 
