@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
-IoT for business
+IoT and the Smart City
 </div>
 
 <div class="MCWHeader2">
@@ -26,7 +26,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [IoT for business before the hands-on lab setup guide](#iot-for-business-before-the-hands-on-lab-setup-guide)
+- [IoT and the Smart City before the hands-on lab setup guide](#iot-and-the-smart-city-before-the-hands-on-lab-setup-guide)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
     - [Task 1: Perform a deployment of the LABVM](#task-1-perform-a-deployment-of-the-labvm)
@@ -35,7 +35,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# IoT for business before the hands-on lab setup guide
+# IoT and the Smart City before the hands-on lab setup guide
 
 ## Requirements
 
@@ -43,7 +43,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - **Global Administrator role** for Azure AD within your subscription.
 
-- Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs) :
+- Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs - perform Task 1 below **only** if you do not want to run locally) :
 
   - Visual Studio Code version 1.19.2 or higher
 
@@ -95,13 +95,13 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 In this exercise, you will set up your environment you will use for the rest of the exercises.
 
-### Task 1: Perform a deployment of the LABVM
+### Task 1: Perform a deployment of the LABVM **NOTE: Solliance will need to update this
 
 In this task you will perform a deployment of a the VM that will be used during this lab.
 
-1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>.
+1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>. 
 
-2.  Scroll down and locate the **IoT for Business** selection and click the **Deploy to Azure** button.
+2.  Scroll down and locate the **IoT for Business** selection and click the **Deploy to Azure** button. 
 
     ![The IoT for Business LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
 
@@ -109,9 +109,9 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Use the sign in form to authenticate with your Azure account.](images/Setup/image4.png 'Authentication dialog')
 
-4.  On the Custom Deployment page enter **IoTBusiness** as the Resource group and select a Location close to you.
+4.  On the Custom Deployment page enter **IoTSmartCity** as the Resource group and select a Location close to you.
 
-    ![Enter IoTBusiness as the Resource Group, and a Location close to you on the Custom Deployment page.](images/Setup/image5.png 'Custom deployment dialog')
+    ![Enter IoTSmartCity as the Resource Group, and a Location close to you on the Custom Deployment page.](images/Setup/image5.png 'Custom deployment dialog')
 
 5.  Next, update the LABVM DNS Name providing a globally unique name 3-24 alpha-numeric characters which are lowercase. Check the I agree to the terms and conditions stated above and then click Purchase.
 
@@ -119,7 +119,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
-6.  Once the Deployment completes, you can locate your VM in the **IotBusiness** Resource group. Open the **LABVM** and click **Connect**.
+6.  Once the Deployment completes, you can locate your VM in the **IotSmartCity** Resource group. Open the **LABVM** and click **Connect**.
 
     ![Click the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 

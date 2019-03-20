@@ -1,16 +1,12 @@
 namespace VehicleTelemetrySimulator
 {
     using System;
-    using System.IO;
-    using System.Runtime.InteropServices;
     using System.Runtime.Loader;
-    using System.Security.Cryptography.X509Certificates;
     using System.Text;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Azure.Devices.Client;
-    using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Microsoft.Azure.Devices.Shared;
     using Newtonsoft.Json;
 
@@ -30,13 +26,14 @@ namespace VehicleTelemetrySimulator
         static double lowEngineTempProbabilityPower = 1.2;
         static string vin { get; set; }
         static string borough { get; set; }
+        static string type { get; set; }
+        static dynamic telemetry { get; set; }
+
+        static ModuleClient ioTHubModuleClient;
+        static DeviceClient ioTHubDeviceClient;
 
         static void Main(string[] args)
         {
-            // The Edge runtime gives us the connection string we need -- it is injected as an environment variable
-           // string connectionString = "HostName=iothub-f5qzr.azure-devices.net;DeviceId=bus1;SharedAccessKey=CXERs+jPxRuHSOZtW3TVtCplf3CkxuClCL/cdduMRVc=;ModuleId=VehicleTelemetry"; //Environment.GetEnvironmentVariable("EdgeHubConnectionString");
-
-           
             Init().Wait();
 
             // Wait until the app unloads or is cancelled
@@ -64,71 +61,31 @@ namespace VehicleTelemetrySimulator
         /// </summary>
         static async Task Init()
         {
-          
-            MqttTransportSettings mqttSetting = new MqttTransportSettings(TransportType.Mqtt_Tcp_Only);
-            ITransportSettings[] settings = { mqttSetting };
-
-            // Open a connection to the Edge runtime
-            ModuleClient ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(settings);
+            // the module client is in charge of sending messages in the context of this module (VehicleTelemetry)
+            ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);
             await ioTHubModuleClient.OpenAsync();
             Console.WriteLine("IoT Hub module client initialized.");
 
-            // Register callback to be called when a message is received by the module
+            // Register callback to be called when a message is received by this module
             await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", PipeMessage, ioTHubModuleClient);
 
-            var moduleTwin = await ioTHubModuleClient.GetTwinAsync();
-            var moduleTwinCollection = moduleTwin.Properties.Desired;
-            if (moduleTwinCollection["VIN"] != null)
-            {
-                // TODO: 5 - Set the vin to the value in the module's twin
-                vin = moduleTwinCollection["VIN"];
-            }
-            if (moduleTwinCollection["Borough"] != null)
-            {
-                // TODO: 6 - Set the borough to the value in the module's twin
-                borough = moduleTwinCollection["Borough"];
-            }
+            //the device client is responsible for managing device twin information at the device level
+            //obtaining the device connection string is currently not supported by DeviceClient
+            ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("HostName=iothub-uox63.azure-devices.net;DeviceId=bus1;SharedAccessKey=Uie7cMBw7bEXZPS3tKTom8xBkCrP6u4Coh6zRnupXv4=");
+            await ioTHubDeviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
+            var twin = await ioTHubDeviceClient.GetTwinAsync();
+            var desired = twin.Properties.Desired;
+            await UpdateReportedPropertiesFromDesired(desired);            
 
-            // Attach callback for Twin desired properties updates
-            await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdate, null);
-
-            await GenerateMessage(ioTHubModuleClient);
+            await GenerateMessage(ioTHubModuleClient);            
         }
 
-        static Task onDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
+        static Task onDesiredPropertiesUpdateAsync(TwinCollection desiredProperties, object userContext)
         {
-            try
-            {
-                Console.WriteLine("Desired property change:");
-                Console.WriteLine(JsonConvert.SerializeObject(desiredProperties));
-
-                if (desiredProperties["VIN"] != null)
-                {
-                    vin = desiredProperties["VIN"];
-                }
-                if (desiredProperties["Borough"] != null)
-                {
-                    borough = desiredProperties["Borough"];
-                }
-
-            }
-            catch (AggregateException ex)
-            {
-                foreach (Exception exception in ex.InnerExceptions)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Error when receiving desired property: {0}", exception);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
-            }
-            return Task.CompletedTask;
+            return UpdateReportedPropertiesFromDesired(desiredProperties);
         }
 
-         private static async Task GenerateMessage(ModuleClient ioTHubModuleClient)
+        private static async Task GenerateMessage(ModuleClient ioTHubModuleClient)
         {
             string outputName = "output1";
             while (true)
@@ -159,7 +116,7 @@ namespace VehicleTelemetrySimulator
                     var message = new Message(Encoding.UTF8.GetBytes(serializedString));
                     message.ContentEncoding = "utf-8";
                     message.ContentType = "application/json";
-                    // TODO: 7 - Have the ModuleClient send the event message asynchronously, using the specified output name
+                    // TODO: 6 - Have the ModuleClient send the event message asynchronously, using the specified output name
                     await ioTHubModuleClient.SendEventAsync(outputName, message);
                 }
                 catch (AggregateException ex)
@@ -210,6 +167,51 @@ namespace VehicleTelemetrySimulator
                 Console.WriteLine("Received message sent");
             }
             return MessageResponse.Completed;
+        }
+
+
+        private static async Task UpdateReportedPropertiesFromDesired(TwinCollection desired)
+        {
+            try {
+                TwinCollection reportedProperties = new TwinCollection();
+                if (desired["VIN"] != null)
+                {
+                    // TODO: 1 - Set the vin to the value in the device twin
+                    vin = desired["VIN"];
+                    reportedProperties["VIN"] = vin;
+                }
+                if (desired["Borough"] != null)
+                {
+                    // TODO: 2 - Set the borough to the value in the device twin
+                    borough = desired["Borough"];
+                    reportedProperties["Borough"] = borough;
+                }
+                if (desired["Telemetry"] != null)
+                {
+                    // TODO: 3 - Set telemetry to the value in the device twin
+                    telemetry = desired["Telemetry"];
+                    reportedProperties["Telemetry"] = telemetry;
+                }
+                if (desired["Type"] != null)
+                {
+                    // TODO: 4 - Set telemetry to the value in the device twin
+                    type = desired["Type"];
+                    reportedProperties["Type"] = type;
+                }
+
+                // TODO: 5 - update reported properties with the IoT Hub
+                await ioTHubDeviceClient.UpdateReportedPropertiesAsync(reportedProperties);
+
+            } catch (AggregateException ex){
+                foreach(Exception exception in ex.InnerExceptions){
+                    Console.WriteLine();
+                    Console.WriteLine("Error when receiving desired property: {0}", exception);
+                }
+            } catch (Exception ex){
+                    Console.WriteLine();
+                    Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
+            }
+          
         }
 
         static int GetSpeed(string borough)
