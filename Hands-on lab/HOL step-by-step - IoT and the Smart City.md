@@ -75,12 +75,12 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Modify the function code](#task-3-modify-the-function-code)
     - [Task 4: View data stored by the function in Azure Cosmos DB](#task-4-view-data-stored-by-the-function-in-azure-cosmos-db)
   - [Exercise 8: View critical engine alerts in the IoT Remote Monitoring web interface](#exercise-8-view-critical-engine-alerts-in-the-iot-remote-monitoring-web-interface)
-    - [Task 1: View the bus data coming from IoT Edge](#task1-view-the-bus-data-coming-from-iot-edge)
-    - [Task 2: Define new alert rules for buses](#task2-define-new-alert-rules-for-buses)
-  - [Exercise 9: Add a Tag to the IoT Edge Device Twin](#exercise-9-add-a-tag-to-the-iot-edge-device-twin)
-    - [Task 1: Create the tag update Job](#task1-create-the-tag-update-job)
-    - [Task 2: Verify tag update in the device twin](#task2-verify-tag-update-in-the-device-twin)
-    - [Task 3: Create new IoT Edge device group](#task3-create-new-iot-edge-device-group)
+    - [Task 1: View the bus data coming from IoT Edge](#task-1-view-the-bus-data-coming-from-iot-edge)
+    - [Task 2: Define new alert rules for buses](#task-2-define-new-alert-rules-for-buses)
+  - [Exercise 9: Add a tag to IoT Edge Device Twin](#exercise-9-add-a-tag-to-iot-edge-device-twin)
+    - [Task 1: Create the tag update job](#task-1-create-the-tag-update-job)
+    - [Task 2: Verify tag update in the device twin](#task-2-verify-tag-update-in-the-device-twin)
+    - [Task 3: Create new IoT Edge device group](#task-3-create-new-iot-edge-device-group)
   - [Exercise 10: View all data in Azure Time Series Insights](#exercise-10-view-all-data-in-azure-time-series-insights)
     - [Help references](#help-references-6)
     - [Task 1: Add your account as a Contributor to the Data Access Policies](#task-1-add-your-account-as-a-contributor-to-the-data-access-policies)
@@ -89,7 +89,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Use Perspective View to create a simultaneous view of up to four unique queries](#task-4-use-perspective-view-to-create-a-simultaneous-view-of-up-to-four-unique-queries)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Deprovision the accelerator through the website](#task-1-deprovision-the-accelerator-through-the-website)
-    - [Task 2: Task 2: Delete the Resource group in which you placed your Azure resources](#task-2- delete-the-resource-group-in-which-you-placed-your-Azure-resources)
+    - [Task 2: Delete the Resource group in which you placed your Azure resources](#task-2-delete-the-resource-group-in-which-you-placed-your-azure-resources)
+
+   
 
 <!-- /TOC -->
 
@@ -254,8 +256,6 @@ Explore the components automatically provisioned by the Remote Monitoring Accele
 |----------|:-------------:|
 | **Description** | **Links** |
 | Remote Monitoring preconfigured solution with Azure IoT  | https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet     |
-| Routing messages with IoT Hub     | https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-process-d2c     | 
-| Use message routes and custom endpoints for device-to-cloud messages | https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-custom     | 
 | What is Azure Time Series Insights?    | https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-overview    | 
                                
 
