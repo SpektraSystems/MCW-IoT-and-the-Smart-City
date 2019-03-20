@@ -88,7 +88,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: View the simulated and IoT Edge bus data side-by-side](#task-3-view-the-simulated-and-iot-edge-bus-data-side-by-side)
     - [Task 4: Use Perspective View to create a simultaneous view of up to four unique queries](#task-4-use-perspective-view-to-create-a-simultaneous-view-of-up-to-four-unique-queries)
   - [After the hands-on lab](#after-the-hands-on-lab)
-    - [Task 1: Delete the Resource group in which you placed your Azure resources.](#task-1-delete-the-resource-group-in-which-you-placed-your-azure-resources)
+    - [Task 1: Deprovision the accelerator through the website](#task-1-deprovision-the-accelerator-through-the-website)
+    - [Task 2: Task 2: Delete the Resource group in which you placed your Azure resources](#task-2- delete-the-resource-group-in-which-you-placed-your-Azure-resources)
 
 <!-- /TOC -->
 
@@ -2129,9 +2130,9 @@ In this exercise, attendees will deprovision any Azure resources that were creat
     ![IoT Remote Monitoring solution](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image237.png "IoT Remote Monitoring solution")   
 
 4. Press the **Delete Solution** button
-     ![Delete solution](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image237.png "Delete solution")   
+     ![Delete solution](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image238.png "Delete solution")   
 
-### Task 2: Delete the Resource group in which you placed your Azure resources.
+### Task 2: Delete the Resource group in which you placed your Azure resources
 
 1.  From the Portal, navigate to the blade of your Resource Group and select Delete in the command bar at the top.
 
