@@ -1164,7 +1164,7 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
 
 ![In the Explorer window, the modules folder is open and Program.cs is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/imageModuleProgramcs.png "Explorer window")
 
-7.  Complete the code for TODO items 1-6.
+7.  Complete the code for TODO items 1-7.
 
     a.  Within the **UpdateReportedPropertiesFromDesired** method:
 
@@ -1220,6 +1220,14 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
      ```
     // TODO: 6 - Have the Module Client send the event message asynchronously, using the specified output name
     await ioTHubModuleClient.SendEventAsync(outputName, message);
+    ```
+
+    c. Within the **Init** method:
+
+    - Add the device connection string to the ioTHubDevice client initialization code
+    ```
+    //TODO: 7 - set device connection string for the device client
+            ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("<connectionstring>");
     ```
 8. Save your changes.
 
