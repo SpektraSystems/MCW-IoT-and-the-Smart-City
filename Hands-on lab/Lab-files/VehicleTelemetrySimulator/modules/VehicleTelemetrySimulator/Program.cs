@@ -71,6 +71,7 @@ namespace VehicleTelemetrySimulator
 
             //the device client is responsible for managing device twin information at the device level
             //obtaining the device connection string is currently not supported by DeviceClient
+            //TODO: 7 - set device connection string for the device client
             ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("HostName=iothub-uox63.azure-devices.net;DeviceId=bus1;SharedAccessKey=Uie7cMBw7bEXZPS3tKTom8xBkCrP6u4Coh6zRnupXv4=");
             await ioTHubDeviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
             var twin = await ioTHubDeviceClient.GetTwinAsync();
