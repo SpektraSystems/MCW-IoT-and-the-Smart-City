@@ -95,7 +95,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 In this exercise, you will set up your environment you will use for the rest of the exercises.
 
-### Task 1: Perform a deployment of the LABVM **NOTE: Solliance will need to update this
+### Task 1: Perform a deployment of the LABVM 
 
 In this task you will perform a deployment of a the VM that will be used during this lab.
 
