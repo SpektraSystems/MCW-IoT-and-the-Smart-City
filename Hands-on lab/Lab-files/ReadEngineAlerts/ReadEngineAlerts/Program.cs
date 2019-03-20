@@ -12,7 +12,7 @@ namespace ReadEngineAlerts
             var count = 1;
             ConsoleColor[] colors = { ConsoleColor.White, ConsoleColor.Cyan, ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow };
             Console.WriteLine("Receive critical messages. Ctrl-C to exit.\n");
-            var connectionString = "{YOUR-CONNECTION-STRING}";
+            var connectionString = "Endpoint=sb://iotlab-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=LkW7XtB6ccglKm+j2bPtSSUvyfmB0wwlB6Cwpz/1LNg=";
             var queueName = "alert-q";
 
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
@@ -22,9 +22,8 @@ namespace ReadEngineAlerts
                 var stream = message.GetBody<Stream>();
                 var reader = new StreamReader(stream, Encoding.ASCII);
                 var s = reader.ReadToEnd();
-                var deviceId = message.Properties["iothub-connection-device-id"];
                 Console.ForegroundColor = colors[count % 5];
-                Console.WriteLine($"Source: {deviceId} > {s}");
+                Console.WriteLine($"Received > {s}");
                 count++;
             });
 

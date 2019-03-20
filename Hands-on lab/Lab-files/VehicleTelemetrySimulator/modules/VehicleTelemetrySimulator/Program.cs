@@ -1,16 +1,12 @@
 namespace VehicleTelemetrySimulator
 {
     using System;
-    using System.IO;
-    using System.Runtime.InteropServices;
     using System.Runtime.Loader;
-    using System.Security.Cryptography.X509Certificates;
     using System.Text;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Azure.Devices.Client;
-    using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Microsoft.Azure.Devices.Shared;
     using Newtonsoft.Json;
 
@@ -30,16 +26,15 @@ namespace VehicleTelemetrySimulator
         static double lowEngineTempProbabilityPower = 1.2;
         static string vin { get; set; }
         static string borough { get; set; }
+        static string type { get; set; }
+        static dynamic telemetry { get; set; }
+
+        static ModuleClient ioTHubModuleClient;
+        static DeviceClient ioTHubDeviceClient;
 
         static void Main(string[] args)
         {
-           // The Edge runtime gives us the connection string we need -- it is injected as an environment variable
-            string connectionString = Environment.GetEnvironmentVariable("EdgeHubConnectionString");
-
-            // Cert verification is not yet fully functional when using Windows OS for the container
-            bool bypassCertVerification = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-            if (!bypassCertVerification) InstallCert();
-            Init(connectionString, bypassCertVerification).Wait();
+            Init().Wait();
 
             // Wait until the app unloads or is cancelled
             var cts = new CancellationTokenSource();
@@ -58,108 +53,40 @@ namespace VehicleTelemetrySimulator
             return tcs.Task;
         }
 
-        /// <summary>
-        /// Add certificate in local cert store for use by client for secure connection to IoT Edge runtime
-        /// </summary>
-        static void InstallCert()
-        {
-            string certPath = Environment.GetEnvironmentVariable("EdgeModuleCACertificateFile");
-            if (string.IsNullOrWhiteSpace(certPath))
-            {
-                // We cannot proceed further without a proper cert file
-                Console.WriteLine($"Missing path to certificate collection file: {certPath}");
-                throw new InvalidOperationException("Missing path to certificate file.");
-            }
-            else if (!File.Exists(certPath))
-            {
-                // We cannot proceed further without a proper cert file
-                Console.WriteLine($"Missing path to certificate collection file: {certPath}");
-                throw new InvalidOperationException("Missing certificate file.");
-            }
-            X509Store store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadWrite);
-            store.Add(new X509Certificate2(X509Certificate2.CreateFromCertFile(certPath)));
-            Console.WriteLine("Added Cert: " + certPath);
-            store.Close();
-        }
+      
         
         /// <summary>
         /// Initializes the ModuleClient and sets up the callback to receive
         /// messages containing temperature information
         /// </summary>
-        static async Task Init(string connectionString, bool bypassCertVerification = false)
+        static async Task Init()
         {
-            Console.WriteLine("Connection String {0}", connectionString);
-
-            MqttTransportSettings mqttSetting = new MqttTransportSettings(TransportType.Mqtt_Tcp_Only);
-            // During dev you might want to bypass the cert verification. It is highly recommended to verify certs systematically in production
-            if (bypassCertVerification)
-            {
-                mqttSetting.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-            }
-            ITransportSettings[] settings = { mqttSetting };
-
-            // Open a connection to the Edge runtime
-            ModuleClient ioTHubModuleClient = ModuleClient.CreateFromConnectionString(connectionString, settings);
+            // the module client is in charge of sending messages in the context of this module (VehicleTelemetry)
+            ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);
             await ioTHubModuleClient.OpenAsync();
             Console.WriteLine("IoT Hub module client initialized.");
 
-            // Register callback to be called when a message is received by the module
+            // Register callback to be called when a message is received by this module
             await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", PipeMessage, ioTHubModuleClient);
 
-            var moduleTwin = await ioTHubModuleClient.GetTwinAsync();
-            var moduleTwinCollection = moduleTwin.Properties.Desired;
-            if (moduleTwinCollection["VIN"] != null)
-            {
-                // TODO: 5 - Set the vin to the value in the module's twin
-                vin = moduleTwinCollection["VIN"];
-            }
-            if (moduleTwinCollection["Borough"] != null)
-            {
-                // TODO: 6 - Set the borough to the value in the module's twin
-                borough = moduleTwinCollection["Borough"];
-            }
+            //the device client is responsible for managing device twin information at the device level
+            //obtaining the device connection string is currently not supported by DeviceClient
+            //TODO: 7 - set device connection string for the device client
+            ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("HostName=iothub-uox63.azure-devices.net;DeviceId=bus1;SharedAccessKey=Uie7cMBw7bEXZPS3tKTom8xBkCrP6u4Coh6zRnupXv4=");
+            await ioTHubDeviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
+            var twin = await ioTHubDeviceClient.GetTwinAsync();
+            var desired = twin.Properties.Desired;
+            await UpdateReportedPropertiesFromDesired(desired);            
 
-            // Attach callback for Twin desired properties updates
-            await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdate, null);
-
-            await GenerateMessage(ioTHubModuleClient);
+            await GenerateMessage(ioTHubModuleClient);            
         }
 
-        static Task onDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
+        static Task onDesiredPropertiesUpdateAsync(TwinCollection desiredProperties, object userContext)
         {
-            try
-            {
-                Console.WriteLine("Desired property change:");
-                Console.WriteLine(JsonConvert.SerializeObject(desiredProperties));
-
-                if (desiredProperties["VIN"] != null)
-                {
-                    vin = desiredProperties["VIN"];
-                }
-                if (desiredProperties["Borough"] != null)
-                {
-                    borough = desiredProperties["Borough"];
-                }
-
-            }
-            catch (AggregateException ex)
-            {
-                foreach (Exception exception in ex.InnerExceptions)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Error when receiving desired property: {0}", exception);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
-            }
-            return Task.CompletedTask;
+            return UpdateReportedPropertiesFromDesired(desiredProperties);
         }
 
-         private static async Task GenerateMessage(ModuleClient ioTHubModuleClient)
+        private static async Task GenerateMessage(ModuleClient ioTHubModuleClient)
         {
             string outputName = "output1";
             while (true)
@@ -188,7 +115,9 @@ namespace VehicleTelemetrySimulator
                     var serializedString = JsonConvert.SerializeObject(info);
                     Console.WriteLine($"{DateTime.Now} > Sending message: {serializedString}");
                     var message = new Message(Encoding.UTF8.GetBytes(serializedString));
-                    // TODO: 7 - Have the ModuleClient send the event message asynchronously, using the specified output name
+                    message.ContentEncoding = "utf-8";
+                    message.ContentType = "application/json";
+                    // TODO: 6 - Have the ModuleClient send the event message asynchronously, using the specified output name
                     await ioTHubModuleClient.SendEventAsync(outputName, message);
                 }
                 catch (AggregateException ex)
@@ -239,6 +168,51 @@ namespace VehicleTelemetrySimulator
                 Console.WriteLine("Received message sent");
             }
             return MessageResponse.Completed;
+        }
+
+
+        private static async Task UpdateReportedPropertiesFromDesired(TwinCollection desired)
+        {
+            try {
+                TwinCollection reportedProperties = new TwinCollection();
+                if (desired["VIN"] != null)
+                {
+                    // TODO: 1 - Set the vin to the value in the device twin
+                    vin = desired["VIN"];
+                    reportedProperties["VIN"] = vin;
+                }
+                if (desired["Borough"] != null)
+                {
+                    // TODO: 2 - Set the borough to the value in the device twin
+                    borough = desired["Borough"];
+                    reportedProperties["Borough"] = borough;
+                }
+                if (desired["Telemetry"] != null)
+                {
+                    // TODO: 3 - Set telemetry to the value in the device twin
+                    telemetry = desired["Telemetry"];
+                    reportedProperties["Telemetry"] = telemetry;
+                }
+                if (desired["Type"] != null)
+                {
+                    // TODO: 4 - Set telemetry to the value in the device twin
+                    type = desired["Type"];
+                    reportedProperties["Type"] = type;
+                }
+
+                // TODO: 5 - update reported properties with the IoT Hub
+                await ioTHubDeviceClient.UpdateReportedPropertiesAsync(reportedProperties);
+
+            } catch (AggregateException ex){
+                foreach(Exception exception in ex.InnerExceptions){
+                    Console.WriteLine();
+                    Console.WriteLine("Error when receiving desired property: {0}", exception);
+                }
+            } catch (Exception ex){
+                    Console.WriteLine();
+                    Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
+            }
+          
         }
 
         static int GetSpeed(string borough)
