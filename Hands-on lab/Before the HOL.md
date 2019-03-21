@@ -163,7 +163,7 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
 
-2. In a web browser, navigate to the [IoT for Business MCW repo](https://github.com/Microsoft/MCW-IoT-for-business). **This link will change once the IoT And the The Smart City repository is released.
+2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-for-business). **This link will change once the IoT And the The Smart City repository is released.**
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
