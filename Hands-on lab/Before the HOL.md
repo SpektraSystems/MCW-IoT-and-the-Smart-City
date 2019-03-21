@@ -109,9 +109,9 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Use the sign in form to authenticate with your Azure account.](images/Setup/image4.png 'Authentication dialog')
 
-4.  On the Custom Deployment page enter **IoTSmartCity** as the Resource group and select a Location close to you.
+4.  On the Custom Deployment page enter **IoTBusiness** as the Resource group and select a Location close to you.
 
-    ![Enter IoTSmartCity as the Resource Group, and a Location close to you on the Custom Deployment page.](images/Setup/image5.png 'Custom deployment dialog')
+    ![Enter IoTBusiness as the Resource Group, and a Location close to you on the Custom Deployment page.](images/Setup/image5.png 'Custom deployment dialog')
 
 5.  Next, update the LABVM DNS Name providing a globally unique name 3-24 alpha-numeric characters which are lowercase. Check the I agree to the terms and conditions stated above and then click Purchase.
 
@@ -119,7 +119,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
-6.  Once the Deployment completes, you can locate your VM in the **IotSmartCity** Resource group. Open the **LABVM** and click **Connect**.
+6.  Once the Deployment completes, you can locate your VM in the **IoTBusiness** Resource group. Open the **LABVM** and click **Connect**.
 
     ![Click the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 
@@ -163,7 +163,7 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
 
-2. In a web browser, navigate to the [IoT for Business MCW repo](https://github.com/Microsoft/MCW-IoT-for-business).
+2. In a web browser, navigate to the [IoT for Business MCW repo](https://github.com/Microsoft/MCW-IoT-for-business). **This link will change once the IoT And the The Smart City repository is released.
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
