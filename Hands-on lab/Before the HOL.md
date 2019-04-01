@@ -103,7 +103,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 2.  Scroll down and locate the **IoT for Business** selection and click the **Deploy to Azure** button. 
 
-    ![The IoT for Business LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
+    ![The IoT and the Smart city LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
 
 3.  You will need to then authenticate with Azure.
 
@@ -163,11 +163,11 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
 
-2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-for-business). **This link will change once the IoT And the The Smart City repository is released.**
+2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). **This link will change once the IoT And the The Smart City repository is released.**
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
-   ![Download .zip containing the IoT for Business repository](media/git-hub-download-repo.png 'Download ZIP')
+   ![Download .zip containing the IoT and the Smart City repository](media/git-hub-download-repo.png 'Download ZIP')
 
 4. Right-click the .zip file you downloaded and choose **Extract All...**.
 
@@ -177,6 +177,6 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
    ![Change the destination path to C:\ and click on Extract](media/extract-lab-files-dialog.png 'Extract Compressed Folders Dialog')
 
-6. The lab files are located here: `C:\MCW-IoT-for-business-master\Hands-on lab\Lab-files`.
+6. The lab files are located here: `C:\MCW-IoT-And-The-Smart-City-master\Hands-on lab\Lab-files`.
 
 You should follow all steps provided *before* performing the Hands-on lab.
