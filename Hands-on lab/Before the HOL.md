@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
-IoT for business
+IoT and the Smart City
 </div>
 
 <div class="MCWHeader2">
@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-October 2018
+March 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.# IoT for business setup
 
@@ -26,7 +26,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [IoT for business before the hands-on lab setup guide](#iot-for-business-before-the-hands-on-lab-setup-guide)
+- [IoT and the Smart City before the hands-on lab setup guide](#iot-and-the-smart-city-before-the-hands-on-lab-setup-guide)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
     - [Task 1: Perform a deployment of the LABVM](#task-1-perform-a-deployment-of-the-labvm)
@@ -35,7 +35,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# IoT for business before the hands-on lab setup guide
+# IoT and the Smart City before the hands-on lab setup guide
 
 ## Requirements
 
@@ -43,7 +43,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - **Global Administrator role** for Azure AD within your subscription.
 
-- Local machine or a virtual machine configured with (**complete the day before the lab!**):
+- Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs - perform Task 1 below **only** if you do not want to run locally) :
 
   - Visual Studio Code version 1.19.2 or higher
 
@@ -95,21 +95,21 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 In this exercise, you will set up your environment you will use for the rest of the exercises.
 
-### Task 1: Perform a deployment of the LABVM
+### Task 1: Perform a deployment of the LABVM 
 
 In this task you will perform a deployment of a the VM that will be used during this lab.
 
-1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>.
+1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>. 
 
-2.  Scroll down and locate the **IoT for Business** selection and click the **Deploy to Azure** button.
+2.  Scroll down and locate the **IoT for Business** selection and click the **Deploy to Azure** button. 
 
-    ![The IoT for Business LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
+    ![The IoT and the Smart city LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
 
 3.  You will need to then authenticate with Azure.
 
     ![Use the sign in form to authenticate with your Azure account.](images/Setup/image4.png 'Authentication dialog')
 
-4.  On the Custom Deployment page enter IoTBusiness as the Resource group and select a Location close to you.
+4.  On the Custom Deployment page enter **IoTBusiness** as the Resource group and select a Location close to you.
 
     ![Enter IoTBusiness as the Resource Group, and a Location close to you on the Custom Deployment page.](images/Setup/image5.png 'Custom deployment dialog')
 
@@ -119,15 +119,15 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
-6.  Once the Deployment completes, you can locate your VM in the **IotBusiness** Resource group. Open the **LABVM** and click **Connect**.
+6.  Once the Deployment completes, you can locate your VM in the **IoTBusiness** Resource group. Open the **LABVM** and click **Connect**.
 
     ![Click the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 
 7.  Login to the LABVM using the following credentials:
 
-    - Username: demouser
+    - **Username**: demouser
 
-    - Password: Password.1!!
+    - **Password**: Password.1!!
 
     ![Enter demouser as the username, and Password.1!! as the password](images/Setup/image8.png 'Login credential fields')
 
@@ -163,11 +163,11 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
 
-2. In a web browser, navigate to the [IoT for Business MCW repo](https://github.com/Microsoft/MCW-IoT-for-business).
+2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). **This link will change once the IoT And The Smart City repository is released.**
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
-   ![Download .zip containing the IoT for Business repository](media/git-hub-download-repo.png 'Download ZIP')
+   ![Download .zip containing the IoT and the Smart City repository](media/git-hub-download-repo.png 'Download ZIP')
 
 4. Right-click the .zip file you downloaded and choose **Extract All...**.
 
