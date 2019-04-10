@@ -1,7 +1,7 @@
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
-IoT And the Smart City
+IoT and the Smart City
 </div>
 
 <div class="MCWHeader2">
@@ -31,7 +31,7 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
   - [Whiteboard design session flow](#whiteboard-design-session-flow)
   - [Before the whiteboard design session: How to prepare](#before-the-whiteboard-design-session-how-to-prepare)
   - [During the whiteboard design session: Tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
-- [IoT and the smart city whiteboard design session student guide](#iot-and-the-smart-city-whiteboard-design-session-student-guide)
+- [IoT and the Smart City whiteboard design session student guide](#iot-and-the-smart-city-whiteboard-design-session-student-guide)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
     - [Customer situation](#customer-situation)
@@ -42,7 +42,7 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
   - [Step 3: Present the solution](#step-3-present-the-solution)
   - [Wrap-up](#wrap-up)
   - [Additional references](#additional-references)
-- [IoT and the smart city whiteboard design session trainer guide](#iot-and-the-smart-city-whiteboard-design-session-trainer-guide)
+- [IoT and the Smart City whiteboard design session trainer guide](#iot-and-the-smart-city-whiteboard-design-session-trainer-guide)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
   - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
   - [Step 3: Present the solution](#step-3-present-the-solution-1)
@@ -363,7 +363,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | About Azure Location Based Services                                      | <https://docs.microsoft.com/en-us/azure/location-based-services/about-location-based-services>  |
 | Using the Azure Location Based Services Search service                   |   <https://docs.microsoft.com/en-us/azure/location-based-services/how-to-search-for-address>    |
 
-# IoT and the Smart city whiteboard design session trainer guide
+# IoT and the Smart City whiteboard design session trainer guide
 
 ## Step 1: Review the customer case study
 
