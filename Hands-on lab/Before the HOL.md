@@ -125,9 +125,9 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 7.  Login to the LABVM using the following credentials:
 
-    - Username: demouser
+    - **Username**: demouser
 
-    - Password: Password.1!!
+    - **Password**: Password.1!!
 
     ![Enter demouser as the username, and Password.1!! as the password](images/Setup/image8.png 'Login credential fields')
 
@@ -163,7 +163,7 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
 
-2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). **This link will change once the IoT And the The Smart City repository is released.**
+2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). **This link will change once the IoT And The Smart City repository is released.**
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
