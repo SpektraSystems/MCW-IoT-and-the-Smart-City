@@ -68,7 +68,7 @@
     "FirmwareUpdate": {
       "Type": "javascript",
       "Path": "FirmwareUpdate-method.js"
-    },
+    }/*,
     "IncreaseTiming": {
       "Type": "javascript",
       "Path": "IncreaseTiming-method.js"
@@ -77,5 +77,6 @@
       "Type": "javascript",
       "Path": "DecreaseTiming-method.js"
     }
+    */
   }
 }
