@@ -310,35 +310,35 @@ In this task, you will provision a new Service Bus queue that will be used for r
 
     ![Data Explorer is selected in the Azure Cosmos DB account blade.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image124.png "Azure Cosmos DB account blade")
 
-2.  There are currently two databases and two collections:
+2.  There are currently two databases and two containers:
 
     a.  **Database**: pcs-storage
 
-    -  **Collection**: pcs-storage
+    -  **Container**: pcs-storage
 
         - **Description**: contains configuration data for the IoT Remote Monitoring solution. 
 
     b.  **Database**: pcs-iothub-stream
 
-    - **Collection**: alarms
+    - **Container**: alarms
 
         - **Description**: This is the collection that holds all IoT Hub messages that the remote monitoring solution receives
 
-3.  Select **New Collection**.
+3.  Select **New Container**.
 
-    ![In the Azure Cosmos DB account blade, the New Collection button is selected. Under Collections, pcs-storage is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image125.png "Azure Cosmos DB account blade")
+    ![In the Azure Cosmos DB account blade, the New Container button is selected. ](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image125.png "Azure Cosmos DB new container blade")
 
 4.  In the Add Collection form, specify the following:
 
     a.  **Database Id**: pcs-iothub-stream
 
-    b.  **Collection Id**: critical-alerts
+    b.  **Container Id**: critical-alerts
 
     c.  **Partition key**: /vin
 
     d.  **Throughput**: 1000
 
-    ![Fields in the Add Collection blade display with the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image126.png "Add Collection blade")
+    ![Fields in the Add Container blade display with the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image126.png "Add Container blade")
 
 5.  Select **OK**.
 
@@ -361,8 +361,6 @@ In this task, you will review the consumer groups that were added to the default
 5. Create a new consumer group by typing **queuefuncconsumergroup** into a Consumer Groups text box, we will use this consumer group later on in this lab.
   
   ![IoT Hub Create Consumer Group](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image222.png "IoT Hub Create Consumer Group")
-
-6. Press the **Save** button to save the changes.
 
 ### Task 4: Review the Azure Time Series Insights instance
 
@@ -463,7 +461,7 @@ You will need to finish configuring these files for the simulator.
 
 ### Task 1: Configure the SimulationAgent and WebService projects to run locally
 
-In this task, you will open the device-simulation solution in Visual Studio 2017 and configure the SimulationAgent and WebService projects to run locally.
+In this task, you will open the device-simulation solution in Visual Studio 2019 and configure the SimulationAgent and WebService projects to run locally.
 
 1.  Browse to the device-simulation solution in the following location: \[your-Lab-files-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\device-simulation.
 
@@ -509,7 +507,7 @@ In this task, you will open the device-simulation solution in Visual Studio 2017
 
 In this task, you will finish configuring the device models we have provided for you.
 
-1.  With the device-simulation solution still open, use Solution Explorer to expand the **Services** project. Next, open **bus-01.json** located under data\\devicemodels.
+1.  With the device-simulation solution still open, use Solution Explorer to expand the **Services** project. Next, open **bus-01.json** located under **data\\devicemodels**.
 
     ![The following path is expanded in Solution Explorer: Services\\Data\\devicemodels. Under devicemodels, bus-o1.json is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image44.png "Solution Explorer")
 
@@ -871,7 +869,7 @@ The IoT Remote Monitoring web interface enables you to create filters that help 
 
 1.  Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is **https://\[your solution name\].azurewebsites.net/dashboard**. You may need to refresh the browser window if it has been running for some time and is unresponsive.
 
-2.  One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map over New York City. In the screenshot below, the new fuel level telemetry option is selected, and data for the two new buses appear beneath.
+2.  One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map over New York City. In the screenshot below, the new fuel level telemetry option is selected, and data for the two new buses appear beneath. (Note: You may need to wait a few minutes with the simulator running in order for the New York data points to appear - zoom out the map to see them.)
 
     ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image67.png "Monitoring Web App dashboard")
 
@@ -983,7 +981,7 @@ In this task, you will send a job to one of the traffic light devices, using the
 
     ![Callouts point to the previously mentioned settings and buttons in the Devices section.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image76.png "Devices section")
 
-9.  Navigate back to the dashboard and view the **timing** telemetry once again. This time, you should notice that the traffic light timing for traffic light \#1 decreased from 90 seconds to 75.
+9.  Navigate back to the dashboard and view the **timing** telemetry once again. This time, you should notice that the traffic light timing for traffic light \#1 decreased from 90 seconds to 75. (You may need to wait a couple of minutes to see the effect in the chart)
 
     ![In the Telemetry section, the decrease is circled on the graph.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image77.png "Telemetry section")
 
@@ -1232,7 +1230,7 @@ In this task, you will use Visual Studio Code to complete the custom C\# IoT Edg
     ```
 8. Save your changes.
 
-9. In VS Code, open **manifest.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
+9. In VS Code, open **module.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
  ![Image Repository](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image199.png "Image Repository")
 
 
