@@ -177,6 +177,6 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
    ![Change the destination path to C:\ and click on Extract](media/extract-lab-files-dialog.png 'Extract Compressed Folders Dialog')
 
-6. The lab files are located here: `C:\MCW-IoT-for-business-master\Hands-on lab\Lab-files`.
+6. The lab files are located here: `C:\MCW-IoT-and-the-Smart-City-master\Hands-on lab\Lab-files`.
 
 You should follow all steps provided *before* performing the Hands-on lab.
