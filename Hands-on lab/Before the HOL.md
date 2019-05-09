@@ -155,8 +155,6 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 - Validate connectivity to your Azure subscription. Launch Visual Studio, open **Server Explorer** from the View menu, and ensure that you can connect to your Azure subscription.
 
-You should follow all steps provided _before_ performing the Hands-on lab.
-
 ### Task 3: Download starter solution
 
 There are several artifacts that will be used in this hands-on lab. All of these files are located on GitHub and can be downloaded as follows:
