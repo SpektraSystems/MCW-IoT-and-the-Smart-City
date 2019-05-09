@@ -72,7 +72,7 @@ namespace VehicleTelemetrySimulator
             //the device client is responsible for managing device twin information at the device level
             //obtaining the device connection string is currently not supported by DeviceClient
             //TODO: 7 - set device connection string for the device client
-            ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("HostName=iothub-uox63.azure-devices.net;DeviceId=bus1;SharedAccessKey=Uie7cMBw7bEXZPS3tKTom8xBkCrP6u4Coh6zRnupXv4=");
+            //ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("<connectionstring>");
             await ioTHubDeviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
             var twin = await ioTHubDeviceClient.GetTwinAsync();
             var desired = twin.Properties.Desired;
@@ -118,7 +118,7 @@ namespace VehicleTelemetrySimulator
                     message.ContentEncoding = "utf-8";
                     message.ContentType = "application/json";
                     // TODO: 6 - Have the ModuleClient send the event message asynchronously, using the specified output name
-                    await ioTHubModuleClient.SendEventAsync(outputName, message);
+                    //await ioTHubModuleClient.SendEventAsync(outputName, message);
                 }
                 catch (AggregateException ex)
                 {
@@ -178,30 +178,30 @@ namespace VehicleTelemetrySimulator
                 if (desired["VIN"] != null)
                 {
                     // TODO: 1 - Set the vin to the value in the device twin
-                    vin = desired["VIN"];
-                    reportedProperties["VIN"] = vin;
+                    //vin = desired["VIN"];
+                    //reportedProperties["VIN"] = vin;
                 }
                 if (desired["Borough"] != null)
                 {
                     // TODO: 2 - Set the borough to the value in the device twin
-                    borough = desired["Borough"];
-                    reportedProperties["Borough"] = borough;
+                    //borough = desired["Borough"];
+                    //reportedProperties["Borough"] = borough;
                 }
                 if (desired["Telemetry"] != null)
                 {
                     // TODO: 3 - Set telemetry to the value in the device twin
-                    telemetry = desired["Telemetry"];
-                    reportedProperties["Telemetry"] = telemetry;
+                    //telemetry = desired["Telemetry"];
+                    //reportedProperties["Telemetry"] = telemetry;
                 }
                 if (desired["Type"] != null)
                 {
                     // TODO: 4 - Set telemetry to the value in the device twin
-                    type = desired["Type"];
-                    reportedProperties["Type"] = type;
+                    //type = desired["Type"];
+                    //reportedProperties["Type"] = type;
                 }
 
                 // TODO: 5 - update reported properties with the IoT Hub
-                await ioTHubDeviceClient.UpdateReportedPropertiesAsync(reportedProperties);
+                //await ioTHubDeviceClient.UpdateReportedPropertiesAsync(reportedProperties);
 
             } catch (AggregateException ex){
                 foreach(Exception exception in ex.InnerExceptions){
