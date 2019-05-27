@@ -159,7 +159,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 There are several artifacts that will be used in this hands-on lab. All of these files are located on GitHub and can be downloaded as follows:
 
-1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
+1. From your LABVM, download the starter project by downloading a .zip copy of the IoT And The Smart City GitHub repo.
 
 2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). 
 
