@@ -101,7 +101,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>. 
 
-2.  Scroll down and locate the **IoT And The Smart City** selection and click the **Deploy to Azure** button. 
+2.  Scroll down and locate the **IoT and the Smart City** selection and click the **Deploy to Azure** button. 
 
     ![The IoT and the Smart city LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
 
