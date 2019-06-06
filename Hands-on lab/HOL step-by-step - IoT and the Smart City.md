@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-March 2019
+June 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -1834,8 +1834,7 @@ The console app is a fast and effortless way to view the critical engine alerts 
             var criticalAlertContent = JSON.stringify(alert);
             // Save the alarm to Cosmos DB
             context.bindings.criticalAlertDocument = criticalAlertContent;
-        }
-        context.done();
+            context.done();
     };
     ```
 
@@ -1867,7 +1866,7 @@ Apply a query filter on the messages collection to view the critical engine aler
 
     ![On the Query 1 tab, the Results 1 - 87 message is called out, and results display below.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image142.png 'Query 1 tab')
 
-4.  Expand the **critical-alerts** collection and select **Documents**. Choose one of the documents to view. You will see the full message data for the critical alert.
+4.  Expand the **critical-alerts** collection and select **Items**. Choose one of the items to view. You will see the full message data for the critical alert.
 
     ![Under Collections, ics-iothub-stream is expanded, Critical-alerts is expanded, and Documents is selected. On the Documents tab, a document id is selected, and the message data for the critical alert displays.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image143.png 'Collections section')
 

@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-March 2019
+June 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -101,7 +101,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>. 
 
-2.  Scroll down and locate the **IoT for Business** selection and click the **Deploy to Azure** button. 
+2.  Scroll down and locate the **IoT and the Smart City** selection and click the **Deploy to Azure** button. 
 
     ![The IoT and the Smart city LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
 
@@ -159,7 +159,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 There are several artifacts that will be used in this hands-on lab. All of these files are located on GitHub and can be downloaded as follows:
 
-1. From your LABVM, download the starter project by downloading a .zip copy of the IoT for Business GitHub repo.
+1. From your LABVM, download the starter project by downloading a .zip copy of the IoT and the Smart City GitHub repo.
 
 2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). 
 
