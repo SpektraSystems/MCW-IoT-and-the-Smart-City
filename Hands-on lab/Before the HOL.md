@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-June 2019
+September 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -45,7 +45,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs - perform Task 1 below **only** if you do not want to run locally) :
 
-  - Visual Studio Code version 1.19.2 or higher
+  - Visual Studio Code version 1.38.0 or higher
 
     - <https://code.visualstudio.com/>
 
@@ -61,21 +61,21 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     - <https://docs.docker.com/engine/installation/>
 
-  - .NET Core 2.0 SDK
+  - .NET Core 2.2 SDK
 
-    - <https://www.microsoft.com/net/core#windowscmd>
+    - <https://dotnet.microsoft.com/download>
 
-  - Visual Studio Community 2017 or greater, version 15.4 or higher
+  - Visual Studio Community 2019 or greater, version 16.1.4 or higher
 
     - <https://www.visualstudio.com/vs/>
 
-  - Azure development workload for Visual Studio 2017
+  - Azure development workload for Visual Studio 2019
 
     - <https://docs.microsoft.com/azure/azure-functions/functions-develop-vs#prerequisites>
 
-  - .NET desktop development workload for Visual Studio 2017
+  - .NET desktop development workload for Visual Studio 2019
 
-  - ASP.NET and web development workload for Visual Studio 2017
+  - ASP.NET and web development workload for Visual Studio 2019
 
   - Node.js (install using either the 32-bit or 64-bit Windows Installer (.msi) option)
 
