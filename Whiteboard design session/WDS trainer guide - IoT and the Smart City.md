@@ -34,7 +34,7 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
 - [IoT and the Smart City whiteboard design session student guide](#iot-and-the-smart-city-whiteboard-design-session-student-guide)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-    - [Customer situation](#customer-situation)
+      - [Customer situation](#customer-situation)
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
@@ -240,7 +240,7 @@ Following this same mandate of ease of use and future flexibility without overta
 
 ### Infographic for common scenarios
 
-![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessionstudentguide-IoTforbusinessimages/media/image2.png 'Common Scenario for IoT')
+![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessionstudentguide-IoTandtheSmartCityimages/media/image2.png 'Common Scenario for IoT')
 
 ## Step 2: Design a proof of concept solution
 
@@ -418,7 +418,7 @@ _High-level architecture_
 
 1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the IoT Smart City.
 
-    ![The Solution Architecture diagram is described in the text following the diagram.](images/Whiteboarddesignsessiontrainerguide-IoTfortheSmartCityimages/media/image3.png 'Solution Architecture diagram')
+    ![The Solution Architecture diagram is described in the text following the diagram.](images/Whiteboarddesignsessiontrainerguide-IoTandtheSmartCityimages/media/image3.png 'Solution Architecture diagram')
 
     The solution begins with an IoT Edge device installed on each city bus, which is responsible for reading the vehicle telemetry from the bus, such as speed, fuel level, oil level, engine temperature, etc. A trained Azure Machine Learning predictive maintenance module is loaded on the IoT Edge device to detect anomalies and potential issues. An Azure Stream Analytics module is added to the IoT Edge device to filter the output of the predictive maintenance module and send only the anomaly data to IoT Hub. A GPS IoT device is separately added to the bus to periodically send location and speed data to IoT Hub. An IoT device is added to various traffic lights to send maintenance-related telemetry, such as voltage readings and whether a light is no longer functional. It is registered as a device in IoT Hub, including properties such as its longitude and latitude and serial number. It can receive cloud-to-device messages through IoT Hub, allowing upstream services to send updates like the timing of its lights based on traffic congestion information. An additional consumer group is added to IoT Hubs messages/events endpoint, allowing a Time Series Insights instance and a Stream Analytics instance to simultaneously read the incoming data. Time Series Insights is used to store the raw time series data and provides advanced filtering, custom ad-hoc queries, and visualizations that can overlay data from several classes of IoT devices. Stream Analytics is used to collect the bus GPS and traffic light data, joining the two using geospatial queries to find buses within close proximity to traffic lights, and using reference data to filter the data based on average bus speeds. The filtered data indicating traffic congestion is sent to Azure Functions to evaluate the data and compare it against traffic data stored in Cosmos DB. If it appears traffic congestion is changing, the function updates Cosmos DB accordingly. Another function is triggered when traffic timing control messages appear in a Cosmos DB collection, whether automatically added by the previous function, or manually added by the web portal. It sends a cloud-to-device control message to IoT Hub to send a timing change request to a specific traffic light if needed. Stream Analytics also inserts unfiltered bus location data to Cosmos DB. Time Series Insights displays a custom view of the captured IoT data. The remote accelerator solution web application plots the devices on a map. The web app connects to Cosmos DB to manage alert rules and device control messages. It is also used to provision new IoT devices and send manual cloud-to-device messages through IoT Hub. At the bottom of the diagram is the Stream Analytics reference data update process, orchestrated by Azure Data Factory. The reference data stores speed limit information and speed alert threshold data for the traffic lights.
 

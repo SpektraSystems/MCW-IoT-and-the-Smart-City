@@ -114,7 +114,7 @@ Following this same mandate of ease of use and future flexibility without overta
 
 ### Infographic for common scenarios
 
-![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessionstudentguide-IoTfortheSmartCityimages/media/image2.png 'Common Scenario for IoT')
+![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessionstudentguide-IoTandtheSmartCityimages/media/image2.png 'Common Scenario for IoT')
 
 ## Step 2: Design a proof of concept solution
 
