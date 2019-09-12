@@ -1,11 +1,9 @@
 # Lab Virtual Machine Deployment
 If you would like to deploy a fully configured Windows 10 based virtual machine in Azure to complete this lab, press the button below.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https://raw.githubusercontent.com/codingbandit/MCW-IoT-and-the-Smart-City/feature/september-2019-update/Hands-on%20lab/Lab-files/LabVM/azure-deploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcodingbandit%2FMCW-IoT-and-the-Smart-City%2Ffeature%2Fseptember-2019-update%2FHands-on-lab%2FLab-files%2FLabVM%2Fazure-deploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-
-
 
 **Prerequisites Supplied:**
 
