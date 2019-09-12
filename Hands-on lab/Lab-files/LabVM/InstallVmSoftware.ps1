@@ -11,7 +11,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 
 #Assign Packages to Install
 $Packages = 'googlechrome',`
-            'docker-for-windows',`
+            'docker-desktop',`
             'postman',`
             'nodejs.install',`
             'vscode',`

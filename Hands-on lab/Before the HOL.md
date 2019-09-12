@@ -31,7 +31,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Before the hands-on lab](#before-the-hands-on-lab)
     - [Task 1: Perform a deployment of the LABVM](#task-1-perform-a-deployment-of-the-labvm)
     - [Task 2: Validate connectivity to Azure](#task-2-validate-connectivity-to-azure)
-    - [Task 3: Download starter solution](#task-3-download-starter-solution)
+    - [Task 3: Download lab artifacts](#task-3-download-lab-artifacts)
 
 <!-- /TOC -->
 
@@ -45,7 +45,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs - perform Task 1 below **only** if you do not want to run locally) :
 
-  - Visual Studio Code version 1.38.0 or higher
+  - Visual Studio Code version 1.38.1 or higher
 
     - <https://code.visualstudio.com/>
 
@@ -57,7 +57,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     - <https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp>
 
-  - Docker on the same computer that has Visual Studio Code (Community Edition (CE) is sufficient)
+  - Docker Desktop on the same computer that has Visual Studio Code
 
     - <https://docs.docker.com/engine/installation/>
 
@@ -65,7 +65,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     - <https://dotnet.microsoft.com/download>
 
-  - Visual Studio Community 2019 or greater, version 16.1.4 or higher
+  - Visual Studio Community 2019 or greater, version 16.2.5 or higher
 
     - <https://www.visualstudio.com/vs/>
 
@@ -99,23 +99,21 @@ In this exercise, you will set up your environment you will use for the rest of 
 
 In this task you will perform a deployment of a the VM that will be used during this lab.
 
-1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/solliancenet/LABVM>. 
+1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/microsoft/MCW-IoT-and-the-Smart-City/Hands-on lab/Lab-files/LABVM>. 
 
-2.  Scroll down and locate the **IoT and the Smart City** selection and click the **Deploy to Azure** button. 
+2.  Press the **Deploy to Azure** button. 
 
-    ![The IoT and the Smart city LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT for business LABVM')
+    ![The IoT and the Smart City LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT and the Smart City LABVM')
 
 3.  You will need to then authenticate with Azure.
 
     ![Use the sign in form to authenticate with your Azure account.](images/Setup/image4.png 'Authentication dialog')
 
-4.  On the Custom Deployment page enter **IoTBusiness** as the Resource group and select a Location close to you.
+4.  On the Custom Deployment page, choose to create a new resource group, enter **IoTSmartCity** as the Resource name and select a Location close to you.
+   
+5.  Next, update the LABVM DNS Name providing a globally unique name 3-24 alpha-numeric characters which are lowercase. Check the I agree to the terms and conditions stated above and then press the Purchase button.
 
-    ![Enter IoTBusiness as the Resource Group, and a Location close to you on the Custom Deployment page.](images/Setup/image5.png 'Custom deployment dialog')
-
-5.  Next, update the LABVM DNS Name providing a globally unique name 3-24 alpha-numeric characters which are lowercase. Check the I agree to the terms and conditions stated above and then click Purchase.
-
-    ![Update the LABVM DNS Name with a globally unique name consisting of 3-24 alpha-numeric lowercase characters. Check the I agree to the terms and conditions checkbox, then click Purchase.](images/Setup/image6.png 'LAVM DNS Name dialot')
+    ![LabVM form](images/Setup/image6.png 'LAVM Form')
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
@@ -139,9 +137,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Select No when asked whether you want to allow your PC to be discoverable by other PCs and devices on this network.](images/Setup/image10.png 'Network pop-up')
 
-10. Once connected double click the Docker Icon to start the application. This will take a couple of minutes to start. You can click in the taskbar to ensure that is reads "Docker is Starting".
-
-    ![Docker for Windows icon.](images/Setup/image11.png 'Docker for Windows icon')
+10. Docker Desktop will automatically start. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
 
     ![Double-click the Docker Icon within the Windows taskbar to ensure Docker has started.](images/Setup/image12.png 'Windows taskbar docker icon')
 
@@ -155,11 +151,11 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 - Validate connectivity to your Azure subscription. Launch Visual Studio, open **Server Explorer** from the View menu, and ensure that you can connect to your Azure subscription.
 
-### Task 3: Download starter solution
+### Task 3: Download lab artifacts
 
 There are several artifacts that will be used in this hands-on lab. All of these files are located on GitHub and can be downloaded as follows:
 
-1. From your LABVM, download the starter project by downloading a .zip copy of the IoT and the Smart City GitHub repo.
+1. From your LABVM, obtain all artifacts by downloading a .zip copy of the IoT and the Smart City GitHub repo.
 
 2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). 
 
