@@ -8,7 +8,7 @@ If you would like to deploy a fully configured Windows 10 based virtual machine 
 **Prerequisites Supplied:**
 
 1. Docker for Windows Community Edition
-1. Visual Studio Community 2019 with Updates (.NET Desktop Environment, ASP and Web Development and Azure SDK)
+1. Visual Studio Community 2019 (.NET Desktop Environment, ASP and Web Development and Azure SDK)
 1. Node.js
 1. Postman
 1. Git for Windows (bash)
