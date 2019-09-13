@@ -137,8 +137,10 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Select No when asked whether you want to allow your PC to be discoverable by other PCs and devices on this network.](images/Setup/image10.png 'Network pop-up')
 
-5.  Docker Desktop will automatically start. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
+5.  Once logged in - Docker Desktop will need to be started. Double-click the *Docker Desktop* icon to start the program. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
 
+    ![Double-Click the Docker Desktop icon to start the program](images/Setup/docker-icon.png)
+    
     ![Double-click the Docker Icon within the Windows taskbar to ensure Docker has started.](images/Setup/image12.png 'Windows taskbar docker icon')
 
 6.  When Docker for Windows is up and running you will receive the following message:
