@@ -15,7 +15,7 @@ $Packages = 'googlechrome',`
             'postman',`
             'nodejs.install',`
             'vscode',`
-            'git-install',`
+            'git.install',`
             'visualstudio2019community',`
             'visualstudio2019-workload-azure',`
             'visualstudio2019-workload-manageddesktop',`
