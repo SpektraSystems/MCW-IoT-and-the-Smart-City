@@ -117,11 +117,11 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
-6.  Once the Deployment completes, you can locate your VM in the **IoTBusiness** Resource group. Open the **LABVM** and click **Connect**.
+1.  Once the Deployment completes, you can locate your VM in the **IoTSmartCity** Resource group. Open the **LABVM** and click **Connect**.
 
     ![Click the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 
-7.  Login to the LABVM using the following credentials:
+2.  Login to the LABVM using the following credentials:
 
     - **Username**: demouser
 
@@ -129,19 +129,19 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Enter demouser as the username, and Password.1!! as the password](images/Setup/image8.png 'Login credential fields')
 
-8.  A Remote Desktop Warning will appear. Click **Don't ask me again for connections to this computer** and they click **Yes**.
+3.  A Remote Desktop Warning will appear. Click **Don't ask me again for connections to this computer** and they click **Yes**.
 
     ![Check the Don't ask me again for connections to this computer, then click Yes on the Remote Desktop Connection Warning dialog.](images/Setup/image9.png 'Remote Desktop Connection warbubg dialog box')
 
-9.  You will receive a message about allowing your PC to be discoverable. Click **No**.
+4.  You will receive a message about allowing your PC to be discoverable. Click **No**.
 
     ![Select No when asked whether you want to allow your PC to be discoverable by other PCs and devices on this network.](images/Setup/image10.png 'Network pop-up')
 
-10. Docker Desktop will automatically start. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
+5.  Docker Desktop will automatically start. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
 
     ![Double-click the Docker Icon within the Windows taskbar to ensure Docker has started.](images/Setup/image12.png 'Windows taskbar docker icon')
 
-11. When Docker for Windows is up and running you will receive the following message:
+6.  When Docker for Windows is up and running you will receive the following message:
 
     ![When Docker is open and displayed, it should say "Docker is now up and running!".](images/Setup/image13.png 'Docker Welcome page')
 
