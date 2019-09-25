@@ -31,31 +31,32 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Overview](#overview)
   - [Solution architecture](#solution-architecture)
   - [Requirements](#requirements)
-  - [Exercise 1: Set up IoT Remote Monitoring solution environment](#exercise-1-set-up-iot-remote-monitoring-solution-environment)
+  - [Exercise 1: Set up the IoT Remote Monitoring solution environment](#exercise-1-set-up-the-iot-remote-monitoring-solution-environment)
     - [Help references](#help-references)
     - [Task 1: Provision the Remote Monitoring Solution](#task-1-provision-the-remote-monitoring-solution)
     - [Task 2: Stop running device simulation in the Remote Monitoring Solution](#task-2-stop-running-device-simulation-in-the-remote-monitoring-solution)
   - [Exercise 2: Provision additional Azure services](#exercise-2-provision-additional-azure-services)
     - [Help references](#help-references-1)
     - [Task 1: Create Service Bus queue](#task-1-create-service-bus-queue)
-    - [Task 2: Create the Critical Alerts collection in Cosmos Db](#task-2-create-the-critical-alerts-collection-in-cosmos-db)
+    - [Task 2: Create the Critical Alerts container in Cosmos Db](#task-2-create-the-critical-alerts-container-in-cosmos-db)
     - [Task 3: Review the consumer groups in the IoT Hub](#task-3-review-the-consumer-groups-in-the-iot-hub)
-    - [Task 4: Review the Azure Time Series Insights Instance](#task-4-review-the-azure-time-series-insights-instance)
-    - [Task 5: Provision Azure Container Registry](#task-5-provision-azure-container-registry)
+    - [Task 4: Review the Azure Time Series Insights instance](#task-4-review-the-azure-time-series-insights-instance)
+    - [Task 5: Provision an Azure Container Registry](#task-5-provision-an-azure-container-registry)
+    - [Task 6: Obtain the Storage Account Connection String](#task-6-obtain-the-storage-account-connection-string)
+    - [Task 7: Retrieve Secrets from the Key Vault](#task-7-retrieve-secrets-from-the-key-vault)
   - [Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters](#exercise-3-create-bus-and-traffic-light-simulated-devices-and-add-alerts-and-filters)
     - [Help references](#help-references-2)
-    - [Task 1: Configure the SimulationAgent and WebService projects to run locally](#task-1-configure-the-simulationagent-and-webservice-projects-to-run-locally)
+    - [Task 1: Configure the Device Simulation projects to run locally](#task-1-configure-the-device-simulation-projects-to-run-locally)
     - [Task 2: Finish configuring the simulated IoT device models and scripts](#task-2-finish-configuring-the-simulated-iot-device-models-and-scripts)
     - [Task 3: Explore the remaining files to understand what is happening](#task-3-explore-the-remaining-files-to-understand-what-is-happening)
     - [Task 4: Configure and run the Storage Adapter project](#task-4-configure-and-run-the-storage-adapter-project)
     - [Task 5: Run the Simulator web app and create a new simulation](#task-5-run-the-simulator-web-app-and-create-a-new-simulation)
-    - [Task 6: Run the device simulation agent locally](#task-6-run-the-device-simulation-agent-locally)
     - [Task 7: Create alerts and filters in the monitoring web app](#task-7-create-alerts-and-filters-in-the-monitoring-web-app)
     - [Task 8: Send jobs to IoT devices](#task-8-send-jobs-to-iot-devices)
   - [Exercise 4: Create IoT Edge device and custom modules](#exercise-4-create-iot-edge-device-and-custom-modules)
     - [Help references](#help-references-3)
     - [Task 1: Add a new IoT Edge device](#task-1-add-a-new-iot-edge-device)
-    - [Task 2: Provision new Linux virtual machine to run as the IoT Edge Device](#task-2-provision-new-linux-virtual-machine-to-run-as-the-iot-edge-device)
+    - [Task 2: Provision new Linux virtual machine to run as the IoT Edge device](#task-2-provision-new-linux-virtual-machine-to-run-as-the-iot-edge-device)
     - [Task 3: Create and deploy the custom C\# IoT Edge module for vehicle telemetry](#task-3-create-and-deploy-the-custom-c-iot-edge-module-for-vehicle-telemetry)
     - [Task 4: Create the Azure Stream Analytics IoT Edge module](#task-4-create-the-azure-stream-analytics-iot-edge-module)
     - [Task 5: Deploy the custom modules to IoT Edge device](#task-5-deploy-the-custom-modules-to-iot-edge-device)
@@ -63,8 +64,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Create a new Function App](#task-1-create-a-new-function-app)
     - [Task 2: Add new Function to process messages received by the IoT Hub](#task-2-add-new-function-to-process-messages-received-by-the-iot-hub)
   - [Exercise 6: Run a console app to view critical engine alerts from the Service Bus Queue](#exercise-6-run-a-console-app-to-view-critical-engine-alerts-from-the-service-bus-queue)
-    - [Help references](#help-references-5)
-    - [Task 1: Make sure the Service Bus Queue is receiving messages](#task-1-make-sure-the-service-bus-queue-is-receiving-messages)
+    - [Help references](#help-references-4)
+    - [Task 1: Retrieve the Service Bus Queue Connection string](#task-1-retrieve-the-service-bus-queue-connection-string)
     - [Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2017](#task-2-configure-and-execute-the-readenginealerts-solution-in-visual-studio-2017)
   - [Exercise 7: Create an Azure Function to ingest critical engine alerts and store them in Cosmos DB](#exercise-7-create-an-azure-function-to-ingest-critical-engine-alerts-and-store-them-in-cosmos-db)
     - [Help references](#help-references-5)
@@ -119,11 +120,9 @@ The solution begins with an **IoT Edge Device** that would be installed on each 
 
 - **Global Administrator role** for Azure AD within your subscription.
 
-- You have completed the steps in [Before the hands-on-lab setup guide](Before%20the%20HOL.md).
+- Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs - perform Task 1 below **only** if you do not want to run locally) :
 
-- Local machine or a virtual machine configured with (**complete the day before the lab!**):
-
-  - Visual Studio Code version 1.19.2 or higher
+  - Visual Studio Code version 1.38.1 or higher
 
     - <https://code.visualstudio.com/>
 
@@ -135,25 +134,25 @@ The solution begins with an **IoT Edge Device** that would be installed on each 
 
     - <https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp>
 
-  - Docker on the same computer that has Visual Studio Code (Community Edition (CE) is sufficient)
+  - Docker Desktop on the same computer that has Visual Studio Code
 
     - <https://docs.docker.com/engine/installation/>
 
-  - .NET Core 2.0 SDK
+  - .NET Core 2.2 SDK
 
-    - <https://www.microsoft.com/net/core#windowscmd>
+    - <https://dotnet.microsoft.com/download>
 
-  - Visual Studio Community 2017 or greater, version 15.4 or higher
+  - Visual Studio Community 2019 or greater, version 16.2.5 or higher
 
     - <https://www.visualstudio.com/vs/>
 
-  - Azure development workload for Visual Studio 2017
+  - Azure development workload for Visual Studio 2019
 
     - <https://docs.microsoft.com/azure/azure-functions/functions-develop-vs#prerequisites>
 
-  - .NET desktop development workload for Visual Studio 2017
+  - .NET desktop development workload for Visual Studio 2019
 
-  - ASP.NET and web development workload for Visual Studio 2017
+  - ASP.NET and web development workload for Visual Studio 2019
 
   - Node.js (install using either the 32-bit or 64-bit Windows Installer (.msi) option)
 
@@ -167,7 +166,7 @@ The solution begins with an **IoT Edge Device** that would be installed on each 
 
     - Instructions for installing the Windows Subsystem for Linux for using Bash: <https://docs.microsoft.com/en-us/windows/wsl/install-win10>
 
-## Exercise 1: Set up IoT Remote Monitoring solution environment
+## Exercise 1: Set up the IoT Remote Monitoring solution environment
 
 **Duration:** 30 Minutes
 
@@ -332,17 +331,23 @@ In this task, you will provision a new Service Bus queue that will be used for r
 
 4.  In the Add Collection form, specify the following:
 
-    a. **Database Id**: pcs-iothub-stream
+    a. Select **Use existing** radio button
+    
+    b. **Database Id**: pcs-iothub-stream
 
-    b. **Container Id**: critical-alerts
+    c. **Container Id**: critical-alerts
 
-    c. **Partition key**: /vin
+    d. **Partition key**: /vin
 
-    d. **Throughput**: 1000
+    e. **Throughput**: 1000
 
     ![Fields in the Add Container blade display with the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image126.png 'Add Container blade')
 
 5.  Select **OK**.
+6.  Next, we will obtain the connection string for Cosmos DB. From the left-hand menu, in the **Settings** section, select **Keys**. Then copy the **Primary Connection String** value and save it for use later on in this lab.
+   
+   ![Obtain Cosmos DB Connection String](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image239.png)
+
 
 ### Task 3: Review the consumer groups in the IoT Hub
 
@@ -364,6 +369,10 @@ In this task, you will review the consumer groups that were added to the default
 
 ![IoT Hub Create Consumer Group](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image222.png 'IoT Hub Create Consumer Group')
 
+6. Next, we will obtain a connection string for this IoT Hub for use later on in this lab. Select **Shared access policies**, then select **iothubowner**, and copy the primary key connection string.
+   
+   ![Primary IoT Hub Connection String](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image240.png)
+
 ### Task 4: Review the Azure Time Series Insights instance
 
 Azure Time Series Insights is the first fully managed time series database on the Azure platform. It was developed primarily with high volume IoT data in mind, where having a single location in which you can quickly view this information and derive insights on it is typically no small feat. Although the IoT Remote Monitoring solution you provisioned stores its simulated device data in Cosmos DB, you will be able to ingest that same data into Time Series Insights, along with data generated by your IoT Edge device. This is because all data flows through IoT Hub as the initial point of ingress. You have a time series consumer group on the Events endpoint specifically for Time Series Insights to be able to simultaneously read and store the same data that will land in Cosmos DB, as well as the added IoT Edge data. After reviewing the Time Series Insights instance, you will see how it's configured to use the IoT Hub consumer group as an input.
@@ -379,7 +388,7 @@ Azure Time Series Insights is the first fully managed time series database on th
 
     ![Event Sources is selected under Environment Toplogy, and the Add button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image185.png 'Event Sources blade')
 
-### Task 5: Provision Azure Container Registry
+### Task 5: Provision an Azure Container Registry
 
 IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics that runs on the device, Azure Machine Learning, and Azure Functions. Each of these modules is hosted within a Docker container. We will be creating two modules for the IoT Edge device: a custom C\# module, and an Azure Stream Analytics module. In both cases, you will be creating a container image from the files. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
 
@@ -413,15 +422,46 @@ IoT Edge devices use one or more modules to perform a series of actions locally 
 
     ![In the Container registry blade, under Settings, Access keys is selected. The copy buttons for Login server, Username, and password are all called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image38.png 'Container registry blade')
 
+### Task 6: Obtain the Storage Account Connection String
+
+1. Return to the Resource Group that houses the resources for the IoT Remote Monitoring solution. From the list, select the Storage account resource whose name shares the same last 5 characters as the IoT Hub name.
+   
+   ![Open Storage Account](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image241.png)
+
+2. From the left-hand menu, select **Access keys**, then copy the value of the Connection string of **key1**. We will be using this value later on in the lab.
+
+    ![Storage Connection String](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image242.png)
+
+### Task 7: Retrieve Secrets from the Key Vault
+Later in this lab, we will be making use of the Azure Key Vault. This vault is created so that secrets do not need to reside in code. A Key Vault resource was generated when we created the IoT Remote Monitoring accelerator.
+
+1. Return to the resource group that was created for this lab. In the list of resources select the Azure Key Vault resource. Record the name of the Key Vault for use later on in this lab.
+    
+    ![Azure key vault resource](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image243.png)
+
+2. From the left-hand menu, select the **Secrets** item, then from the list, select the **aadAppId** item.
+
+    ![Azure vault secrets](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image244.png)
+
+3. Select the Current Version for this key.
+   
+   ![Azure key current version](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image245.png)
+
+4. At the bottom of the next screen, copy and store the secret value. We will be using this value later on in the lab.
+   
+    ![Azure key secret value](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image246.png)
+
+5. Repeat steps 2-4 for the following key: **aadAppSecret**
+
 ## Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters
 
 **Duration:** 60 minutes
 
-The IoT Remote Monitoring solution allows you to provision and collect telemetry from both simulated and real devices. As part of the process, telemetry schema information is applied to the device's twin through its reported properties. The properties are read as the microservice that's executing the EventProcessor processes incoming messages from IoT Hub. The telemetry metadata is used to write the data to Cosmos DB, then used again later by the web app to extract and display the data on the chart and map. The metadata is also used to define cloud-to-device messages and actions that can be performed on the device. The web app uses this information to send control messages to the devices. This metadata is added to simulated and non-simulated devices alike.
+The IoT Remote Monitoring solution allows you to provision and collect telemetry from both simulated and real devices. As part of the process, telemetry schema information is applied to the devices twin through its reported properties. The properties are read as the microservice that's executing the EventProcessor processes incoming messages from IoT Hub. The telemetry metadata is used to write the data to Cosmos DB, then used again later by the Remote Monitoring web ui to extract and display the data in the charts and maps. The metadata is also used to define cloud-to-device messages and actions that can be performed on the device. The web ui uses this information to send control messages to the devices. This metadata is added to simulated and non-simulated devices alike.
 
 In this exercise, you will define metadata for new device types that will be provisioned, and whose telemetry will be simulated by the solution. Each new device type will have a state script to generate telemetry that changes the device's state, whether speed, location, voltage, or other data that relates to the device. In addition, you will define cloud-to-device messages and actions for the new device types. Then, you will create and run a new simulation locally, using a Visual Studio solution. Finally, you will create new alerts and filters through the web app interface.
 
-We have created the following files for you, located within the device-simulation project (/azure-iot-pcs-remote-monitoring-dotnet/device-simulation/Services/data/devicemodels):
+We have created the following files for you, located within the device-simulation project (Lab-files/DeviceSimulation/Services/data/devicemodels):
 
 - Device models:
 
@@ -460,49 +500,30 @@ You will need to finish configuring these files for the simulator.
 | Customize the device simulator microservice |        <https://docs.microsoft.com/en-us/azure/iot-suite/iot-suite-remote-monitoring-test>        |
 | IoT Remote Monitoring solution architecture | <https://docs.microsoft.com/en-us/azure/iot-suite/iot-suite-remote-monitoring-sample-walkthrough> |
 
-### Task 1: Configure the SimulationAgent and WebService projects to run locally
+### Task 1: Configure the Device Simulation projects to run locally
 
-In this task, you will open the device-simulation solution in Visual Studio 2019 and configure the SimulationAgent and WebService projects to run locally.
+In this task, you will open the device-simulation solution in Visual Studio 2019 and configure the projects to run locally.
 
-1.  Browse to the device-simulation solution in the following location: \[your-Lab-files-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\device-simulation.
+1.  Browse to the device-simulation solution in the following location: Lab-files\\DeviceSimulation.
 
 2.  Open **device-simulation.sln**.
 
     ![File Explorer displays with the previous path and file called out.](media/device-simulation-folder-explorer.png 'File Explorer')
 
-3.  Right-click the **SimulationAgent** project in the Solution Explorer, then select **Properties**.
+3.  Right click on the **WebService** project and select **Debug** from the left-hand menu.In the Environment variables section, populate the values for the following Environment Variables (the others can remain empty or with their default values):
+    
+    | Environment Variable                      | Value                                 |
+    |-------------------------------------------|---------------------------------------|
+    | PCS_STORAGEADAPTER_WEBSERVICE_URL         | http://localhost:9022/v1              |
+    | PCS_IOTHUB_CONNSTRING                     | *your IoT Hub Connection String*      |
+    | PCS_AZURE_STORAGE_ACCOUNT                 | *your Azure Storage Connection String*|
+    | PCS_STORAGEADAPTER_DOCUMENTDB_CONNSTRING  | *your CosmosDB Connection String*     |
 
-    ![In Solution Explorer, SimulationAgent is selected, and its right-click menu displays with Properties selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image41.png 'Solution Explorer')
 
-4.  Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
+    ![On the WebService project properties, Debug tab is selected, and in the Environment variables section, populate the values.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image187.png 'WebService project debug properties')
 
-    ![The Assembly name and Target framework fields display.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image42.png 'Simulator fields')
+4.  Save your changes to the file.
 
-5.  Select **Debug** from the left-hand menu. In the Environment variables section, add the PCS_IOTHUB_CONNSTRING variable, replacing the value with the IoT Hub connection string you copied earlier.
-
-    ![On the SimulationAgent properties, Debug tab is selected, and in the Environment variables section, the value for PCS_IOTHUB_CONNSTRING is added.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image43.png 'SimulationAgent project debug properties')
-
-6.  In the same Environment variables section, add the PCS_STORAGEADAPTER_WEBSERVICE_URL variable, replacing the value with **http://localhost:9022/v1**.
-
-    ![On the SimulationAgent properties, Debug tab is selected, and in the Environment variables section, the value for PCS_STORAGEADAPTER_WEBSERVICE_URL is added.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image187.png 'SimulationAgent project debug properties')
-
-7.  Save your changes to the file.
-
-8.  Right-click the **WebService** project, go to **Properties**. Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
-
-9.  Next, select **Debug** from the left-hand menu.
-
-    a. Ensure the **Launch Browser** checkbox is checked and that its value is set to **http://localhost:9003/v1/status**.
-
-    b. Add the **PCS_IOTHUB_CONNSTRING** environment variable with the same value you supplied for the SimulationAgent.
-
-    c. Add another Environment variable named **PCS_STORAGEADAPTER_WEBSERVICE_URL** and set its value to **http://localhost:9022/v1**.
-
-    d. Remaining on the **Debug** screen, in the **Web Server Settings** section, ensure the **App URL** property is set to **http://localhost:9003/**.
-
-![On the WebService project properties, Debug tab is selected](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image190.png 'WebService project debug properties')
-
-10. Save your changes to the file.
 
 ### Task 2: Finish configuring the simulated IoT device models and scripts
 
@@ -708,8 +729,8 @@ Below is a table containing file paths and an explanation of what each does in t
         - **Description**: SendMessageAsync method (line 100) constructs a new Message object that it will send to IoT Hub. It includes the event message properties to include the message content type (JSON), and the schema name, as defined in the device model scripts you edited earlier. The microservice running the IoT Hub EventProcessor will look for these values before processing messages and saving them to Cosmos DB.
 
     - Visual Studio Project: SimulationAgent
-        - **File Path**: Simulation\\DeviceActor.cs
-        - **Description**: Each device is assigned an instance of the DeviceActor class. This class manages the following state machine flow (as shown within the MoveNext method).
+        - **File Path**: SimulationManager.cs
+        - **Description**: Each device is assigned an instance of a DeviceStateActor (DeviceState\\DeviceStateActor.cs), DeviceConnectionActor (DeviceConnection\\DeviceConnectionActor.cs), DeviceTelemetryActor (DeviceTelemetry\\DeviceTelemetryActor.cs), DevicePropertiesActor(DeviceProperties\\DevicePropertiesActor.cs), and DeviceReplayActor(DeviceReplay\\DeviceReplayActor.cs). This class manages all of the actors for this solution - generated through the *TryToCreateActorsForPartitionAsync* and *CreateActorsForDeviceAsync*. Through the actors, the simulated device will:
             - Connect to IoT Hub.
             - Bootstrap the device to retrieve it, create if necessary, and update the device twin state.
             - Update the device state using the state scripts we created, in order to send telemetry.
@@ -723,9 +744,9 @@ Below is a table containing file paths and an explanation of what each does in t
 
 The Storage Adapter project (pcs-storage-adapter) is another microservice that constantly runs and provides REST-based endpoints to manage simple key/value data in Cosmos DB. It is used by several services, including the web service within the device-simulator project, as seen in the previous task. This needs to be configured, then executed to run before creating and running simulations on the new devices locally.
 
-1.  Browse to the storage-adapter solution in the following location: \[your-Lab-files-folder\]\\azure-iot-pcs-remote-monitoring-dotnet\\storage-adapter.
+1.  Browse to the storage-adapter solution in the following location: LabFiles\\StorageAdapter.
 
-2.  Open **pcs-storage-adapter.sln**.
+2.  Open **storage-adapter.sln**.
 
     ![File Explorer is open to the the previously defined path, and the .sln file is selected.](media/storage-adapter-file-explorer.png 'File Explorer')
 
@@ -733,43 +754,27 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
     ![In Solution Explorer, WebService is selected, and on its right-click menu, Properties is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image53.png 'Solution Explorer')
 
-4.  Select **Application** from the left-hand menu. Expand the dropdown menu beneath "Target framework", then select **.NET Core 2.0**.
+4.  Select **Debug** from the left-hand menu. In the Environment variables section, populate the following variables:
+   
+    | Environment Variable         | Value                                 |
+    |------------------------------|---------------------------------------|
+    | PCS_KEYVAULT_NAME            | *your key vault name*                 |
+    | PCS_AAD_APPID                | *the value for aadAppId from the Key Vault*  |
+    | documentDBConnectionString   | *your Cosmos DB Connection String*    |
+    | PCS_AAD_APPSECRET            | *the value for aadAppSecret from the Key Vault*     |
+    
 
-    ![The Assembly name and Target framework fields display.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image54.png 'Simulator fields')
+5.  Save your changes to the file.
 
-5.  Select **Debug** from the left-hand menu. In the Environment variables section, add the PCS_STORAGEADAPTER_DOCUMENTDB_CONNSTRING value, replacing "..." with the Cosmos DB connection string. To find your connection string, do the following:
-
-    a. Open your Cosmos DB instance from within your lab's resource group.
-
-    b. Select **Keys** from the left-hand menu.
-
-    c. Copy the **Primary Connection String**.
-
-    d. Paste the value in the PCS_STORAGEADAPTER_DOCUMENTDB_CONNSTRING environment variable value.
-
-![In the Azure Cosmos DB account blade, under Settings, Keys is selected. On the Read-write keys tab, the copy button is selected for the Primary Connection String.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image55.png 'Azure Cosmos DB account blade')
-
-![On the WebService tab, Debug is selected, and the Environment variables value is called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image56.png 'WebService tab')
-
-6.  Remaining in your **Debug** screen:
-
-    a. Ensure the **Launch Browser** checkmark is checked, and has the value **http://localhost:9022/v1/status**.
-
-    b. In the **Web Server Settings** section, ensure the **App URL** is set to **http://localhost:9022/**.
-
-    ![On the WebService tab, Debug is selected, and the Launch Browser and App Url settings are set.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image212.png 'WebService Properties Debug tab')
-
-7.  Save your changes to the file.
-
-8.  Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
+6.  Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
 
     ![In Solution Explorer, WebService is selected, and from its right-click menu, Debug, and then Start new instance are selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image57.png 'Solution Explorer')
 
-9.  The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is OK.
+7.  The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is alive and well.
 
-    ![The status response of "OK: Alive and well" is highlighted in the Web service window.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image58.png 'Web service window')
+    ![The status response of "Alive and well" is highlighted in the Web service window.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image58.png 'Web service window')
 
-10. Leave the project running in debug mode for the duration of the lab.
+8.  Leave the project running in debug mode.
 
 ### Task 5: Run the Simulator web app and create a new simulation
 
@@ -779,25 +784,15 @@ In this task, you will run the Simulator web app locally and send REST-based com
 
     ![In Solution Explorer, WebService is selected, and from its right-click menu, Debug, and then Start new instance are selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image59.png 'Solution Explorer')
 
-2.  This will launch a new browser window at the following path: <http://localhost:9003/v1/status>. You will likely see an output containing errors about the RateLimiting object reference being null. Ignore this error, as it does not impact the web service. You may need to tell the debugger in Visual Studio to continue running.
+2.  This will launch a new command window with console statements flowing through.
+   
+   ![Console window for device simulation](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image247.png)
 
 3.  Open **Postman**. You should have it installed from the lab's prerequisites. If not, refer to the link to install Postman found there.
 
-4.  Enter http://localhost:9003/v1/simulations/1 into the URL field, making sure that the **GET** method is selected. Then select **Send**. You should see a JSON response with a status of 200 OK.
+4.  Add a new request. Select the **POST** method and enter <http://localhost:9003/v1/simulations as the URL.
 
-    ![In the Postman window, on the Retrieve IoT device simulation details tab, both Get and the previously defined URL are circled, and the Send button is selected. a JSON response displays below.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image60.png 'Postman window')
-
-5.  The response will show that the simulation is disabled from when you set it to disabled through the IoT Remote Monitoring web interface earlier. It also lists the current device models configured for the simulation. We want to change this to use our new device models. First, we need to delete the current simulation.
-
-6.  Select to add a new request. This time, select the **DELETE** method and enter <http://localhost:9003/v1/simulations/1 as the URL. Select **Send**. There will be no JSON response this time. Instead, make sure the returned status is 200 OK.
-
-    ![In the Postman window, on the Delete an IoT device simulation tab, both Delete and the previously defined URL are circled, and the Send button is selected. Below, Status: 200 OK is called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image61.png 'Postman window')
-
-7.  To verify, you can execute the first GET command. If the solution was deleted, you will see an exception that Resource simulations/1 was not found.
-
-8.  Add a new request. Select the **POST** method and enter <http://localhost:9003/v1/simulations as the URL.
-
-9.  Select **Headers** beneath the URL and add the following Key / Value pair:
+5.  Select **Headers** beneath the URL and add the following Key / Value pair:
 
     a. **Key**: Content-Type
 
@@ -805,11 +800,17 @@ In this task, you will run the Simulator web app locally and send REST-based com
 
     ![In the Postman window, both Post and the previously defined URL are circled. Below, the Headers tab is selected, and the Content-Type key with an applicaton/json value is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image62.png 'Postman window')
 
-10. Select **Body**, select **raw**, then **JSON (application/json)** as the content type. Paste the following to create a new simulation with our new models, plus existing elevator models:
+6. Select **Body**, select **raw**, then **JSON (application/json)** as the content type. Paste the following to create a new simulation with our new models, plus existing elevator models - remember to add your IoT Hub Connection string to the IoT Hubs element:
 
     ```
     {
+        "Name": "Smart City Simulation",
         "Enabled": true,
+        "IoTHubs": [
+            {
+                "ConnectionString": "YOUR_IOT_CONNECTION_STRING"    
+            }
+            ],
             "DeviceModels": [
                 {
                     "Id": "bus-01",
@@ -818,14 +819,6 @@ In this task, you will run the Simulator web app locally and send REST-based com
                 {
                     "Id": "bus-02",
                     "Count": 1
-                },
-                {
-                    "Id": "elevator-01",
-                    "Count": 3
-                },
-                {
-                    "Id": "elevator-02",
-                    "Count": 2
                 },
                 {
                     "Id": "trafficlight-01",
@@ -842,25 +835,11 @@ In this task, you will run the Simulator web app locally and send REST-based com
 
     ![In the Postman window, on the Create a new IoT Hub tab, on the Body tab, raw is selected. JSON (application/json) is selected, and the JSON code as previously defined displays below.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image63.png 'Postman window')
 
-11. Select **Send**. You should receive a response status of 200 OK, and output showing the new simulation information with your defined devices. The Enabled value should also be true.
+7. Press **Send**. You should receive a response status of 200 OK, and output showing the new simulation information with your defined devices. The Enabled value should also be true.
 
     ![In the Postman window, Send is selected, Status: 200 OK displays, and in the Body, "Enabled"; True, is called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image64.png 'Postman window')
 
-### Task 6: Run the device simulation agent locally
-
-In this task, you will run the device simulation agent (SimulationAgent project) locally to run the simulation you just created. Because you created the new device elements locally, this is where you will run the simulation for the lab. To permanently have this run from the hosted Docker container, you would need to create a new Docker image, publish it to your own Docker Hub account, and either update the solution scripts to use the custom image and redeploy your solution to Azure, or ssh into the VM hosting the container and manually replace the image there. These steps are beyond the scope of the lab, but can be found in the [developer reference guide](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet/wiki/Developer-Reference-Guide).
-
-Run the simulator and let it continue running in the background.
-
-1.  Switch back to the **device-simulation** solution in Visual Studio. Right-click the **SimulationAgent** project, then select **Start new instance** under **Debug**, to run a new instance of the console app.
-
-    ![In Solution Explorer, SimulationAgent is selected, and from its right-click menus, Debug and Start new instance are both selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image65.png 'Solution Explorer')
-
-2.  This will launch a console window, displaying the logging data as the simulation is run.
-
-    ![Screenshot of the Console window. ](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image66.png 'Console window')
-
-3.  Allow this to continue running in the background for the remainder of the lab.
+8. Leave this project running in the background.
 
 ### Task 7: Create alerts and filters in the monitoring web app
 
@@ -906,9 +885,9 @@ The IoT Remote Monitoring web interface enables you to create filters that help 
 
     e. **Type**: Text
 
-7.  After creating both device groups, you may select them using the filter drop-down list to the left of the map. In the screenshot below, we have selected Traffic Lights. Notice that in the telemetry graph, it shows just the two traffic light devices. Also notice that one traffic light has consistently higher voltage than the other, as dictated by the traffic device model state script modified earlier. Now we'll create a new alert for traffic lights whose voltage is too high. **As of this writing the chart showing voltage data in the Accelerator dashboard is not functional, this is an older screenshot.**
-
-    ![The Monitoring Web App dashboard displays with the previously described information.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image70.png 'Monitoring Web App dashboard')
+7.  After creating both device groups, you may select them using the filter drop-down list on the top of the **Dashboard** screen. In the screenshot below, we have selected Buses. Notice that the shows only the two Bus devices. 
+   
+    ![The Monitoring Web App dashboard displays with filtered by the selected group.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image70.png 'Monitoring Web App dashboard')
 
 8.  Select **Rules** in the left-hand menu.
 
@@ -968,22 +947,24 @@ In this task, you will send a job to one of the traffic light devices, using the
 
 3.  Navigate to **Device Explorer** using the left-hand menu.
 
-4.  Check the box next to **Simulated.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list).
+4.  Check the box next to **GUIDVALUE.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list - the names could be long, so clicking on one will open an overview blade displaying the full name of the device).
 
 5.  Select **jobs** in the top menu.
 
-6.  Select **Run Method**.
+6.  Select **Methods** for the job type.
 
-7.  In the **Method Name**, select **DecreaseTiming** and provide a name.
+7.  In the **Method Name**, select **DecreaseTiming** 
 
-8.  Select **Apply**. You may view the job status in the maintenance page, if desired.
+8.  Provide any name for your Job.
+
+9.  Select **Apply**. You may view the job status in the maintenance page, if desired.
 
     ![Callouts point to the previously mentioned settings and buttons in the Devices section.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image76.png 'Devices section')
 
-9.  Navigate back to the dashboard and view the **timing** telemetry once again. This time, you should notice that the traffic light timing for traffic light \#1 decreased from 90 seconds to 75. (You may need to wait a couple of minutes to see the effect in the chart)
+10. Navigate back to the dashboard and view the **timing** telemetry once again. This time, you should notice that the traffic light timing for traffic light \#1 decreased from 90 seconds to 75. (You may need to wait a couple of minutes to see the effect in the chart)
 
     ![In the Telemetry section, the decrease is circled on the graph.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image77.png 'Telemetry section')
-
+ 
 ## Exercise 4: Create IoT Edge device and custom modules
 
 **Duration:** 60 minutes

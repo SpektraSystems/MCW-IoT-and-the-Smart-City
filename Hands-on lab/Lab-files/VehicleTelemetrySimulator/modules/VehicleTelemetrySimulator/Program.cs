@@ -30,7 +30,6 @@ namespace VehicleTelemetrySimulator
         static dynamic telemetry { get; set; }
 
         static ModuleClient ioTHubModuleClient;
-        static DeviceClient ioTHubDeviceClient;
 
         static void Main(string[] args)
         {
@@ -69,12 +68,10 @@ namespace VehicleTelemetrySimulator
             // Register callback to be called when a message is received by this module
             await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", PipeMessage, ioTHubModuleClient);
 
-            //the device client is responsible for managing device twin information at the device level
-            //obtaining the device connection string is currently not supported by DeviceClient
-            //TODO: 7 - set device connection string for the device client
-            //ioTHubDeviceClient = DeviceClient.CreateFromConnectionString("<connectionstring>");
-            await ioTHubDeviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
-            var twin = await ioTHubDeviceClient.GetTwinAsync();
+            //the module client is responsible for managing device twin information at the device level            
+            //TODO: 7 - set device connection string for the device client            
+            await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
+            var twin = await ioTHubModuleClient.GetTwinAsync();
             var desired = twin.Properties.Desired;
             await UpdateReportedPropertiesFromDesired(desired);            
 
@@ -93,7 +90,7 @@ namespace VehicleTelemetrySimulator
             {
                 try
                 {
-                    var info = new CarEvent() {
+                    var info = new BusEvent() {
                         vin = vin,
                         outsideTemperature = GetOutsideTemp(borough),
                         engineTemperature  = GetEngineTemp(borough),
@@ -118,7 +115,7 @@ namespace VehicleTelemetrySimulator
                     message.ContentEncoding = "utf-8";
                     message.ContentType = "application/json";
                     // TODO: 6 - Have the ModuleClient send the event message asynchronously, using the specified output name
-                    //await ioTHubModuleClient.SendEventAsync(outputName, message);
+                    await ioTHubModuleClient.SendEventAsync(outputName, message);
                 }
                 catch (AggregateException ex)
                 {
@@ -178,30 +175,30 @@ namespace VehicleTelemetrySimulator
                 if (desired["VIN"] != null)
                 {
                     // TODO: 1 - Set the vin to the value in the device twin
-                    //vin = desired["VIN"];
-                    //reportedProperties["VIN"] = vin;
+                    vin = desired["VIN"];
+                    reportedProperties["VIN"] = vin;
                 }
                 if (desired["Borough"] != null)
                 {
                     // TODO: 2 - Set the borough to the value in the device twin
-                    //borough = desired["Borough"];
-                    //reportedProperties["Borough"] = borough;
+                    borough = desired["Borough"];
+                    reportedProperties["Borough"] = borough;
                 }
                 if (desired["Telemetry"] != null)
                 {
                     // TODO: 3 - Set telemetry to the value in the device twin
-                    //telemetry = desired["Telemetry"];
-                    //reportedProperties["Telemetry"] = telemetry;
+                    telemetry = desired["Telemetry"];
+                    reportedProperties["Telemetry"] = telemetry;
                 }
                 if (desired["Type"] != null)
                 {
                     // TODO: 4 - Set telemetry to the value in the device twin
-                    //type = desired["Type"];
-                    //reportedProperties["Type"] = type;
+                    type = desired["Type"];
+                    reportedProperties["Type"] = type;
                 }
 
                 // TODO: 5 - update reported properties with the IoT Hub
-                //await ioTHubDeviceClient.UpdateReportedPropertiesAsync(reportedProperties);
+                await ioTHubModuleClient.UpdateReportedPropertiesAsync(reportedProperties);
 
             } catch (AggregateException ex){
                 foreach(Exception exception in ex.InnerExceptions){
