@@ -7,7 +7,7 @@ namespace VehicleTelemetrySimulator
         public string vin { get; set; }
         public int outsideTemperature { get; set; }
         public int engineTemperature { get; set; }
-        public int speed { get; set; }
+        public double speed { get; set; }
         public int fuel { get; set; }
         public int engineoil { get; set; }
         public int tirepressure { get; set; }
@@ -20,6 +20,7 @@ namespace VehicleTelemetrySimulator
         public bool ignition_status { get; set; }
         public bool windshield_wiper_status { get; set; }
         public bool abs { get; set; }
+        public bool mlDetectedAggressiveDriving {get;set;}
         public DateTime timestamp { get; set; }
 
     }

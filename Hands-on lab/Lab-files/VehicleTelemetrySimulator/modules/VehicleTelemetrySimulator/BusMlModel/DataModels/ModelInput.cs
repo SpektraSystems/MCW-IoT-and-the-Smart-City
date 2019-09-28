@@ -6,7 +6,7 @@
 
 using Microsoft.ML.Data;
 
-namespace BusModelLearningML.Model.DataModels
+namespace VehicleTelemetrySimulator
 {
     public class ModelInput
     {

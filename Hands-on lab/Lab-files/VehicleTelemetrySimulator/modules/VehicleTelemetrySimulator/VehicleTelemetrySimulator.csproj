@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="BusRouteData/routeInterpolated.csv">
+    <None Update="BusRouteData/routeInterpolated.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -20,7 +20,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ExcelMapper" Version="5.0.92" />
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.21.1" />
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.0" />
@@ -28,6 +30,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="microsoft.ml" Version="1.3.1" />
+    <PackageReference Include="Microsoft.ML.FastTree" Version="1.3.1" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="Troschuetz.Random" Version="4.3.1" />
   </ItemGroup>
 </Project>

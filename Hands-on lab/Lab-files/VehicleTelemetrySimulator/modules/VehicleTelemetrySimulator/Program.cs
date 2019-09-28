@@ -9,27 +9,49 @@ namespace VehicleTelemetrySimulator
     using Microsoft.Azure.Devices.Client;
     using Microsoft.Azure.Devices.Shared;
     using Newtonsoft.Json;
-
+    using Ganss.Excel;
+    using Troschuetz.Random;
+    using System.Linq;
+    using Microsoft.ML;
+    using Microsoft.Azure.Storage;
+    using Microsoft.Azure.Storage.Blob;
+    
     class Program
     {
-        static int counter;
-        static Random random = new Random();
-        static double highSpeedProbabilityPower = 0.3;
-        static double lowSpeedProbabilityPower = 0.9;
-        static double highOilProbabilityPower = 0.3;
-        static double lowOilProbabilityPower = 1.2;
-        static double highTirePressureProbabilityPower = 0.5;
-        static double lowTirePressureProbabilityPower = 1.7;
-        static double highOutsideTempProbabilityPower = 0.3;
-        static double lowOutsideTempProbabilityPower = 1.2;
-        static double highEngineTempProbabilityPower = 0.3;
-        static double lowEngineTempProbabilityPower = 1.2;
-        static string vin { get; set; }
-        static string borough { get; set; }
-        static string type { get; set; }
-        static dynamic telemetry { get; set; }
+        //TODO: 1 - set device connection string for the device client 
+        static string _deviceConnectionString = "HostName=iothub-4qs4q.azure-devices.net;DeviceId=bus1;SharedAccessKey=tu5OElfcM8n1Uk4MnYWO6/8E6wpWY+iOYMMDR1Zips8=";
 
-        static ModuleClient ioTHubModuleClient;
+        //TODO: 2 - set the connection string for local blob storage
+        static string _storageConnectionString = "DefaultEndpointsProtocol=http;BlobEndpoint=http://azureblobstorageoniotedge:11002/edgestorage;AccountName=edgestorage;AccountKey=pM8cWFj0L8h+VKRfE8Fy3tVVtdfOR4bCIzX8N/sDiK1X0znhu8iatFwVfjzwjedDKe5ln+2cI7wpy+2eO1vvQQ==";
+
+        static List<string> _boroughList = new List<string>() { "Northwind", "Contoso", "Tailwind" };
+        static ExcelMapper _routeReader = new ExcelMapper("BusRouteData/routeInterpolated.xlsx");
+        static int _secondsToTwinReportedPropertiesUpdate = 120;
+        static List<RouteData> _routeData = null;
+        static TRandom _random = new TRandom();
+        static Timer _timer;
+
+        static int _counter;
+
+        static double _highOilProbabilityPower = 0.3;
+        static double _lowOilProbabilityPower = 1.2;
+        static double _highTirePressureProbabilityPower = 0.5;
+        static double _lowTirePressureProbabilityPower = 1.7;
+        static double _highOutsideTempProbabilityPower = 0.3;
+        static double _lowOutsideTempProbabilityPower = 1.2;
+        static double _highEngineTempProbabilityPower = 0.3;
+        static double _lowEngineTempProbabilityPower = 1.2;
+        static string _vin { get; set; }
+        static string _borough { get; set; }
+        static float _latitude { get; set; }
+        static float _longitude { get; set; }
+
+        static ModuleClient _vehicleTelemetryModuleClient;
+        static DeviceClient _deviceClient;
+
+        static CloudStorageAccount _storageAccount;
+        static CloudBlobClient _blobClient;
+        static CloudBlobContainer _blobContainer;
 
         static void Main(string[] args)
         {
@@ -40,6 +62,10 @@ namespace VehicleTelemetrySimulator
             AssemblyLoadContext.Default.Unloading += (ctx) => cts.Cancel();
             Console.CancelKeyPress += (sender, cpe) => cts.Cancel();
             WhenCancelled(cts.Token).Wait();
+
+            _timer?.Change(Timeout.Infinite, 0);
+            _timer?.Dispose();
+
         }
 
         /// <summary>
@@ -52,70 +78,141 @@ namespace VehicleTelemetrySimulator
             return tcs.Task;
         }
 
-      
-        
         /// <summary>
         /// Initializes the ModuleClient and sets up the callback to receive
         /// messages containing temperature information
         /// </summary>
         static async Task Init()
         {
+
+            // read the route data
+            _routeData = _routeReader.Fetch<RouteData>().ToList();
+
+            // TODO: 11 - update reported properties at a specified time interval
+            _timer = new Timer(UpdateReportedProperties, null, TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate), TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate));
+
             // the module client is in charge of sending messages in the context of this module (VehicleTelemetry)
-            ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);
-            await ioTHubModuleClient.OpenAsync();
-            Console.WriteLine("IoT Hub module client initialized.");
+            // TODO: 3 - Create module client from container environment variable
+            _vehicleTelemetryModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);
+            await _vehicleTelemetryModuleClient.OpenAsync();
+
+            // the device client is responsible for the device twin reported properties updates
+            // TODO: 4 - Create device client to obtain desired properties from Twin and update reported properties
+            _deviceClient = DeviceClient.CreateFromConnectionString(_deviceConnectionString);
+            await _deviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
 
             // Register callback to be called when a message is received by this module
-            await ioTHubModuleClient.SetInputMessageHandlerAsync("input1", PipeMessage, ioTHubModuleClient);
+            await _vehicleTelemetryModuleClient.SetInputMessageHandlerAsync("input1", PipeMessage, _vehicleTelemetryModuleClient);
 
-            //the module client is responsible for managing device twin information at the device level            
-            //TODO: 7 - set device connection string for the device client            
-            await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
-            var twin = await ioTHubModuleClient.GetTwinAsync();
+            //initialize device with values obtained from the desired properties in the device twin     
+            // TODO: 5 - initialize device instance with values obtained from the device twin desired properties       
+            var twin = await _deviceClient.GetTwinAsync();
             var desired = twin.Properties.Desired;
-            await UpdateReportedPropertiesFromDesired(desired);            
+            await UpdateDeviceInstanceFromDesiredProperties(desired);
 
-            await GenerateMessage(ioTHubModuleClient);            
+            // TODO: 6 - initialize iot edge storage 
+            _storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
+            _blobClient = _storageAccount.CreateCloudBlobClient();
+            _blobContainer = _blobClient.GetContainerReference("telemetry");
+            if(!_blobContainer.Exists()){
+                _blobContainer.CreateIfNotExists();
+            }
+            
+
+            //start generating telemetry data
+            await GenerateTelemetry();
         }
 
-        static Task onDesiredPropertiesUpdateAsync(TwinCollection desiredProperties, object userContext)
+        /// <summary>
+        /// This method is called whenever the device twin desired properties change in the cloud 
+        /// It updates the current device instance with the desired properties that were changed
+        /// </summary>
+        private static async Task onDesiredPropertiesUpdateAsync(TwinCollection desiredProperties, object userContext)
         {
-            return UpdateReportedPropertiesFromDesired(desiredProperties);
+            await UpdateDeviceInstanceFromDesiredProperties(desiredProperties);
         }
 
-        private static async Task GenerateMessage(ModuleClient ioTHubModuleClient)
+
+        /// <summary>
+        /// This method simulated bus sensor telemetry 
+        /// </summary>        
+        private static async Task GenerateTelemetry()
         {
             string outputName = "output1";
+            int routeIdx = 0;
+
+            // TODO: 13 - Initialize machine learning prediction model infrastructure
+            var mlContext = new MLContext();
+            ITransformer mlModel = mlContext.Model.Load("BusMlModel/MLModel.zip", out var modelInputSchema);
+            var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+
             while (true)
             {
                 try
                 {
-                    var info = new BusEvent() {
-                        vin = vin,
-                        outsideTemperature = GetOutsideTemp(borough),
-                        engineTemperature  = GetEngineTemp(borough),
-                        speed = GetSpeed(borough), 
-                        fuel = random.Next(0,40),
-                        engineoil = GetOil(borough),
-                        tirepressure = GetTirePressure(borough),
-                        odometer = random.Next (0,200000),
-                        accelerator_pedal_position = random.Next (0,100),
+                    var currRouteData = _routeData[routeIdx];
+
+                    _borough = GetBorough();
+                    _latitude = currRouteData.Latitude;
+                    _longitude = currRouteData.Longitude;
+
+                    // TODO 14: Create input for the machine learning prediction engine by setting the 
+                    //         device current latitude, longitude, and speed limit
+                    var mlInput = new ModelInput()
+                    {
+                        Latitude = currRouteData.Latitude,
+                        Longitude = currRouteData.Longitude,
+                        BusSpeed = currRouteData.BusSpeed
+                    };
+
+                    // TODO 15: Use this input model to have the prediction engine determine if the
+                    //          current speed for the device is safe for the latitude and longitude location
+                    var mlOutput = predEngine.Predict(mlInput);
+
+                    if (routeIdx == _routeData.Count - 1)
+                    {
+                        routeIdx = 0; //restart route
+                    }
+                    else
+                    {
+                        routeIdx++;
+                    }
+
+                    var info = new BusEvent()
+                    {
+                        vin = _vin,
+                        outsideTemperature = GetOutsideTemp(_borough),
+                        engineTemperature = GetEngineTemp(_borough),
+                        speed = currRouteData.BusSpeed,
+                        fuel = _random.Next(0, 40),
+                        engineoil = GetOil(_borough),
+                        tirepressure = GetTirePressure(_borough),
+                        odometer = _random.Next(0, 200000),
+                        accelerator_pedal_position = _random.Next(0, 100),
                         parking_brake_status = GetRandomBoolean(),
                         headlamp_status = GetRandomBoolean(),
                         brake_pedal_status = GetRandomBoolean(),
                         transmission_gear_position = GetGearPos(),
                         ignition_status = GetRandomBoolean(),
                         windshield_wiper_status = GetRandomBoolean(),
-                        abs = GetRandomBoolean(),   
-                        timestamp = DateTime.UtcNow
+                        abs = GetRandomBoolean(),
+                        timestamp = DateTime.UtcNow,
+
+                        // TODO: 16 Populate the machine learning prediction into the telemetry data for upstream systems
+                        mlDetectedAggressiveDriving = mlOutput.Prediction
                     };
                     var serializedString = JsonConvert.SerializeObject(info);
                     Console.WriteLine($"{DateTime.Now} > Sending message: {serializedString}");
                     var message = new Message(Encoding.UTF8.GetBytes(serializedString));
                     message.ContentEncoding = "utf-8";
                     message.ContentType = "application/json";
-                    // TODO: 6 - Have the ModuleClient send the event message asynchronously, using the specified output name
-                    await ioTHubModuleClient.SendEventAsync(outputName, message);
+
+                    // TODO: 17 - Have the ModuleClient send the event message asynchronously, using the specified output name
+                    await _vehicleTelemetryModuleClient.SendEventAsync(outputName, message);
+
+                    // TODO: 18 - Send all telemetry to local blob storage
+                    var blockBlob = _blobContainer.GetBlockBlobReference($"telemetry_{info.timestamp.Ticks}.json");
+                    blockBlob.UploadText(serializedString);
                 }
                 catch (AggregateException ex)
                 {
@@ -128,21 +225,22 @@ namespace VehicleTelemetrySimulator
                 catch (Exception ex)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Error in sample: {0}", ex.Message);
+                    Console.WriteLine("Error in sample: {0}", ex);
                 }
 
                 await Task.Delay(200);
             }
+            
         }
-        
+
         /// <summary>
         /// This method is called whenever the module is sent a message from the EdgeHub. 
         /// It just pipe the messages without any change.
         /// It prints all the incoming messages.
         /// </summary>
-        static async Task<MessageResponse> PipeMessage(Message message, object userContext)
+        private static async Task<MessageResponse> PipeMessage(Message message, object userContext)
         {
-            int counterValue = Interlocked.Increment(ref counter);
+            int counterValue = Interlocked.Increment(ref _counter);
 
             var moduleClient = userContext as ModuleClient;
             if (moduleClient == null)
@@ -168,111 +266,172 @@ namespace VehicleTelemetrySimulator
         }
 
 
-        private static async Task UpdateReportedPropertiesFromDesired(TwinCollection desired)
+        /// <summary>
+        /// This method updates current device instance fields with values from a Device Twin
+        /// </summary>
+        private static async Task UpdateDeviceInstanceFromDesiredProperties(TwinCollection desired)
         {
-            try {
-                TwinCollection reportedProperties = new TwinCollection();
-                if (desired["VIN"] != null)
+            await Task.Run(() =>
+            {
+                try
                 {
-                    // TODO: 1 - Set the vin to the value in the device twin
-                    vin = desired["VIN"];
-                    reportedProperties["VIN"] = vin;
+                    if (desired["VIN"] != null)
+                    {
+                        // TODO: 7 - Set the vin to the value in the device twin
+                        _vin = desired["VIN"];
+                    }
+                    if (desired["Borough"] != null)
+                    {
+                        // TODO: 8 - Set the borough to the value in the device twin
+                        _borough = desired["Borough"];
+                    }
+
+                    if (desired["Latitude"] != null)
+                    {
+                        // TODO: 9 - Set the latitude to the value in the device twin
+                        _latitude = Convert.ToSingle(desired["Latitude"]);
+                    }
+                    if (desired["Longitude"] != null)
+                    {
+                        // TODO: 10 - Set the longitude to the value in the device twin
+                        _longitude = Convert.ToSingle(desired["Longitude"]);
+                    }
                 }
-                if (desired["Borough"] != null)
+                catch (AggregateException ex)
                 {
-                    // TODO: 2 - Set the borough to the value in the device twin
-                    borough = desired["Borough"];
-                    reportedProperties["Borough"] = borough;
+                    foreach (Exception exception in ex.InnerExceptions)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Error when receiving desired property: {0}", exception);
+                    }
                 }
-                if (desired["Telemetry"] != null)
+                catch (Exception ex)
                 {
-                    // TODO: 3 - Set telemetry to the value in the device twin
-                    telemetry = desired["Telemetry"];
-                    reportedProperties["Telemetry"] = telemetry;
-                }
-                if (desired["Type"] != null)
-                {
-                    // TODO: 4 - Set telemetry to the value in the device twin
-                    type = desired["Type"];
-                    reportedProperties["Type"] = type;
+                    Console.WriteLine();
+                    Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
                 }
 
-                // TODO: 5 - update reported properties with the IoT Hub
-                await ioTHubModuleClient.UpdateReportedPropertiesAsync(reportedProperties);
+            });
 
-            } catch (AggregateException ex){
-                foreach(Exception exception in ex.InnerExceptions){
+
+
+        }
+
+        /// <summary>
+        /// This method sends current device field 'state' to the cloud through reported properties
+        /// </summary>
+        private static void UpdateReportedProperties(Object stateInfo)
+        {
+            try
+            {
+
+                // TODO: 12 - update reported properties with the IoT Hub with most recent Lat/Long
+                //patch the changed properties (Latitude, Longitude, Borough)
+                TwinCollection patch = new TwinCollection();
+                patch["Latitude"] = _latitude;
+                patch["Longitude"] = _longitude;
+                patch["Borough"] = _borough;
+                Task.Run(async () => await _deviceClient.UpdateReportedPropertiesAsync(patch));
+
+            }
+            catch (AggregateException ex)
+            {
+                foreach (Exception exception in ex.InnerExceptions)
+                {
                     Console.WriteLine();
                     Console.WriteLine("Error when receiving desired property: {0}", exception);
                 }
-            } catch (Exception ex){
-                    Console.WriteLine();
-                    Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
             }
-          
-        }
-
-        static int GetSpeed(string borough)
-        {
-            if (borough.ToLower() == "brooklyn")
+            catch (Exception ex)
             {
-                return GetRandomWeightedNumber(100, 0, highSpeedProbabilityPower);
+                Console.WriteLine();
+                Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
             }
-            return GetRandomWeightedNumber(100, 0, lowSpeedProbabilityPower);
+
         }
 
+        /// <summary>
+        /// Randomly chooses a borough for telemetry data
+        /// </summary>
+        static string GetBorough()
+        {
+            return _boroughList[_random.Next(0, _boroughList.Count)];
+        }
+
+        /// <summary>
+        /// Randomly generates oil level for telemetry data
+        /// </summary>
         static int GetOil(string borough)
         {
-            if (borough.ToLower() == "manhattan")
+            if (borough.ToLower() == GetBorough().ToLower())
             {
-                return GetRandomWeightedNumber(50, 0, lowOilProbabilityPower);
+                return GetRandomWeightedNumber(50, 0, _lowOilProbabilityPower);
             }
-            return GetRandomWeightedNumber(50, 0, highOilProbabilityPower);
+            return GetRandomWeightedNumber(50, 0, _highOilProbabilityPower);
         }
 
+        /// <summary>
+        /// Randomly generates tire pressure for telemetry data
+        /// </summary>
         static int GetTirePressure(string borough)
         {
-            if (borough.ToLower() == "manhattan")
+            if (borough.ToLower() == GetBorough().ToLower())
             {
-                return GetRandomWeightedNumber(50, 0, lowTirePressureProbabilityPower);
+                return GetRandomWeightedNumber(50, 0, _lowTirePressureProbabilityPower);
             }
-            return GetRandomWeightedNumber(50, 0, highTirePressureProbabilityPower);
+            return GetRandomWeightedNumber(50, 0, _highTirePressureProbabilityPower);
         }
+
+        /// <summary>
+        /// Randomly generates engine temperature for telemetry data
+        /// </summary>
         static int GetEngineTemp(string borough)
         {
-            if (borough.ToLower() == "manhattan")
+            if (borough.ToLower() == GetBorough().ToLower())
             {
-                return GetRandomWeightedNumber(500, 0, highEngineTempProbabilityPower);
+                return GetRandomWeightedNumber(500, 0, _highEngineTempProbabilityPower);
             }
-            return GetRandomWeightedNumber(500, 0, lowEngineTempProbabilityPower);
+            return GetRandomWeightedNumber(500, 0, _lowEngineTempProbabilityPower);
         }
+
+        /// <summary>
+        /// Randomly generates outside temperature for telemetry data
+        /// </summary>
         static int GetOutsideTemp(string borough)
         {
-            if (borough.ToLower() == "manhattan")
+            if (borough.ToLower() == GetBorough().ToLower())
             {
-                return GetRandomWeightedNumber(100, 0, lowOutsideTempProbabilityPower);
+                return GetRandomWeightedNumber(100, 0, _lowOutsideTempProbabilityPower);
             }
-            return GetRandomWeightedNumber(100, 0, highOutsideTempProbabilityPower);
+            return GetRandomWeightedNumber(100, 0, _highOutsideTempProbabilityPower);
         }
+
+        /// <summary>
+        /// Helper method assisting with generation of random telemetry data
+        /// </summary>
         private static int GetRandomWeightedNumber(int max, int min, double probabilityPower)
         {
-            var randomizer = new Random();
-            var randomDouble = randomizer.NextDouble();
+            var randomDouble = _random.NextDouble();
 
             var result = Math.Floor(min + (max + 1 - min) * (Math.Pow(randomDouble, probabilityPower)));
             return (int)result;
         }
+
+        /// <summary>
+        /// Randomly assigns a gear position for telemetry data
+        /// </summary>
         static string GetGearPos()
         {
-            List<string> list = new List<string>() { "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight"};
-            int l = list.Count;
-            Random r = new Random();
-            int num = r.Next(l);
-            return list[num];
+            List<string> list = new List<string>() { "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight" };
+            return list[_random.Next(list.Count())];
         }
+
+        /// <summary>
+        /// Randomly provides a boolean value for telemetry data
+        /// </summary>
         static bool GetRandomBoolean()
         {
-            return new Random().Next(100) % 2 == 0;
+            return _random.NextBoolean();
         }
     }
 }
