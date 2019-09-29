@@ -67,7 +67,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Exercise 6: Run a console app to view critical engine alerts from the Service Bus Queue](#exercise-6-run-a-console-app-to-view-critical-engine-alerts-from-the-service-bus-queue)
     - [Help references](#help-references-4)
     - [Task 1: Retrieve the Service Bus Queue Connection string](#task-1-retrieve-the-service-bus-queue-connection-string)
-    - [Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2017](#task-2-configure-and-execute-the-readenginealerts-solution-in-visual-studio-2017)
+    - [Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2019](#task-2-configure-and-execute-the-readenginealerts-solution-in-visual-studio-2019)
   - [Exercise 7: Create an Azure Function to ingest critical engine alerts and store them in Cosmos DB](#exercise-7-create-an-azure-function-to-ingest-critical-engine-alerts-and-store-them-in-cosmos-db)
     - [Help references](#help-references-5)
     - [Task 1: Create a new Function](#task-1-create-a-new-function)
@@ -837,7 +837,7 @@ In this task, you will run the Simulator web service locally and send REST-based
         "Enabled": true,
         "IoTHubs": [
             {
-                "ConnectionString": "YOUR_IOT_CONNECTION_STRING"    
+                "ConnectionString": "YOUR_IOT_HUB_CONNECTION_STRING"    
             }
             ],
             "DeviceModels": [
@@ -1171,7 +1171,11 @@ In this task, you will provision a new Linux virtual machine that will be used t
 14.  Next, we will create a folder to house the data for our local storage. 
 
     ```
-    sudo mkdir /storage/containerdata
+    sudo mkdir /storage
+    sudo cd storage
+    sudo mkdir /containerdata
+    cd ..
+    cd ..
     ```
 
 15.  Grant the default module user privileges to the directory by executing the following commands:
@@ -1185,7 +1189,7 @@ In this task, you will provision a new Linux virtual machine that will be used t
 
 In this task, you will use Visual Studio Code to complete the custom C\# IoT Edge module that simulates vehicle telemetry representing bus sensor data. Then you will create the Docker container, and register it in your Container Registry instance so it can be deployed to the IoT Edge device.
 
-This simulator accomplishes many things. As part of the project, Fabrikam city wanted to apply machine learning to determine if a bus driver is driving dangerously. A machine learning model has been supplied in this project and is used to determine the safety of the driver by evaluating the current bus speed, with the location (latitude and longitude) of the bus. The prediction from this model is populate in the telemetry data and can be used for future processing.
+This simulator accomplishes many things. As part of the project, Fabrikam city wanted to apply machine learning to determine if a bus driver is driving dangerously. A machine learning model has been supplied in this project and is used to determine the safety of the driver by evaluating the current bus speed, with the location (latitude and longitude) of the bus. The prediction from this model is populated in the telemetry data so that it can be used for future processing.
 
 Additionally, all telemetry obtained from the bus sensors is saved in local blob storage. The storage module is responsible for automatically uploading this data to the cloud when a feasible internet connection is established.
 
@@ -1559,7 +1563,7 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
 ### Task 5: Deploy custom modules to IoT Edge device
 
-In this task, you will deploy the vehicle telemetry module, Stream Analytics module, and an IoT Edge Storage module to the IoT Edge device. All will be deployed simultaneously so you can register the module routes to send vehicle telemetry data to the Stream Analytics module, then send the filtered data upstream to IoT Hub as needed. The Stream Analytics module will also send all telemetry data into IoT Edge Storage. The IoT Edge Storage module is responsible for synchronizing this data to a storage account in the cloud. The IoT Edge Storage module is intelligent, it can be configured to delete local blocks of data that have already been moved to the cloud, as well as recover from connection interruptions. IoT Edge Storage is ideal for a sometimes connected scenario, data will be held locally until an internet connection is available to upload to the cloud.
+In this task, you will deploy the vehicle telemetry module, Stream Analytics module, and an IoT Edge Storage module to the IoT Edge device. All will be deployed simultaneously so you can register the module routes to send vehicle telemetry data to the Stream Analytics module, then send the filtered data upstream to IoT Hub as needed. The Vehicle Telemetry module will also send all telemetry data into IoT Edge Storage. The IoT Edge Storage module is responsible for synchronizing this data to a storage account in the cloud. The IoT Edge Storage module is intelligent, it can be configured to delete local blocks of data that have already been moved to the cloud, as well as recover from connection interruptions. IoT Edge Storage is ideal for a sometimes connected scenario, data will be held locally until a feasible internet connection is available to upload to the cloud.
 
 1.  Open your **IoT Hub**.
 
@@ -1647,8 +1651,8 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
     }
     }
     ```
-    4.  Check the **Set module twins's desired properties** checkbox
-    5.  Desired properties textbox - remember to replace the **cloudStorageConnectionString** value with your own:
+    1.  Check the **Set module twins's desired properties** checkbox
+    2.  Desired properties textbox - remember to replace the **cloudStorageConnectionString** value with your own:
 
     ```
     {
@@ -1672,49 +1676,49 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
     }
     ```
 
-    6.  Press **Save**
+    1.  Press **Save**
 17.  Select **Next**.
 
 18.  Copy the following code to Routes. Replace _{moduleName}_ with the Stream Analytics module name that you copied:
 
-    ```javascript
-    {
-        "routes": {
-            "alertsToCloud": "FROM /messages/modules/{moduleName}/outputs/* INTO $upstream",
-            "telemetryToAsa": "FROM /messages/modules/VehicleTelemetry/outputs/* INTO BrokeredEndpoint(\"/modules/{moduleName}/inputs/VehicleTelemetry\")"
-        }
+```
+{
+    "routes": {
+        "alertsToCloud": "FROM /messages/modules/{moduleName}/outputs/* INTO $upstream",
+        "telemetryToAsa": "FROM /messages/modules/VehicleTelemetry/outputs/* INTO BrokeredEndpoint(\"/modules/{moduleName}/inputs/VehicleTelemetry\")"
     }
-    ```
+}
+```
 
-    ![The previously designated code displays in the code window on the Specify Routes page.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image114.png 'Set Modules blade, Specify Routes page')
+![The previously designated code displays in the code window on the Specify Routes page.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image114.png 'Set Modules blade, Specify Routes page')
 
 19.  Select **Next**.
 
 20.  In the Review Template step, select **Submit**.
 
-21.  After approximately 4 minutes, return to the device details page. You should see the two new modules running, along with the IoT Edge agent module and the IoT Edge hub.
-
-    ![On the Deployed Modules tab, under Name, iot-lab-edge and VehicleTelemetry are called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image115.png 'Device Details page Deployed Modules tab')
+21.  After approximately 4 minutes, return to the device details page. You should see the two new modules running, along with the IoT Edge agent module and the IoT Edge hub. 
+        
+![On the Deployed Modules tab, under Name, iot-lab-edge and VehicleTelemetry are called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image115.png 'Device Details page Deployed Modules tab')
 
 22.  Go back to your Bash shell that is connected to the Linux VM containing your IoT Edge device.
 
 23.  Execute the following to make sure all the modules are running in Docker:
 
-    ```
-    sudo iotedge list
-    ```
+```
+sudo iotedge list
+```
 
-    ![Displays the list of docker images running in the IoT Edge simulator VM.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image116.png 'Bash shell')
+![Displays the list of docker images running in the IoT Edge simulator VM.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image116.png 'Bash shell')
 
 24.  You should have five containers running at this point.
 
 25.  View the Stream Analytics module logs to see the telemetry it is reading, as well as any outputs it generates based on anomalies. You should see a large degree more vehicle telemetry feeding into the Stream Analytics module than what it sends out. This, of course, is by design. Replace {moduleName} with the Stream Analytics module name. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
 
-    ```
-    sudo iotedge logs -f {moduleName}
-    ```
+```
+sudo iotedge logs -f {moduleName}
+```
 
-    ![In the Output window, results from the Stream Analytics module logs display.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image206.png 'Output window')
+![In the Output window, results from the Stream Analytics module logs display.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image206.png 'Output window')
 
 26. View the generated data by viewing the log for the VehicleTelemetry module as follows. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
 
@@ -1872,7 +1876,7 @@ As you remember, you created an Azure Service Bus Queue to ingest messages flagg
 
     ![In the Service Bus blade, under Settings, Shared access policies is selected. Under Policy, RootManageSharedAccessKey is selected. The copy button is selected for the Primary Connection String.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image120.png 'Service Bus blade')
 
-### Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2017
+### Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2019
 
 1.  Browse to the Lab-files folder containing the extracted solution files for the lab.
 
