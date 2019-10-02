@@ -96,7 +96,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Use Perspective View to create a simultaneous view of up to four unique queries](#task-4-use-perspective-view-to-create-a-simultaneous-view-of-up-to-four-unique-queries)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Deprovision the accelerator through the website](#task-1-deprovision-the-accelerator-through-the-website)
-    - [Task 2: Delete the Resource group in which you placed your Azure resources](#task-2-delete-the-resource-group-in-which-you-placed-your-azure-resources)
 
 <!-- /TOC -->
 
@@ -1318,6 +1317,7 @@ i. Implement the code that sends the current state of the device to the cloud th
     // patch["Latitude"] = _latitude;
     // patch["Longitude"] = _longitude;
     // patch["Borough"] = _borough;
+    // patch["Telemetry"] = _telemetryDefn;
     // Task.Run(async () => await _deviceClient.UpdateReportedPropertiesAsync(patch));
 ```
 
@@ -2439,11 +2439,3 @@ In this exercise, attendees will deprovision any Azure resources that were creat
 4.  Press the **Delete Solution** button.
 
     ![Delete solution](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image238.png 'Delete solution')
-
-### Task 2: Delete the Resource group in which you placed your Azure resources
-
-1.  From the Portal, navigate to the blade of your Resource Group and select Delete in the command bar at the top.
-
-2.  Confirm the deletion by re-typing the resource group name and selecting Delete.
-
-You should follow all steps provided _after_ attending the hands-on lab.
