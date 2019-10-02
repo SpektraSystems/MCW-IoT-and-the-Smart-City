@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-June 2019
+September 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -43,8 +43,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Review the Azure Time Series Insights instance](#task-4-review-the-azure-time-series-insights-instance)
     - [Task 5: Provision an Azure Container Registry](#task-5-provision-an-azure-container-registry)
     - [Task 6: Obtain the Storage Account Connection String](#task-6-obtain-the-storage-account-connection-string)
-    - [Task 8: Create storage account containers required for the lab](#task-8-create-storage-account-containers-required-for-the-lab)
-    - [Task 7: Retrieve Secrets from the Key Vault](#task-7-retrieve-secrets-from-the-key-vault)
+    - [Task 7: Create storage account containers required for the lab](#task-7-create-storage-account-containers-required-for-the-lab)
+    - [Task 8: Retrieve Secrets from the Key Vault](#task-8-retrieve-secrets-from-the-key-vault)
   - [Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters](#exercise-3-create-bus-and-traffic-light-simulated-devices-and-add-alerts-and-filters)
     - [Help references](#help-references-2)
     - [Task 1: Configure the Device Simulation projects to run locally](#task-1-configure-the-device-simulation-projects-to-run-locally)
@@ -81,10 +81,17 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Create the tag update job](#task-1-create-the-tag-update-job)
     - [Task 2: Verify tag update in the device twin](#task-2-verify-tag-update-in-the-device-twin)
     - [Task 3: Create new IoT Edge device group](#task-3-create-new-iot-edge-device-group)
-  - [Exercise 10: View all data in Azure Time Series Insights](#exercise-10-view-all-data-in-azure-time-series-insights)
+  - [Exercise 10: Process cold data through an event hub](#exercise-10-process-cold-data-through-an-event-hub)
+    - [Task 1: Verify cold data is being received in cloud storage](#task-1-verify-cold-data-is-being-received-in-cloud-storage)
+    - [Task 2: Create an event hub to receive the cold data](#task-2-create-an-event-hub-to-receive-the-cold-data)
+    - [Task 3: Add an input to Stream Analytics to pull the data in from Telemetry storage](#task-3-add-an-input-to-stream-analytics-to-pull-the-data-in-from-telemetry-storage)
+    - [Task 4: Add an output to Stream Analytics to forward data to an Event Hub](#task-4-add-an-output-to-stream-analytics-to-forward-data-to-an-event-hub)
+    - [Task 5: Modify the Stream Analytics Query to send data from storage to the event hub](#task-5-modify-the-stream-analytics-query-to-send-data-from-storage-to-the-event-hub)
+  - [Exercise 11: View all data in Azure Time Series Insights](#exercise-11-view-all-data-in-azure-time-series-insights)
     - [Help references](#help-references-6)
     - [Task 1: Add your account as a Contributor to the Data Access Policies](#task-1-add-your-account-as-a-contributor-to-the-data-access-policies)
-    - [Task 2: Go to the Time Series Insights environment and use the data explorer](#task-2-go-to-the-time-series-insights-environment-and-use-the-data-explorer)
+    - [Task 2: Add the cold data event hub as an event source into Time Series Insights](#task-2-add-the-cold-data-event-hub-as-an-event-source-into-time-series-insights)
+    - [Task 3: Go to the Time Series Insights environment and use the data explorer](#task-3-go-to-the-time-series-insights-environment-and-use-the-data-explorer)
     - [Task 3: View the simulated and IoT Edge bus data side-by-side](#task-3-view-the-simulated-and-iot-edge-bus-data-side-by-side)
     - [Task 4: Use Perspective View to create a simultaneous view of up to four unique queries](#task-4-use-perspective-view-to-create-a-simultaneous-view-of-up-to-four-unique-queries)
   - [After the hands-on lab](#after-the-hands-on-lab)
@@ -206,7 +213,7 @@ In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft A
 
     ![Provisioning Completed](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image179.png 'Provisioning Completed')
 
-8.  Alternatively, you may access installed accelerators in your account by clicking the **My Solutions** link on the (Azure IoT Solution Accelerators website)[https://www.azureiotsolutions.com].
+8.  Alternatively, you may access installed accelerators in your account by selecting the **My Solutions** link on the (Azure IoT Solution Accelerators website)[https://www.azureiotsolutions.com].
 
     ![Launching the Remote Monitoring Solution](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image180.png 'Launch Solution')
 
@@ -435,7 +442,7 @@ IoT Edge devices use one or more modules to perform a series of actions locally 
 
 3. Also save the name of the storage account, as we'll be needing this value later on in this lab as well.
 
-### Task 8: Create storage account containers required for the lab
+### Task 7: Create storage account containers required for the lab
 While we are in the storage account, we will need to create two blob containers for use in this lab.
 
 1. The first container we will create is responsible for housing the definition and configuration of the Azure Stream Analytics job that we will have running on an Edge device later in this lab.
@@ -461,7 +468,7 @@ While we are in the storage account, we will need to create two blob containers 
         b. **Public access level**: Container
 
 
-### Task 7: Retrieve Secrets from the Key Vault
+### Task 8: Retrieve Secrets from the Key Vault
 Later in this lab, we will be making use of the Azure Key Vault. This vault is created so that secrets do not need to reside in code. A Key Vault resource was generated when we created the IoT Remote Monitoring accelerator.
 
 1. Return to the resource group that was created for this lab. In the list of resources select the Azure Key Vault resource. Record the name of the Key Vault for use later on in this lab.
@@ -481,7 +488,7 @@ Later in this lab, we will be making use of the Azure Key Vault. This vault is c
     ![Azure key secret value](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image246.png)
 
 5. Repeat steps 2-4 for the following key: **aadAppSecret**
-
+ 
 ## Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters
 
 **Duration:** 60 minutes
@@ -539,7 +546,7 @@ In this task, you will open the device-simulation solution in Visual Studio 2019
 
     ![File Explorer displays with the previous path and file called out.](media/device-simulation-folder-explorer.png 'File Explorer')
 
-3.  Right click on the **WebService** project and select **Debug** from the left-hand menu.In the Environment variables section, populate the values for the following Environment Variables (the others can remain empty or with their default values):
+3.  Right click on the **WebService** project and select **Properties** from the left-hand menu.In the Environment variables section, populate the values for the following Environment Variables (the others can remain empty or with their default values):
     
     | Environment Variable                      | Value                                 |
     |-------------------------------------------|---------------------------------------|
@@ -580,9 +587,13 @@ In this task, you will finish configuring the device models we have provided for
 
     a. **Type**: Bus
 
-    b. **Location**: Manhattan
+    b. **Location**: Contoso
 
-    ![Properties_bus_manhattan](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image46.png)
+    c. **Latitude**: 40.755086
+
+    d. **Longitude**: -73.984165
+
+    ![Bus 1 Properties](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image46.png)
 
 4.  There are two Telemetry schemas set for this bus. The first one should send telemetry every 10 seconds, while the other one should have an interval of one minute. Complete the Telemetry values according to the following specifications:
 
@@ -634,7 +645,11 @@ In this task, you will finish configuring the device models we have provided for
 
     a. **Type**: Bus
 
-    b. **Location**: Brooklyn
+    b. **Location**: Tailwind
+
+    c. **Latitude**: 40.693935
+
+    d. **Longitude**: -73.952279
 
     ![The previously defined properties are circled in the JSON Code window.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image49.png 'JSON Code window')
 
@@ -819,7 +834,7 @@ In this task, you will run the Simulator web service locally and send REST-based
 
 3.  Open **Postman**. You should have it installed from the lab's prerequisites. If not, refer to the link to install Postman found there.
 
-4.  Add a new request. Select the **POST** method and enter <http://localhost:9003/v1/simulations as the URL.
+4.  Add a new request. Select the **POST** method and enter http://localhost:9003/v1/simulations as the URL.
 
 5.  Select **Headers** beneath the URL and add the following Key / Value pair:
 
@@ -976,7 +991,7 @@ In this task, you will send a job to one of the traffic light devices, using the
 
 3.  Navigate to **Device Explorer** using the left-hand menu.
 
-4.  Check the box next to **GUIDVALUE.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list - the names could be long, so clicking on one will open an overview blade displaying the full name of the device).
+4.  Check the box next to **GUIDVALUE.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list - the names could be long, so selecting one will open an overview blade displaying the full name of the device).
 
 5.  Select **jobs** in the top menu.
 
@@ -1171,10 +1186,9 @@ In this task, you will provision a new Linux virtual machine that will be used t
 14.  Next, we will create a folder to house the data for our local storage. 
 
     ```
-    sudo mkdir /storage
-    sudo cd storage
-    sudo mkdir /containerdata
-    cd ..
+    sudo mkdir storage
+    cd storage
+    sudo mkdir containerdata
     cd ..
     ```
 
@@ -1243,28 +1257,28 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
    ```
 
    e. Use the device client to retrieve the desired properties from the Device Twin in the cloud. Use these values to populate the initial state of the current device.
-
    ```
-    // TODO: 5 - initialize device instance with values obtained from the device twin desired properties       
+   // TODO: 5 - initialize device instance with values obtained from the device twin desired properties       
     // var twin = await _deviceClient.GetTwinAsync();
     // var desired = twin.Properties.Desired;
     // await UpdateDeviceInstanceFromDesiredProperties(desired);
    ```
-    
-    f. Initialize local edge blob storage.
-    
-    ```
-    // TODO: 6 - initialize iot edge storage 
+
+
+f. Initialize local edge blob storage.    
+```
+// TODO: 6 - initialize iot edge storage 
     // _storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
     // _blobClient = _storageAccount.CreateCloudBlobClient();
     // _blobContainer = _blobClient.GetContainerReference("telemetry");
     // if(!_blobContainer.Exists()){
     //     _blobContainer.CreateIfNotExists();
     // }
-    ```
-    g. Populate the current 'state' field values from the retrieved Desired Properties obtain from the Device Twin.
+```
 
-    ```
+g. Populate the current 'state' field values from the retrieved Desired Properties obtain from the Device Twin.
+
+```
     if (desired["VIN"] != null)
     {
         // TODO: 7 - Set the vin to the value in the device twin
@@ -1286,18 +1300,18 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
         // TODO: 10 - Set the longitude to the value in the device twin
         // _longitude = Convert.ToSingle(desired["Longitude"]);
     }
-    ```
+```
 
-    h. Initialize a timer to send reported properties to the Device Twin at regular intervals.
+h. Initialize a timer to send reported properties to the Device Twin at regular intervals.
 
-    ```
+ ```
     // TODO: 11 - update reported properties at a specified time interval
     // _timer = new Timer(UpdateReportedProperties, null, TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate), TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate));
-    ```
+```
 
-    i. Implement the code that sends the current state of the device to the cloud through reported properties of the device twin.
+i. Implement the code that sends the current state of the device to the cloud through reported properties of the device twin.
 
-    ```
+```
     // TODO: 12 - update reported properties with the IoT Hub with most recent Lat/Long
     //patch the changed properties (Latitude, Longitude, Borough)
     // TwinCollection patch = new TwinCollection();
@@ -1305,20 +1319,20 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
     // patch["Longitude"] = _longitude;
     // patch["Borough"] = _borough;
     // Task.Run(async () => await _deviceClient.UpdateReportedPropertiesAsync(patch));
-    ```
+```
 
-    j. Initialize the machine learning context, load its model, and create an instance of the prediction engine to evaluate the incoming telemetry for dangerous driving.
+j. Initialize the machine learning context, load its model, and create an instance of the prediction engine to evaluate the incoming telemetry for dangerous driving.
 
-    ```
+```
     // TODO: 13 - Initialize machine learning prediction model infrastructure
     // var mlContext = new MLContext();
     // ITransformer mlModel = mlContext.Model.Load("BusMlModel/MLModel.zip", out var modelInputSchema);
     // var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
-    ```
+ ```
 
-    k. Populate the input model with the current state data of the bus. This information will be used by the prediction engine to determine if the bus driver is driving dangerously.
+k. Populate the input model with the current state data of the bus. This information will be used by the prediction engine to determine if the bus driver is driving dangerously.
 
-    ```
+```
     // TODO 14: Create input for the machine learning prediction engine by setting the 
     //         device current latitude, longitude, and speed limit
     // var mlInput = new ModelInput()
@@ -1327,37 +1341,37 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
     //    Longitude = currRouteData.Longitude,
     //    BusSpeed = currRouteData.BusSpeed
     // };
-    ``` 
+``` 
 
-    l. Use the prediction engine to determine if the driver is driving dangerously.
+l. Use the prediction engine to determine if the driver is driving dangerously.
 
-    ```
+```
     // TODO 15: Use this input model to have the prediction engine determine if the
     //          current speed for the device is safe for the latitude and longitude location
     // var mlOutput = predEngine.Predict(mlInput);
-    ```
+```
 
-    m. Populate the predicted value into the telemetry being sent by the module.
+m. Populate the predicted value into the telemetry being sent by the module.
 
-    ```
+```
     // TODO: 16 Populate the machine learning prediction into the telemetry data for upstream systems
     // mlDetectedAggressiveDriving = mlOutput.Prediction
-    ```
+```
 
-    n. Output the generated telemetry from the module asynchronously.
+n. Output the generated telemetry from the module asynchronously.
 
-    ```
+```
      // TODO: 17 - Have the ModuleClient send the event message asynchronously, using the specified output name
      // await _vehicleTelemetryModuleClient.SendEventAsync(outputName, message);
-    ```
+```
 
-    o. Save all data to local blob storage
+o. Save all data to local blob storage
 
-    ```
+```
     // TODO: 18 - Send all telemetry to local blob storage
     // var blockBlob = _blobContainer.GetBlockBlobReference($"telemetry_{info.timestamp.Ticks}.json");
     // blockBlob.UploadText(serializedString);
-    ```
+```
 
 8.  Save your changes.
 
@@ -1602,7 +1616,7 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
 
 9.  Select your Azure subscription, then the Stream Analytics job you created in the previous task.
 
-10. if you are missing a storage account setting, click on the link to set it up.
+10. if you are missing a storage account setting, select the link to set it up.
 
     ![Missing Storage Account.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image205.png "Missing Storage Account")
 
@@ -1800,7 +1814,7 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
    ![Define function output](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image224.png 'Define function output')
 
-10. You may be prompted to install further extensions, please do so by clicking the install link.
+10. You may be prompted to install further extensions, please do so by selecting the install link.
 
     ![Install extensions](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image225.png 'Install Extensions')
 
@@ -2077,7 +2091,7 @@ Navigate back to the monitoring web app. If you don't remember the path or have 
 
    d. **Calculation**: Select **Instant**.
 
-   e. Condition 1 **Field**: Welect **engineoil**.
+   e. Condition 1 **Field**: Select **engineoil**.
 
    f. **Operator**: Select **< Less than**.
 
@@ -2158,11 +2172,115 @@ In this exercise, you will create the following tag that will be saved to the de
 
    ![The Monitoring Web App dashboard displays information for only one Edge Device.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image152.png 'Monitoring Web App dashboard')
 
-## Exercise 10: View all data in Azure Time Series Insights
+## Exercise 10: Process cold data through an event hub
+
+**Duration:** 25 minutes
+
+So far we have seen the near real time analysis of data coming in from our Bus Edge device. Remember only the data being flagged as an alert is immediately being sent to IoT Hub through the Edge Stream Analytics module. The rest of the data is being stored in local storage on the Edge Device. We have configured the local Edge storage to automatically upload its data to the cloud. This module has the intelligence to know if a viable data connection is available before it does its upload, otherwise it will store all data on the device itself - perfect for disconnected scenarios. After data has been uploaded, the Edge Storage module will automatically delete the uploaded data on the device in order to regain storage space. In order to work with this data in Time Series Insights, it needs to be processed through an Event Hub.
+
+### Task 1: Verify cold data is being received in cloud storage
+
+1. In the Azure Portal, open the Storage Account where you created the **telemetrysink** blob container earlier in the lab.
+
+![Telemetrysink blob](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image249.png)
+
+2. Select the **telemetrysink** blob to view its contents. You should see many telemetry files with the extension *.json in the list. Each of these files indicates a reading that has been uploaded by the bus1 Edge device. 
+
+![Cold Readings From Edge Device](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image250.png)
+
+### Task 2: Create an event hub to receive the cold data
+
+1. In your resource group, locate and select the Event Hub Namespace that has the same suffix as your IoT hub.
+
+![Find the event hub namespace](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image251.png)
+
+2. From the left menu, select **Event Hubs** from the Entities section. Then press the **+ Event Hub** button.
+
+![Add an event hub menu](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image252.png)
+
+3. Name the event hub **colddatahub** and press the **Create** button.
+
+![Create event hub form](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image253.png)
+
+### Task 3: Add an input to Stream Analytics to pull the data in from Telemetry storage
+
+1. Open the Stream Analytics job that shares the same suffix as your IoT Hub.
+
+![Open Stream Analytics](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image254.png)  
+
+2. Stop the Stream Analytics job by pressing the **Stop** button on the top of the **Overview** window.
+
+![Stop the Stream Analytics Job](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image255.png)
+
+3. Once stopped, select **Inputs** from the **Job Topology** section, then press the **+ Add stream input** button.
+ 
+![Add stream input](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image256.png)
+
+5. Select to add **Blob storage** input.
+   
+![Add blob storage input](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image257.png)
+
+6. Create the input as follows:
+   1. **Input Alias**: ColdStorage
+   2. Select the **Select Blob storage from your subscriptions** option
+   3. **Storage Account**: select the storage account that shares the same suffix as your IoT Hub
+   4.  **Container**, select to **Use existing** and choose the **telemetrysink** container.
+   5.  Press **Save**
+
+### Task 4: Add an output to Stream Analytics to forward data to an Event Hub   
+1.  Next, from the left hand menu select **Outputs**, then select to add an **Event Hub** output.
+   
+![Add Event Hub Output](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image258.png)
+
+2.  Create the output as follows:
+    1.  **Output Alias**: ColdDataHub
+    2.  Choose the **Select Event Hub from your subscription** item
+    3.  **Subscription**: Select the appropriate subscription
+    4.  **Event Hub Namespace**: Select the event hub namespace that shares the same suffix as your IoT Hub
+    5.  **Event Hub name**: Select **Use existing**, then select **colddatahub**
+    6.  Press **Save**
+   
+![Event Output Form](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image259.png)
+
+### Task 5: Modify the Stream Analytics Query to send data from storage to the event hub
+
+1.  From the left menu, select **Query**
+    
+2. We will first define our input dataset to pull data from storage. To do this, immediately following the **WITH** keyword, insert the following:
+    
+```
+ColdData As
+(
+    SELECT 
+        *
+    FROM ColdStorage TIMESTAMP BY [timestamp]
+),
+```
+
+![Define ColdData input path](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image260.png)
+
+3. Next, we will direct all data being read from storage and send it to our Event Hub output that we defined. To do this, scroll to the end of the query and append the following:
+
+```
+SELECT *
+INTO ColdDataHub
+FROM ColdData
+```
+
+![Output all data from storage into the Event Hub](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image261.png)
+
+4. Save the query
+    
+5. From the left menu, select **Overview**, then press the **Start** button to restart the stream job.
+
+![Restart Stream Analytics Job](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image262.png)
+ 
+
+## Exercise 11: View all data in Azure Time Series Insights
 
 **Duration:** 15 minutes
 
-Now that the critical engine alert data is being recorded, we can view this data in Time Series Insights as well.
+Now that the critical engine alert data is being recorded, and we have folded in the telemetry coming in from storage to an event hub as well, we can view this data in Time Series Insights.
 
 ### Help references
 
@@ -2189,8 +2307,26 @@ Before you can access the Time Series Insights environment and make changes, you
     ![In the Select Role blade, the check boxes for Reader and Contributor are selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image154.png 'Select Role blade')
 
 5.  Select **Ok** twice to go back to the Data Access Policies blade. You should now see your account listed with the Reader and Contributor roles.
+   
+### Task 2: Add the cold data event hub as an event source into Time Series Insights
 
-### Task 2: Go to the Time Series Insights environment and use the data explorer
+1. From the left-hand menu, select **Event Sources** from the **Environment Topology** section, then press the **Add** button.
+   
+![Add event source menu](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image263.png)
+
+2. Define the input source as follows:
+   1. **Event source name**: ColdData
+   2. **Source**: Event Hub
+   3. **Import option**: Use Event Hub from available subscriptions
+   4. **Subscription**: Select the appropriate subscription
+   5. **Event Hub namespace**: Select the event hub namespace with the same suffix as your IoT Hub
+   6. **Event Hub name**: Select **colddatahub**
+   7. **Timestamp property name**: timestamp
+   8. Press **Save**
+   
+> Note: The timestamp property is part of the telemetry data, this tells Time Series Insights how to ensure the data is arranged in the appropriate date/time order
+
+### Task 3: Go to the Time Series Insights environment and use the data explorer
 
 1.  Select **Overview** from the left-hand menu, then select **Go to Environment**.
 

@@ -4,7 +4,7 @@
   "Version": "0.0.1",
   "Name": "Traffic Light",
   "Description": "Failing traffic light with voltage too high",
-  "Protocol": "MQTT",
+  "Protocol": "AMQP",
   "Simulation": {
     "InitialState": {
       "online": true,
@@ -31,7 +31,7 @@
     "Longitude": -73.956592
   },
   "Tags": {
-    "Borough": "Brooklyn"
+    "Borough": "Tailwind"
   },
   "Telemetry": [
     {
@@ -71,6 +71,8 @@
       "Type": "javascript",
       "Path": "FirmwareUpdate-method.js"
     },
+
+    /*
     "IncreaseTiming": {
       "Type": "javascript",
       "Path": "IncreaseTiming-method.js"
@@ -79,6 +81,6 @@
       "Type": "javascript",
       "Path": "DecreaseTiming-method.js"
     }
-    
+    */
   }
 }

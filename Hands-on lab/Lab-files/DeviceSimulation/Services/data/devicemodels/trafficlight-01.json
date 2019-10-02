@@ -32,7 +32,7 @@
     "Longitude": -73.981783
   },
   "Tags": {
-    "Borough": "Manhattan"
+    "Borough": "Contoso"
   },
   "Telemetry": [
     {
@@ -72,6 +72,7 @@
       "Type": "javascript",
       "Path": "FirmwareUpdate-method.js"
     },
+    /*
     "IncreaseTiming": {
       "Type": "javascript",
       "Path": "IncreaseTiming-method.js"
@@ -80,6 +81,7 @@
       "Type": "javascript",
       "Path": "DecreaseTiming-method.js"
     }
+    */
     
   }
 }

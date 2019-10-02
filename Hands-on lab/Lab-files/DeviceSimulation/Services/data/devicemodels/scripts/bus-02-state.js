@@ -94,11 +94,11 @@ function main(context, previousState, previousProperties) {
 
     // 42 +/- 50%,  Min 0, Max 80
     // TODO: 3 - finish this line of code:
-    state.speed = vary(42, 50, 0, 80);
+    //state.speed = vary(42, 50, 0, 80);
 
     // 53 +/- 25%,  Min 2, Max 80
     // TODO: 4 - finish this line of code:
-    state.fuellevel = vary(53, 25, 2, 80);
+    //state.fuellevel = vary(53, 25, 2, 80);
 
     updateState(state);
 }

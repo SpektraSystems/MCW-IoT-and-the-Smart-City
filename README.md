@@ -18,7 +18,7 @@ By the end of this workshop, you will learn to use IoT Hub to manage IoT devices
 
 ### Whiteboard design session
 
-This whiteboard design session is designed to help you gain a better understanding of implementing architectures that use IoT data in new and innovative ways. You will design an IoT workflow that begins with a local IoT edge device that collects and analyzes data from various sensors that are connected to it, and intelligently aggregates and sends that data to the cloud when anomalies are detected. Once the data is uploaded, it is sent to a time-series database for rapid analysis alongside other classes of IoT data to spot and act on correlated information in real-time. You will also configure alerts when certain thresholds are exceeded and configure a remote monitoring solution that manages and sends control messages to IoT devices located within the city limits.
+This whiteboard design session is designed to help you gain a better understanding of implementing architectures that use IoT data in new and innovative ways. You will design an IoT workflow that begins with a local IoT edge device that collects and analyzes data from various sensors that are connected to it, and intelligently aggregates and sends that data to the cloud when anomalies are detected, other non-critical data is uploaded to cloud storage when a viable internet connection is available. Once the data is uploaded, it is sent to a time-series database for rapid analysis alongside other classes of IoT data to spot and act on correlated information in real-time. You will also configure alerts when certain thresholds are exceeded and configure a remote monitoring solution that manages and sends control messages to IoT devices located within the city limits.
 
 At the end of this whiteboard design session, you will be better able to design an end-to-end IoT solution that processes and analyzes data both in the field and in the cloud.
 
@@ -29,13 +29,15 @@ In this hands-on-lab, you will build an end-to-end smart city solution, beginnin
 At the end of this hands-on lab, you will be better able to build an end-to-end IoT solution that processes and analyzes data both in the field and in the cloud.
 
 ## Azure services and related products
-- Azure Data Factory
 - Azure IoT Hub
+- Azure IoT Edge
 - Azure Stream Analytics
-- Azure HDInsight
-- Azure Spark & Spark SQL
+- Azure Time Series Insights
 - Azure Storage
-- Power BI
+- Azure Event Hub
+- Azure Service Bus
+- Visual Studio
+- Visual Studio Code
 
 ## Azure solutions
 Internet of Things

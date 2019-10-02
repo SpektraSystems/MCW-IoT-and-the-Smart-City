@@ -15,15 +15,16 @@ namespace VehicleTelemetrySimulator
     using Microsoft.ML;
     using Microsoft.Azure.Storage;
     using Microsoft.Azure.Storage.Blob;
-    
+    using Newtonsoft.Json.Linq;
+
     class Program
     {
         //TODO: 1 - set device connection string for the device client 
-        static string _deviceConnectionString = "HostName=iothub-4qs4q.azure-devices.net;DeviceId=bus1;SharedAccessKey=tu5OElfcM8n1Uk4MnYWO6/8E6wpWY+iOYMMDR1Zips8=";
+        static string _deviceConnectionString = "<device connection string goes here>";
 
-        //TODO: 2 - set the connection string for local blob storage
-        static string _storageConnectionString = "DefaultEndpointsProtocol=http;BlobEndpoint=http://azureblobstorageoniotedge:11002/edgestorage;AccountName=edgestorage;AccountKey=pM8cWFj0L8h+VKRfE8Fy3tVVtdfOR4bCIzX8N/sDiK1X0znhu8iatFwVfjzwjedDKe5ln+2cI7wpy+2eO1vvQQ==";
-
+        //TODO: 2 - set the connection string for local blob storage (keep this text, just uncomment)
+        //static string _storageConnectionString = "DefaultEndpointsProtocol=http;BlobEndpoint=http://azureblobstorageoniotedge:11002/edgestorage;AccountName=edgestorage;AccountKey=pM8cWFj0L8h+VKRfE8Fy3tVVtdfOR4bCIzX8N/sDiK1X0znhu8iatFwVfjzwjedDKe5ln+2cI7wpy+2eO1vvQQ==";
+      
         static List<string> _boroughList = new List<string>() { "Northwind", "Contoso", "Tailwind" };
         static ExcelMapper _routeReader = new ExcelMapper("BusRouteData/routeInterpolated.xlsx");
         static int _secondsToTwinReportedPropertiesUpdate = 120;
@@ -45,6 +46,7 @@ namespace VehicleTelemetrySimulator
         static string _borough { get; set; }
         static float _latitude { get; set; }
         static float _longitude { get; set; }
+        static JObject _telemetryDefn {get;set;}
 
         static ModuleClient _vehicleTelemetryModuleClient;
         static DeviceClient _deviceClient;
@@ -89,36 +91,35 @@ namespace VehicleTelemetrySimulator
             _routeData = _routeReader.Fetch<RouteData>().ToList();
 
             // TODO: 11 - update reported properties at a specified time interval
-            _timer = new Timer(UpdateReportedProperties, null, TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate), TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate));
+            //_timer = new Timer(UpdateReportedProperties, null, TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate), TimeSpan.FromSeconds(_secondsToTwinReportedPropertiesUpdate));
 
             // the module client is in charge of sending messages in the context of this module (VehicleTelemetry)
             // TODO: 3 - Create module client from container environment variable
-            _vehicleTelemetryModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);
+            //_vehicleTelemetryModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);            
             await _vehicleTelemetryModuleClient.OpenAsync();
 
             // the device client is responsible for the device twin reported properties updates
             // TODO: 4 - Create device client to obtain desired properties from Twin and update reported properties
-            _deviceClient = DeviceClient.CreateFromConnectionString(_deviceConnectionString);
-            await _deviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
+            //_deviceClient = DeviceClient.CreateFromConnectionString(_deviceConnectionString);
+            //await _deviceClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdateAsync, null);
 
             // Register callback to be called when a message is received by this module
             await _vehicleTelemetryModuleClient.SetInputMessageHandlerAsync("input1", PipeMessage, _vehicleTelemetryModuleClient);
 
             //initialize device with values obtained from the desired properties in the device twin     
             // TODO: 5 - initialize device instance with values obtained from the device twin desired properties       
-            var twin = await _deviceClient.GetTwinAsync();
-            var desired = twin.Properties.Desired;
-            await UpdateDeviceInstanceFromDesiredProperties(desired);
+            //var twin = await _deviceClient.GetTwinAsync();
+            //var desired = twin.Properties.Desired;
+            //await UpdateDeviceInstanceFromDesiredProperties(desired);
 
             // TODO: 6 - initialize iot edge storage 
-            _storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
-            _blobClient = _storageAccount.CreateCloudBlobClient();
-            _blobContainer = _blobClient.GetContainerReference("telemetry");
-            if(!_blobContainer.Exists()){
-                _blobContainer.CreateIfNotExists();
-            }
+            // _storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
+            // _blobClient = _storageAccount.CreateCloudBlobClient();
+            // _blobContainer = _blobClient.GetContainerReference("telemetry");
+            // if(!_blobContainer.Exists()){
+            //     _blobContainer.CreateIfNotExists();
+            // }
             
-
             //start generating telemetry data
             await GenerateTelemetry();
         }
@@ -142,9 +143,9 @@ namespace VehicleTelemetrySimulator
             int routeIdx = 0;
 
             // TODO: 13 - Initialize machine learning prediction model infrastructure
-            var mlContext = new MLContext();
-            ITransformer mlModel = mlContext.Model.Load("BusMlModel/MLModel.zip", out var modelInputSchema);
-            var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+            // var mlContext = new MLContext();
+            // ITransformer mlModel = mlContext.Model.Load("BusMlModel/MLModel.zip", out var modelInputSchema);
+            // var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 
             while (true)
             {
@@ -158,16 +159,16 @@ namespace VehicleTelemetrySimulator
 
                     // TODO 14: Create input for the machine learning prediction engine by setting the 
                     //         device current latitude, longitude, and speed limit
-                    var mlInput = new ModelInput()
-                    {
-                        Latitude = currRouteData.Latitude,
-                        Longitude = currRouteData.Longitude,
-                        BusSpeed = currRouteData.BusSpeed
-                    };
+                    // var mlInput = new ModelInput()
+                    // {
+                    //     Latitude = currRouteData.Latitude,
+                    //     Longitude = currRouteData.Longitude,
+                    //     BusSpeed = currRouteData.BusSpeed
+                    // };
 
                     // TODO 15: Use this input model to have the prediction engine determine if the
                     //          current speed for the device is safe for the latitude and longitude location
-                    var mlOutput = predEngine.Predict(mlInput);
+                    //var mlOutput = predEngine.Predict(mlInput);
 
                     if (routeIdx == _routeData.Count - 1)
                     {
@@ -199,7 +200,7 @@ namespace VehicleTelemetrySimulator
                         timestamp = DateTime.UtcNow,
 
                         // TODO: 16 Populate the machine learning prediction into the telemetry data for upstream systems
-                        mlDetectedAggressiveDriving = mlOutput.Prediction
+                       // mlDetectedAggressiveDriving = mlOutput.Prediction
                     };
                     var serializedString = JsonConvert.SerializeObject(info);
                     Console.WriteLine($"{DateTime.Now} > Sending message: {serializedString}");
@@ -208,11 +209,11 @@ namespace VehicleTelemetrySimulator
                     message.ContentType = "application/json";
 
                     // TODO: 17 - Have the ModuleClient send the event message asynchronously, using the specified output name
-                    await _vehicleTelemetryModuleClient.SendEventAsync(outputName, message);
+                    //await _vehicleTelemetryModuleClient.SendEventAsync(outputName, message);
 
                     // TODO: 18 - Send all telemetry to local blob storage
-                    var blockBlob = _blobContainer.GetBlockBlobReference($"telemetry_{info.timestamp.Ticks}.json");
-                    blockBlob.UploadText(serializedString);
+                    // var blockBlob = _blobContainer.GetBlockBlobReference($"telemetry_{info.timestamp.Ticks}.json");
+                    // blockBlob.UploadText(serializedString);
                 }
                 catch (AggregateException ex)
                 {
@@ -278,36 +279,37 @@ namespace VehicleTelemetrySimulator
                     if (desired["VIN"] != null)
                     {
                         // TODO: 7 - Set the vin to the value in the device twin
-                        _vin = desired["VIN"];
+                        //_vin = desired["VIN"];
                     }
                     if (desired["Borough"] != null)
                     {
                         // TODO: 8 - Set the borough to the value in the device twin
-                        _borough = desired["Borough"];
+                        //_borough = desired["Borough"];
                     }
 
                     if (desired["Latitude"] != null)
                     {
                         // TODO: 9 - Set the latitude to the value in the device twin
-                        _latitude = Convert.ToSingle(desired["Latitude"]);
+                        //_latitude = (float)desired["Latitude"];
                     }
                     if (desired["Longitude"] != null)
                     {
                         // TODO: 10 - Set the longitude to the value in the device twin
-                        _longitude = Convert.ToSingle(desired["Longitude"]);
+                        //_longitude = (float)desired["Longitude"];
+                    }
+                    if(desired["Telemetry"]!=null){
+                        _telemetryDefn = desired["Telemetry"];
                     }
                 }
                 catch (AggregateException ex)
                 {
                     foreach (Exception exception in ex.InnerExceptions)
                     {
-                        Console.WriteLine();
                         Console.WriteLine("Error when receiving desired property: {0}", exception);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine();
                     Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
                 }
 
@@ -327,11 +329,13 @@ namespace VehicleTelemetrySimulator
 
                 // TODO: 12 - update reported properties with the IoT Hub with most recent Lat/Long
                 //patch the changed properties (Latitude, Longitude, Borough)
-                TwinCollection patch = new TwinCollection();
-                patch["Latitude"] = _latitude;
-                patch["Longitude"] = _longitude;
-                patch["Borough"] = _borough;
-                Task.Run(async () => await _deviceClient.UpdateReportedPropertiesAsync(patch));
+                // TwinCollection patch = new TwinCollection();
+                // patch["Latitude"] = _latitude;
+                // patch["Longitude"] = _longitude;
+                // patch["Borough"] = _borough;
+                // patch["Type"] = "Bus";
+                // patch["Telemetry"] = _telemetryDefn;
+                // Task.Run(async () => await _deviceClient.UpdateReportedPropertiesAsync(patch));
 
             }
             catch (AggregateException ex)

@@ -6,6 +6,7 @@
   "Description": "Bus with GPS, speed, and fuel-level sensors",
   "Protocol": "AMQP",
   "Simulation": {
+    /*
     "InitialState": {
       "online": true,
       "latitude": 40.693935,
@@ -17,6 +18,7 @@
       "vin": "2K0H7PNZY0RSFQ033"
 
     },
+    */
     "Interval": "00:00:05",
     "Scripts": [
       {
@@ -26,13 +28,15 @@
       }
     ]
   },
+  /*
   "Properties": {
     "Type": "Bus",
-    "Location": "Brooklyn",
+    "Location": "Tailwind",
     "Latitude": 40.693935,
     "Longitude": -73.952279
 
   },
+  */
   "Telemetry": [
     {
       "Interval": "00:00:12",
@@ -40,6 +44,7 @@
       "MessageSchema": {
         "Name": "bus-sensors;v1",
         "Format": "JSON",
+        /*
         "Fields": {
           "latitude": "double",
           "longitude": "double",
@@ -48,20 +53,25 @@
           "vin": "text"
           
         }
+       */
       }
     },
     {
       "Interval": "00:00:55",
+      /*
       "MessageTemplate": "{\"fuellevel\":${fuellevel},\"fuellevel_unit\":\"${fuellevel_unit}\"}",
+      */
       "MessageSchema": {
         "Name": "bus-sensors;v1",
         "Format": "JSON",
+        /*
         "Fields": {
           "fuellevel": "double",
           "fuellevel_unit": "text"
           
         }
-      }
+        */
+    }
     }
   ],
   "CloudToDeviceMethods": {
