@@ -45,7 +45,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - Local machine or a virtual machine configured with:
 
->**Note**:  Included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs.  Perform Task 1 **only** if you do not want to run locally. **It is important to complete these steps the day before the lab!
+>**Note**:  Included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs.  Perform Task 1 **only** if you do not want to run locally. **It is important to complete these steps the day before the lab**!
 
   - Visual Studio Code version 1.38.1 or higher
 
