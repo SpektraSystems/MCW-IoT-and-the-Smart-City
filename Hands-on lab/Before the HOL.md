@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 IoT and the Smart City
@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-September 2019
+October 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -43,7 +43,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 - **Global Administrator role** for Azure AD within your subscription.
 
-- Local machine or a virtual machine configured with (**complete the day before the lab!**) - (included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs - perform Task 1 below **only** if you do not want to run locally) :
+- Local machine or a virtual machine configured with:
+
+>**Note**:  Included below is instruction on automating the creation of an Azure VM that includes all of the necessary software to complete the labs.  Perform Task 1 **only** if you do not want to run locally. **It is important to complete these steps the day before the lab!
 
   - Visual Studio Code version 1.38.1 or higher
 
@@ -117,7 +119,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
-1.  Once the Deployment completes, you can locate your VM in the **IoTSmartCity** Resource group. Open the **LABVM** and click **Connect**.
+1.  Once the Deployment completes, you can locate your VM in the **IoTSmartCity** Resource group. Open the **LABVM** and select **Connect**.
 
     ![Click the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 
@@ -127,19 +129,19 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     - **Password**: Password.1!!
 
-    ![Enter demouser as the username, and Password.1!! as the password](images/Setup/image8.png 'Login credential fields')
+    ![Enter demouser as the username, and Password.1!! as the password.](images/Setup/image8.png 'Login credential fields')
 
-3.  A Remote Desktop Warning will appear. Click **Don't ask me again for connections to this computer** and they click **Yes**.
+3.  A Remote Desktop Warning will appear. Select **Don't ask me again for connections to this computer** and then select **Yes**.
 
-    ![Check the Don't ask me again for connections to this computer, then click Yes on the Remote Desktop Connection Warning dialog.](images/Setup/image9.png 'Remote Desktop Connection warbubg dialog box')
+    ![Check the Don't ask me again for connections to this computer, then select Yes on the Remote Desktop Connection Warning dialog.](images/Setup/image9.png 'Remote Desktop Connection warbubg dialog box')
 
-4.  You will receive a message about allowing your PC to be discoverable. Click **No**.
+4.  You will receive a message about allowing your PC to be discoverable. Select **No**.
 
     ![Select No when asked whether you want to allow your PC to be discoverable by other PCs and devices on this network.](images/Setup/image10.png 'Network pop-up')
 
 5.  Once logged in - Docker Desktop will need to be started. Double-click the *Docker Desktop* icon to start the program. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
 
-    ![Double-Click the Docker Desktop icon to start the program](images/Setup/docker-icon.png)
+    ![Double-Click the Docker Desktop icon to start the program.](images/Setup/docker-icon.png)
     
     ![Double-click the Docker Icon within the Windows taskbar to ensure Docker has started.](images/Setup/image12.png 'Windows taskbar docker icon')
 
@@ -149,9 +151,9 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 ### Task 2: Validate connectivity to Azure
 
-- From within the virtual machine, launch **Visual Studio** and validate that you can log in with your Microsoft Account when prompted.
+1.  From within the virtual machine, launch **Visual Studio** and validate that you can log in with your Microsoft Account when prompted.
 
-- Validate connectivity to your Azure subscription. Launch Visual Studio, open **Server Explorer** from the View menu, and ensure that you can connect to your Azure subscription.
+2.  Validate connectivity to your Azure subscription. Launch Visual Studio, open **Server Explorer** from the View menu, and ensure that you can connect to your Azure subscription.
 
 ### Task 3: Download lab artifacts
 
@@ -163,15 +165,15 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
-   ![Download .zip containing the IoT and the Smart City repository](media/git-hub-download-repo.png 'Download ZIP')
+   ![Download .zip containing the IoT and the Smart City repository.](media/git-hub-download-repo.png 'Download ZIP')
 
 4. Right-click the .zip file you downloaded and choose **Extract All...**.
 
-   ![Right-click the .zip file and choose Extract All](media/extract-lab-files.png 'Extract All')
+   ![Right-click the .zip file and choose Extract All.](media/extract-lab-files.png 'Extract All')
 
-5. Set the destination path to **C:\\**, then click on **Extract**.
+5. Set the destination path to **C:\\**, then select **Extract**.
 
-   ![Change the destination path to C:\ and click on Extract](media/extract-lab-files-dialog.png 'Extract Compressed Folders Dialog')
+   ![Change the destination path to C:\ and select Extract.](media/extract-lab-files-dialog.png 'Extract Compressed Folders Dialog')
 
 6. The lab files are located here: `C:\MCW-IoT-and-the-Smart-City-master\Hands-on lab\Lab-files`.
 
