@@ -138,7 +138,7 @@ Directions: With all participants at your table, respond to the following questi
 
 _High-level architecture_
 
-1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the bus and traffic light IoT devices, data ingestion, storage, and visualization.
+1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the IoT Smart City.
 
 _IoT Devices_
 
