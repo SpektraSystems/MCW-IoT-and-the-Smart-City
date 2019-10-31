@@ -2218,6 +2218,7 @@ So far we have seen the near real time analysis of data coming in from our Bus E
     ![The Add Stream input menu is shown with the blob storage item selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image257.png 'Add blob storage input')
 
 5. Create the input as follows:
+
    a. **Input Alias**: ColdStorage
    b. Select the **Select Blob storage from your subscriptions** option.
    c. **Storage Account**: select the storage account that shares the same suffix as your IoT Hub.
@@ -2231,6 +2232,7 @@ So far we have seen the near real time analysis of data coming in from our Bus E
     ![Outputs is selected from the left hand menu, and the Add button is selcted with the Event Hub item chosen from the sub menu](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image258.png 'Add stream analytics output')
 
 2. Create the output as follows:
+
     a. **Output Alias**: ColdDataHub
     b. Choose the **Select Event Hub from your subscription** item.
     c. **Subscription**: Select the appropriate subscription.
@@ -2312,6 +2314,7 @@ Before you can access the Time Series Insights environment and make changes, you
     ![In the left menu, Event sources is selected, the Add button is highlighted above the list of available event sources.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image263.png 'Add event source')
 
 2. Define the input source as follows:
+
    a. **Event source name**: ColdData
    b. **Source**: Event Hub
    c. **Import option**: Use Event Hub from available subscriptions
