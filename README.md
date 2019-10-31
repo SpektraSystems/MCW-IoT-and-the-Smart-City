@@ -4,6 +4,8 @@ Fabrikam City council has conducted a six-month study of new and emerging techno
 
 At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
+October 2019
+
 ## Target audience
 - Application developer
 - Data engineer
@@ -44,4 +46,18 @@ Internet of Things
 
 ## Related references
 - [MCW](https://github.com/Microsoft/MCW)
+
+## Help & Support
+
+We welcome feedback and comments from Microsoft SMEs & learning partners who deliver MCWs.  
+
+***Having trouble?***
+- First, verify you have followed all written lab instructions (including the Before the Hands-on lab document).
+- Next, submit an issue with a detailed description of the problem.
+- Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.  
+
+If you are planning to present a workshop, *review and test the materials early*! We recommend at least two weeks prior.
+
+### Please allow 5 - 10 business days for review and resolution of issues.
+
 
