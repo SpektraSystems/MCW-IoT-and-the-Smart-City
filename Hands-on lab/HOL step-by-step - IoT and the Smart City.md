@@ -2220,9 +2220,13 @@ So far we have seen the near real time analysis of data coming in from our Bus E
 5. Create the input as follows:
 
    a. **Input Alias**: ColdStorage
+   
    b. Select the **Select Blob storage from your subscriptions** option.
+   
    c. **Storage Account**: select the storage account that shares the same suffix as your IoT Hub.
+   
    d. **Container**, select to **Use existing** and choose the **telemetrysink** container.
+   
    e. Press **Save**.
 
 ### Task 4: Add an output to Stream Analytics to forward data to an Event Hub  
@@ -2234,10 +2238,15 @@ So far we have seen the near real time analysis of data coming in from our Bus E
 2. Create the output as follows:
 
     a. **Output Alias**: ColdDataHub
+    
     b. Choose the **Select Event Hub from your subscription** item.
+    
     c. **Subscription**: Select the appropriate subscription.
+    
     d. **Event Hub Namespace**: Select the event hub namespace that shares the same suffix as your IoT Hub.
+    
     e. **Event Hub name**: Select **Use existing**, then select **colddatahub**.
+    
     f. Press **Save**.
 
     ![The Event Output Form is displayed populated with the previous values.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image259.png 'Event Output Form')
@@ -2316,13 +2325,20 @@ Before you can access the Time Series Insights environment and make changes, you
 2. Define the input source as follows:
 
    a. **Event source name**: ColdData
+   
    b. **Source**: Event Hub
+   
    c. **Import option**: Use Event Hub from available subscriptions
+   
    d. **Subscription**: Select the appropriate subscription
+   
    e. **Event Hub namespace**: Select the event hub namespace with the same suffix as your IoT Hub
+   
    f. **Event Hub name**: Select **colddatahub**
+   
    g. **Timestamp property name**: timestamp
-   h. Press **Save**
+   
+   h. Press **Save**.
 
 >**Note**: The timestamp property is part of the telemetry data, this tells Time Series Insights how to ensure the data is arranged in the appropriate date/time order.
 
