@@ -101,7 +101,7 @@ In this exercise, you will set up your environment you will use for the rest of 
 
 In this task you will perform a deployment of a the VM that will be used during this lab.
 
-1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/microsoft/MCW-IoT-and-the-Smart-City/Hands-on lab/Lab-files/LabVM>. 
+1.  Open a new private or incognito tab in your web browser, and then connect to <https://github.com/microsoft/MCW-IoT-and-the-Smart-City/Hands-on lab/Lab-files/LABVM>. 
 
 2.  Press the **Deploy to Azure** button. 
 
