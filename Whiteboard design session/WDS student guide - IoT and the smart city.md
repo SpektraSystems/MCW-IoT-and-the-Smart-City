@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 IoT and the Smart City
@@ -9,7 +9,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-June 2019
+October 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -44,7 +44,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-This whiteboard design session is designed to help you gain a better understanding of implementing architectures that use IoT data in new and innovative ways. You will design an IoT workflow that begins with a local IoT edge device that collects and analyzes data from various sensors that are connected to it, and intelligently aggregates and sends that data to the cloud when anomalies are detected. Once the data is uploaded, it is sent to a time-series database for rapid analysis alongside other classes of IoT data to spot and act on correlated information in real-time. You will also configure alerts when certain thresholds are exceeded and configure a custom-built application that manages and sends control messages to IoT devices located within the city limits.
+This whiteboard design session is designed to help you gain a better understanding of implementing architectures that use IoT data in new and innovative ways. You will design an IoT workflow that begins with a local IoT edge device that collects and analyzes data from various sensors that are connected to it, and intelligently aggregates and sends that data to the cloud when anomalies are detected. Once the data is uploaded, it is sent to a time-series database for rapid analysis alongside other classes of IoT data to spot and act on correlated information in real-time. You will also configure alerts when certain thresholds are exceeded and configure a remote monitoring accelerator solution that manages and sends control messages to IoT devices located within the city limits.
 
 At the end of this whiteboard design session, you will be better able to design an end-to-end IoT solution that processes and analyzes data both in the field and in the cloud.
 
@@ -66,21 +66,21 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 #### Customer situation
 
-New York City council has conducted a six-month study of new and emerging technologies that can improve the lives of its citizens. Being the largest city in the US, the challenges most cities face are compounded by scale. Many of these challenges revolve around city traffic and public transportation.
+Fabrikam City council has conducted a six-month study of new and emerging technologies that can improve the lives of its citizens. Being the largest city in the US, the challenges most cities face are compounded by scale. Many of these challenges revolve around city traffic and public transportation.
 
-At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. NYC can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
+At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
-They realize that IoT offers cities revolutionary ways to gather this vital data. Analyzing this information to understand how a city operates will improve response times for everyday purposes and acute emergencies. This wave of change will enable innovation, new services, and cost savings. However, if NYC is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
+They realize that IoT offers cities revolutionary ways to gather this vital data. Analyzing this information to understand how a city operates will improve response times for everyday purposes and acute emergencies. This wave of change will enable innovation, new services, and cost savings. However, if Fabrikam City is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
 
-New York City buses are widely used throughout the many boroughs, such as Manhattan, Brooklyn, and the Bronx. It would make sense to somehow attach IoT devices to those buses to perform a number of functions such as preventive maintenance and tracking driver performance. It would be great if only the most important information is sent off over the internet instead of constantly sending a lot of data over expensive cellular connectivity. The most important information could be described as anomalies, like impending mechanical breakdowns or reckless driving. The buses will periodically send their location information that can be used to track their progress on their route. All of the information can be uploaded once the bus arrives at its home station where it has Wi-Fi connectivity. The full data could then be used for accounting and analysis of the data collected throughout the day.
+Fabrikam City buses are widely used throughout the many boroughs, such as Northwind, Contoso, and the Tailwind. It would make sense to somehow attach IoT devices to those buses to perform a number of functions such as preventive maintenance and tracking driver performance. It would be great if only the most important information is sent off over the internet instead of constantly sending a lot of data over expensive cellular connectivity. The most important information could be described as anomalies, like impending mechanical breakdowns or reckless driving. The buses will periodically send their location information that can be used to track their progress on their route. All of the information can be uploaded once the bus arrives at its home station where it has Wi-Fi connectivity. The full data could then be used for accounting and analysis of the data collected throughout the day.
 
 Because these buses are so prevalent on all the major roads, they should be able to act as traffic bellwethers, using that information along with their location to inform the timing of traffic lights. These traffic lights contain control boxes that can be remotely controlled.
 
-NYC city council would also like to increase the intelligence of the traffic lights and reduce physical inspections by adding IoT devices with sensors that can detect maintenance and performance issues, such as when a bulb is out, if the light sequence is stuck in a continuous cycle loop outside of normal parameters, voltage irregularities, etc. Unlike the city buses, these traffic lights are always connected to the internet and can send and receive command and control information as often as needed.
+Fabrikam city council would also like to increase the intelligence of the traffic lights and reduce physical inspections by adding IoT devices with sensors that can detect maintenance and performance issues, such as when a bulb is out, if the light sequence is stuck in a continuous cycle loop outside of normal parameters, voltage irregularities, etc. Unlike the city buses, these traffic lights are always connected to the internet and can send and receive command and control information as often as needed.
 
 Relecloud has been contracted to build a cloud-based architecture based on these requirements. They have researched IoT-related service offerings from various cloud providers and are interested in recent capabilities added to Azure for storing and evaluating time series data, as well as building IoT devices that run on the edge for localized data transformation and processing.
 
-"While bidding for the NYC smart city contract, we made it a primary goal from the start to build a solution that can easily be taken over by the city's IT department," says Rodrigo Romani, CTO of Relecloud. "Localizing telemetry captured on buses, that can be evaluated on the fly, while at the same time controlling the flow of data over a slow or unreliable internet connection seems like a tall order. We need a solution that is repeatable for fleets of buses entering or leaving service and is manageable in a way that makes it easy to send out targeted updates to groups of buses at a time."
+"While bidding for the Fabrikam smart city contract, we made it a primary goal from the start to build a solution that can easily be taken over by the city's IT department," says Rodrigo Romani, CTO of Relecloud. "Localizing telemetry captured on buses, that can be evaluated on the fly, while at the same time controlling the flow of data over a slow or unreliable internet connection seems like a tall order. We need a solution that is repeatable for fleets of buses entering or leaving service and is manageable in a way that makes it easy to send out targeted updates to groups of buses at a time."
 
 Following this same mandate of ease of use and future flexibility without overtaxing an already busy city IT department, Relecloud is seeking options for capturing and displaying time series data that allows the end user to easily combine all of the data in any number of ways, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added. Additionally, this data needs to be accessible by an external web application for managing alerts and device management and must be able to display the raw data within a given timeframe, without pre-aggregation, at scale.
 
@@ -102,7 +102,7 @@ Following this same mandate of ease of use and future flexibility without overta
 
 8.  Easily combine all of the time series data in a single pane of view, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added.
 
-9.  Have a custom web application to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
+9.  Have a web portal to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
 
 ### Customer objections
 
@@ -114,7 +114,7 @@ Following this same mandate of ease of use and future flexibility without overta
 
 ### Infographic for common scenarios
 
-![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessionstudentguide-IoTforbusinessimages/media/image2.png 'Common Scenario for IoT')
+![A Common Scenario of Internet of Things flowchart is split between Azure and On-Premises. At a high level, Azure steps are: Ingest, Stream Processing, Batch Storage, Speed Serving, Batch Processing, Batch View Serving, and Analytics Clients.](images/Whiteboarddesignsessionstudentguide-IoTandtheSmartCityimages/media/image2.png 'Common Scenario for IoT')
 
 ## Step 2: Design a proof of concept solution
 
@@ -138,7 +138,7 @@ Directions: With all participants at your table, respond to the following questi
 
 _High-level architecture_
 
-1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the bus and traffic light IoT devices, data ingestion, storage, and visualization.
+1.  Without getting into the details (the following sections will address the particular details), diagram your initial vision for handling the top-level requirements for the IoT Smart City.
 
 _IoT Devices_
 
