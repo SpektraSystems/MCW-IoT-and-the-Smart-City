@@ -32,9 +32,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Solution architecture](#solution-architecture)
   - [Requirements](#requirements)
   - [Exercise 1: Set up the IoT Remote Monitoring solution environment](#exercise-1-set-up-the-iot-remote-monitoring-solution-environment)
+    - [Help references](#help-references)
     - [Task 1: Provision the Remote Monitoring Solution](#task-1-provision-the-remote-monitoring-solution)
     - [Task 2: Stop running device simulation in the Remote Monitoring Solution](#task-2-stop-running-device-simulation-in-the-remote-monitoring-solution)
   - [Exercise 2: Provision additional Azure services](#exercise-2-provision-additional-azure-services)
+    - [Help references](#help-references-1)
     - [Task 1: Create Service Bus queue](#task-1-create-service-bus-queue)
     - [Task 2: Create the Critical Alerts container in Cosmos Db](#task-2-create-the-critical-alerts-container-in-cosmos-db)
     - [Task 3: Review the consumer groups in the IoT Hub](#task-3-review-the-consumer-groups-in-the-iot-hub)
@@ -44,6 +46,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 7: Create storage account containers required for the lab](#task-7-create-storage-account-containers-required-for-the-lab)
     - [Task 8: Retrieve Secrets from the Key Vault](#task-8-retrieve-secrets-from-the-key-vault)
   - [Exercise 3: Create bus and traffic light simulated devices, and add alerts and filters](#exercise-3-create-bus-and-traffic-light-simulated-devices-and-add-alerts-and-filters)
+    - [Help references](#help-references-2)
     - [Task 1: Configure the Device Simulation projects to run locally](#task-1-configure-the-device-simulation-projects-to-run-locally)
     - [Task 2: Finish configuring the simulated IoT device models and scripts](#task-2-finish-configuring-the-simulated-iot-device-models-and-scripts)
     - [Task 3: Explore the remaining files to understand what is happening](#task-3-explore-the-remaining-files-to-understand-what-is-happening)
@@ -52,6 +55,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 6: Create alerts and filters in the monitoring web app](#task-6-create-alerts-and-filters-in-the-monitoring-web-app)
     - [Task 7: Send jobs to IoT devices](#task-7-send-jobs-to-iot-devices)
   - [Exercise 4: Create IoT Edge device and custom modules](#exercise-4-create-iot-edge-device-and-custom-modules)
+    - [Help references](#help-references-3)
     - [Task 1: Add a new IoT Edge device](#task-1-add-a-new-iot-edge-device)
     - [Task 2: Provision new Linux virtual machine to run as the IoT Edge device](#task-2-provision-new-linux-virtual-machine-to-run-as-the-iot-edge-device)
     - [Task 3: Create and upload the custom C\# IoT Edge module for vehicle telemetry](#task-3-create-and-upload-the-custom-c-iot-edge-module-for-vehicle-telemetry)
@@ -61,9 +65,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Create a new Function App](#task-1-create-a-new-function-app)
     - [Task 2: Add new Function to process messages received by the IoT Hub](#task-2-add-new-function-to-process-messages-received-by-the-iot-hub)
   - [Exercise 6: Run a console app to view critical engine alerts from the Service Bus Queue](#exercise-6-run-a-console-app-to-view-critical-engine-alerts-from-the-service-bus-queue)
+    - [Help references](#help-references-4)
     - [Task 1: Retrieve the Service Bus Queue Connection string](#task-1-retrieve-the-service-bus-queue-connection-string)
     - [Task 2: Configure and execute the ReadEngineAlerts solution in Visual Studio 2019](#task-2-configure-and-execute-the-readenginealerts-solution-in-visual-studio-2019)
   - [Exercise 7: Create an Azure Function to ingest critical engine alerts and store them in Cosmos DB](#exercise-7-create-an-azure-function-to-ingest-critical-engine-alerts-and-store-them-in-cosmos-db)
+    - [Help references](#help-references-5)
     - [Task 1: Create a new Function](#task-1-create-a-new-function)
     - [Task 2: Add an Azure Cosmos DB output to the critical-alerts collection](#task-2-add-an-azure-cosmos-db-output-to-the-critical-alerts-collection)
     - [Task 3: Modify the function code](#task-3-modify-the-function-code)
@@ -82,6 +88,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Add an output to Stream Analytics to forward data to an Event Hub](#task-4-add-an-output-to-stream-analytics-to-forward-data-to-an-event-hub)
     - [Task 5: Modify the Stream Analytics Query to send data from storage to the event hub](#task-5-modify-the-stream-analytics-query-to-send-data-from-storage-to-the-event-hub)
   - [Exercise 11: View all data in Azure Time Series Insights](#exercise-11-view-all-data-in-azure-time-series-insights)
+    - [Help references](#help-references-6)
     - [Task 1: Add your account as a Contributor to the Data Access Policies](#task-1-add-your-account-as-a-contributor-to-the-data-access-policies)
     - [Task 2: Add the cold data event hub as an event source into Time Series Insights](#task-2-add-the-cold-data-event-hub-as-an-event-source-into-time-series-insights)
     - [Task 3: Go to the Time Series Insights environment and use the data explorer](#task-3-go-to-the-time-series-insights-environment-and-use-the-data-explorer)
@@ -1559,7 +1566,7 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
 25. Select **Test query** in the toolbar above the query.
 
-    ![In the Query blade, the Test query button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image105.png 'Query blade', 'Test the analytics query with the sample data')
+    ![In the Query blade, the Test query button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image105.png 'Test the analytics query with the sample data')
 
 26. At a quick glance, the Alert output should have 85 rows.
 
