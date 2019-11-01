@@ -6,11 +6,13 @@ At the conclusion of their study, the city council realized that the Internet of
 
 October 2019
 
+June 2019
+
 ## Target audience
 - Application developer
 - Data engineer
 
-## Abstract
+## Abstracts
 
 ### Workshop
 
@@ -54,10 +56,9 @@ We welcome feedback and comments from Microsoft SMEs & learning partners who del
 ***Having trouble?***
 - First, verify you have followed all written lab instructions (including the Before the Hands-on lab document).
 - Next, submit an issue with a detailed description of the problem.
-- Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.  
+- Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.    
 
 If you are planning to present a workshop, *review and test the materials early*! We recommend at least two weeks prior.
 
 ### Please allow 5 - 10 business days for review and resolution of issues.
-
 
