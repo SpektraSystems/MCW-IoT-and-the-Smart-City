@@ -6,8 +6,6 @@ At the conclusion of their study, the city council realized that the Internet of
 
 October 2019
 
-June 2019
-
 ## Target audience
 - Application developer
 - Data engineer
