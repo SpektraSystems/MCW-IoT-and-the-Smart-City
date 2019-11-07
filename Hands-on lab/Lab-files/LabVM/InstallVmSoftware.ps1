@@ -34,7 +34,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; & 'C:\Program Files\Microsoft 
 Add-LocalGroupMember -Member demouser -Group docker-users
 
 #Bring down Desktop Shortcuts
-$zipDownload = "https://github.com/codingbandit/MCW-IoT-and-the-Smart-City/blob/feature/september-2019-update/Hands-on%20lab/Lab-files/LabVM/shortcuts.zip?raw=true"
+$zipDownload = "https://github.com/microsoft/MCW-IoT-and-the-Smart-City/blob/master/Hands-on%20lab/Lab-files/LabVM/shortcuts.zip?raw=true"
 $downloadedFile = "D:\shortcuts.zip"
 $vmFolder = "C:\Users\Public\Desktop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
