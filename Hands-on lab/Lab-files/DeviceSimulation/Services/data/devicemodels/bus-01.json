@@ -42,7 +42,7 @@
 
       "MessageSchema": {
         "Name": "bus-sensors;v1",
-        "Format": "JSON"
+        "Format": "JSON",
         /*
         "Fields": {
           "latitude": "double",
