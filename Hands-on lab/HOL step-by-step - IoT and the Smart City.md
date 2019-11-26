@@ -551,7 +551,7 @@ In this task, you will open the device-simulation solution in Visual Studio 2019
 
 3. Right-click on the **WebService** project, and select the **Set as StartUp Project** option.
 
-   ![The Web Service context menu is displayed with the Set as StartUp Project option selected.](/images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image264.png)
+   ![The Web Service context menu is displayed with the Set as StartUp Project option selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image264.png)
 
 4. In the Visual Studio toolbar, ensure the start up item is the WebService project.
 
