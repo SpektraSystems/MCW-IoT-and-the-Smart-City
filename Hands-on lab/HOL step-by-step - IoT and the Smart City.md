@@ -549,7 +549,15 @@ In this task, you will open the device-simulation solution in Visual Studio 2019
 
     ![File Explorer displays with the previous path and the device-simulation.sln file called out.](media/device-simulation-folder-explorer.png 'File Explorer')
 
-3. Right-click on the **WebService** project and select **Properties** from the left-hand menu. In the Environment variables section, populate the values for the following Environment Variables (the others can remain empty or with their default values):
+3. Right-click on the **WebService** project, and select the **Set as StartUp Project** option.
+
+   ![The Web Service context menu is displayed with the Set as StartUp Project option selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image264.png)
+
+4. In the Visual Studio toolbar, ensure the start up item is the WebService project.
+
+    ![The Visual Studio Taskbar is displayed, the start up item drop down list is expanded with the WebService item selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image265.png)
+
+5. Right-click on the **WebService** project and select **Properties** from the left-hand menu. In the Environment variables section, populate the values for the following Environment Variables (the others can remain empty or with their default values):
 
     | Environment Variable                      | Value                                 |
     |-------------------------------------------|---------------------------------------|
@@ -560,7 +568,7 @@ In this task, you will open the device-simulation solution in Visual Studio 2019
 
     ![On the WebService project properties, Debug tab is selected, and in the Environment variables section, the previous values are populated in the form](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image187.png 'WebService project debug properties')
 
-4. Save your changes to the file.
+6. Save your changes to the file.
 
 ### Task 2: Finish configuring the simulated IoT device models and scripts
 
@@ -794,11 +802,19 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
     ![File Explorer is open to the the previously defined path, and the storage-adapter.sln file is selected.](media/storage-adapter-file-explorer.png 'File Explorer')
 
-3. Right-click the **WebService** project in the Solution Explorer, then select **Properties**.
+3. Right-click on the **WebService** project, and select the **Set as StartUp Project** option.
+
+   ![The Web Service context menu is displayed with the Set as StartUp Project option selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image264.png)
+
+4. In the Visual Studio toolbar, ensure the start up item is the WebService project.
+
+    ![The Visual Studio Taskbar is displayed, the start up item drop down list is expanded with the WebService item selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image265.png)
+
+5. Right-click the **WebService** project in the Solution Explorer, then select **Properties**.
 
     ![In Solution Explorer, WebService is selected, and on its right-click menu, Properties is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image53.png 'Solution Explorer')
 
-4. Select **Debug** from the left-hand menu. In the Environment variables section, populate the following variables:
+6. Select **Debug** from the left-hand menu. In the Environment variables section, populate the following variables:
 
     | Environment Variable         | Value                                 |
     |------------------------------|---------------------------------------|
@@ -807,17 +823,21 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
     | documentDBConnectionString   | *your Cosmos DB Connection String*    |
     | PCS_AAD_APPSECRET            | *the value for aadAppSecret from the Key Vault*     |
 
-5. Save your changes to the file.
+7. Save your changes to the file.
 
-6. Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
+8. Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
 
     ![In Solution Explorer, WebService is selected, and from its right-click menu, Debug, and then Start new instance are selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image57.png 'Solution Explorer')
 
-7. The web service should launch in a new browser window at the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is alive and well.
+9. Starting the project will bring up a console window indicating the service is now listening on port 9022.
+
+    ![A console window is displayed indicating the application is now listening for HTTP requests on port 9022](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image266.png)
+
+10. Open a new browser window and go to the following path: <http://localhost:9022/v1/status>. You should also see a status response on the page showing the service is alive and well.
 
     ![The status response of "Alive and well" is highlighted in the Web service window.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image58.png 'Web service window')
 
-8. Leave the project running in debug mode.
+11. Leave the project running in debug mode.
 
 ### Task 5: Run the Simulator web service and create a new simulation
 
