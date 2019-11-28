@@ -220,8 +220,9 @@ namespace Microsoft.Azure.IoTSolutions.DeviceSimulation.Services.Runtime
                 // Remove placeholders
                 value = keys.Aggregate(value, (current, k) => current.Replace("${?" + k + "}", string.Empty));
 
-                var varsNotFound = keys.Aggregate(", ", (current, k) => current + k);
-                this.log.Warn("Environment variables not found", () => new { varsNotFound });
+                //suppress optional placeholder environment variable missing messages.
+                //var varsNotFound = keys.Aggregate(", ", (current, k) => current + k);
+                //this.log.Warn("Environment variables not found", () => new { varsNotFound });
 
                 notFound = true;
             }
