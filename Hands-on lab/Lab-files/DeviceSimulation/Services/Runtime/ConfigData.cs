@@ -145,7 +145,8 @@ namespace Microsoft.Azure.IoTSolutions.DeviceSimulation.Services.Runtime
             this.ReplaceEnvironmentVariables(ref value, defaultValue);
 
             if (value != notFound) return value;
-            this.log.Info("Configuration setting not found, using default value", () => new { key, defaultValue });
+            //suppress using default value messages
+            //this.log.Info("Configuration setting not found, using default value", () => new { key, defaultValue });
             return defaultValue;
         }
 
