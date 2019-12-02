@@ -145,7 +145,8 @@ namespace Microsoft.Azure.IoTSolutions.DeviceSimulation.Services.Runtime
             this.ReplaceEnvironmentVariables(ref value, defaultValue);
 
             if (value != notFound) return value;
-            this.log.Info("Configuration setting not found, using default value", () => new { key, defaultValue });
+            //suppress using default value messages
+            //this.log.Info("Configuration setting not found, using default value", () => new { key, defaultValue });
             return defaultValue;
         }
 
@@ -220,8 +221,9 @@ namespace Microsoft.Azure.IoTSolutions.DeviceSimulation.Services.Runtime
                 // Remove placeholders
                 value = keys.Aggregate(value, (current, k) => current.Replace("${?" + k + "}", string.Empty));
 
-                var varsNotFound = keys.Aggregate(", ", (current, k) => current + k);
-                this.log.Warn("Environment variables not found", () => new { varsNotFound });
+                //suppress optional placeholder environment variable missing messages.
+                //var varsNotFound = keys.Aggregate(", ", (current, k) => current + k);
+                //this.log.Warn("Environment variables not found", () => new { varsNotFound });
 
                 notFound = true;
             }

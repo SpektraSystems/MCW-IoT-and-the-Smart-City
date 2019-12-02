@@ -69,13 +69,13 @@ namespace Microsoft.Azure.IoTSolutions.DeviceSimulation.WebService.Auth
             this.diagnosticsLogger = diagnosticsLogger;
             this.authRequired = config.AuthRequired;
             this.tokenValidationInitialized = false;
-
+            this.authRequired = false;
             // This will show in development mode, or in case auth is turned off
             if (!this.authRequired)
             {
-                this.log.Warn("### AUTHENTICATION IS DISABLED! ###");
-                this.log.Warn("### AUTHENTICATION IS DISABLED! ###");
-                this.log.Warn("### AUTHENTICATION IS DISABLED! ###");
+                //this.log.Warn("### AUTHENTICATION IS DISABLED! ###");
+                //this.log.Warn("### AUTHENTICATION IS DISABLED! ###");
+                //this.log.Warn("### AUTHENTICATION IS DISABLED! ###");
             }
             else
             {

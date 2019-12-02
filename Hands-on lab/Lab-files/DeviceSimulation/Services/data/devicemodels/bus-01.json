@@ -4,7 +4,7 @@
   "Version": "0.0.1",
   "Name": "Bus",
   "Description": "Bus with GPS, speed, and fuel-level sensors",
-  "Protocol": "AMQP",
+  "Protocol": "MQTT",
   "Simulation": {
     /*
     "InitialState": {
