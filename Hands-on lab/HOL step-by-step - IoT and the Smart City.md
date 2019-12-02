@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-October 2019
+December 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -1405,15 +1405,19 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
     docker login -u <username>    -p <password>    <Login server>
     ```
 
-10. To build the project and Push it to the IoT Edge Module Image, right-click the **module.json** file in the Explorer and select **Build and Push IoT edge Module Image**.
+10. To build the project, right-click the **module.json** file in the Explorer and select **Build IoT Edge Module Image**.
+
+    ![The module.json file is right-clicked and the Build IoT Edge Module Image item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image267.png 'Build IoT Edge module')
+
+11. To push the image to the Azure Container Registry, right-click the **module.json** file and select **Build and Push IoT Edge Module Image**.
 
     ![The module.json file is right-clicked and the Build and Push IoT Edge Module Image item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image89.png 'Build and push IoT Edge module')
 
-11. select **amd64** as the platform of choice. This will create a Linux-based Docker image.
+12. select **amd64** as the platform of choice. This will create a Linux-based Docker image.
 
     ![amd64 is selected as the platform.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image91.png 'Select Platform')
 
-12. Watch the VS Code terminal window. You should see a success status when the build is complete. **Take note of the tag applied to your vehicle-telemetry-simulator image**. You will need to use this tag when you add the module to your IoT Edge device via the portal later on.
+13. Watch the VS Code terminal window. You should see a success status when the build is complete. **Take note of the tag applied to your vehicle-telemetry-simulator image**. You will need to use this tag when you add the module to your IoT Edge device via the portal later on.
 
     ![In a terminal window, next to "Successfully tagged," the tag is value is highlighted.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image92.png 'VS Code terminal window showing a successful build')
 
@@ -1423,17 +1427,13 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
 1. Navigate to the Azure Portal, <http://portal.azure.com>.
 
-2. Browse to your solution's resource group and locate the provisioned Azure Storage account whose name begins with "storage".
-
-    ![In the Azure Portal, under Name, the storage account is selected.](media/resource-group-storage-account.png 'Storage account resource')
-
-3. Select **+ Create a resource**, then type **stream analytics** into the search box on top. Select **Stream Analytics job** from the results.
+2. Select **+ Create a resource**, then type **stream analytics** into the search box on top. Select **Stream Analytics job** from the results.
 
     ![The search field in the Azure Portal is set to stream analytics.Stream Analytics job item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image96.png 'Add stream analytics job')
 
-4. Select the **Create** button on the Stream Analytics job overview blade.
+3. Select the **Create** button on the Stream Analytics job overview blade.
 
-5. On the Create namespace blade, specify the following configuration options:
+4. On the New Stream Analytics job blade, specify the following configuration options:
 
     a. **Name**: Unique value for the Job name (ensure the green check mark appears).
 
@@ -1445,13 +1445,13 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ![In the New Stream Analytics job form fields are set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image97.png 'New Stream Analytics job blade')
 
-6. Select **Create**.
+5. Select **Create**.
 
-7. In the created job, under **Job Topology**, select **Inputs**, and then select **+ Add stream input**, then select **Edge Hub**.
+6. In the created job, under **Job Topology**, select **Inputs**, and then select **+ Add stream input**, then select **Edge Hub**.
 
     ![The Add stream input button is highlighted, then the Edge Hub item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image98.png 'Inputs blade')
 
-8. Provide the following configuration in the New input blade:
+7. Provide the following configuration in the New input blade:
 
     a. **Input alias**: VehicleTelemetry
 
@@ -1463,11 +1463,11 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ![The input form is displayed with the previous values populated.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image99.png 'Edge Hub new input')
 
-9. Select **Save**.
+8. Select **Save**.
 
-10. Under **Job Topology**, select **Outputs**, and then select **+ Add**, then select **Edge Hub**.
+9. Under **Job Topology**, select **Outputs**, and then select **+ Add**, then select **Edge Hub**.
 
-11. Provide the following configuration in the New output blade:
+10. Provide the following configuration in the New output blade:
 
     a. **Input alias**: Alert
 
@@ -1475,13 +1475,13 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     c. **Encoding**: UTF-8
 
-    ![The new output form is displayed populated with the previous values.]](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image100.png 'Edge Hub new output')
+    ![The new output form is displayed populated with the previous values.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image100.png 'Edge Hub new output')
 
-12. Select **Save**.
+11. Select **Save**.
 
-13. Select **+ Add** under **Outputs** to create a new output that will trigger the route you created in IoT Hub earlier, that sends events filtered on the EngineAlert output, to the custom endpoint and on to the Service Bus Queue.
+12. Select **+ Add** under **Outputs** to create a new output that will trigger the route you created in IoT Hub earlier, that sends events filtered on the EngineAlert output, to the custom endpoint and on to the Service Bus Queue.
 
-14. Provide the following configuration in the New output blade:
+13. Provide the following configuration in the New output blade:
 
     a. **Input alias**: EngineAlert
 
@@ -1491,13 +1491,13 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ![Enter EngineAlert for the Output alias.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image101.png 'Edge Hub new output')
 
-15. Select **Save**.
+14. Select **Save**.
   
-16. From the left-hand Stream Analytics menu, select the **Query** item from the Job Topology section. You will see the input and three outputs that you created. Select **Edit query** to the right of the displayed Query container.
+15. From the left-hand Stream Analytics menu, select the **Query** item from the Job Topology section. You will see the input and three outputs that you created. Select **Edit query** to the right of the displayed Query container.
 
     ![The Query menu item is selected from the left hand menu. The Edit query button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image102.png 'Stream Analytics overview blade')
 
-17. Create a step that averages the engine temperature and speed over a two second duration. Create another step that selects all telemetry data, including the average values from the previous step, and specifies the following anomalies as new fields:
+16. Create a step that averages the engine temperature and speed over a two second duration. Create another step that selects all telemetry data, including the average values from the previous step, and specifies the following anomalies as new fields:
 
     a. **enginetempanomaly**: When the average engine temperature is \>= 405 or \<= 15.
 
@@ -1505,13 +1505,13 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     c. **aggressivedriving**: When the transmission gear position is in first, second, or third, and the brake pedal status is 1, the accelerator pedal position \>= 90, and the average speed is \>= 55.
 
-18. Have the query output all fields from the anomalies step into the Alert output where aggressivedriving = 1 or enginetempanomaly = 1.
+17. Have the query output all fields from the anomalies step into the Alert output where aggressivedriving = 1 or enginetempanomaly = 1.
 
-19. Have the query output all fields from the anomalies step where the enginetempanomaly = 1 and oilanomaly = 1.
+18. Have the query output all fields from the anomalies step where the enginetempanomaly = 1 and oilanomaly = 1.
 
-20. Have the query output all fields from all the data into a "sink" that records all data.
+19. Have the query output all fields from all the data into a "sink" that records all data.
 
-21. Here is the completed query:
+20. Here is the completed query:
 
     ```sql
     WITH
@@ -1574,25 +1574,25 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ```
 
-22. To test the query with sample data, press the **Upload sample input** button in the bottom pane.
+21. To test the query with sample data, press the **Upload sample input** button in the bottom pane.
 
     ![The edit query form is displayed, beneath the query textbox, the Upload sample input button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image103.png 'Upload sample input')
 
-23. Use the browse button to select the **sample-vehicle-telemetry.json** file extracted to the Lab-files folder from the starter solution zip file you downloaded. This file contains 1000 JSON records of simulated vehicle telemetry.
+22. Use the browse button to select the **sample-vehicle-telemetry.json** file extracted to the Lab-files folder from the starter solution zip file you downloaded. This file contains 1000 JSON records of simulated vehicle telemetry.
 
     ![In the Upload input data blade, the browse button is highlighted and the sample-vehicle-telemetry.json file is displayed in the textbox.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image104.png 'Select sample input file')
 
-24. Select **OK**.
+23. Select **OK**.
 
-25. Select **Test query** in the toolbar above the query.
+24. Select **Test query** in the toolbar above the query.
 
     ![In the Query blade, the Test query button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image105.png 'Test the analytics query with the sample data')
 
-26. At a quick glance, the Alert output should have 85 rows.
+25. At a quick glance, the Alert output should have 85 rows.
 
     ![In the Results section a list of data is displayed, at the top of the list it shows a label indicating it is showing 85 rows form alert.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image106.png 'Test Results section')
 
-27. **Save** the query.
+26. **Save** the query.
 
 ### Task 5: Deploy custom modules to IoT Edge device
 
@@ -1830,7 +1830,7 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
 7. This function will be responsible for analyzing instant measurements of engine oil and engine temperature. The threshold for engine oil is to flag any values less than 20, and any engine temperatures greater than 400. Readings that are flagged are to be put into the Service bus **alert-q** that we created earlier in this lab.
 
-8. In order to moved flagged messages to the queue, we must declare a Service Bus output for our function. Beneath our function, press the **Integrate** button.
+8. In order to move flagged messages to the queue, we must declare a Service Bus output for our function. Beneath our function, press the **Integrate** button.
 
    ![The Function app is expanded with the Integrate item selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image223.png 'Azure Function Integrate')
 
@@ -2365,7 +2365,7 @@ Before you can access the Time Series Insights environment and make changes, you
    
    g. **Timestamp property name**: timestamp
    
-   h. Press **Save**.
+   h. Press **Create**.
 
 >**Note**: The timestamp property is part of the telemetry data, this tells Time Series Insights how to ensure the data is arranged in the appropriate date/time order.
 

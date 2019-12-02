@@ -141,7 +141,7 @@ you can set the value directly in the file.
 Depending on the OS and the IDE used, there are several ways to manage environment variables.
 
 1. If you're using Visual Studio or Visual Studio for Mac, the environment
-   variables are loaded from the project settings. Right click on WebService,
+   variables are loaded from the project settings. Right-click on WebService,
    and select Options/Properties, and find the section with the list of env
    vars. See [WebService/Properties/launchSettings.json](WebService/Properties/launchSettings.json).
 1. Visual Studio Code loads the environment variables from

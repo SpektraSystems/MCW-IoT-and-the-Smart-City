@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-October 2019
+December 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -121,7 +121,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
 1.  Once the Deployment completes, you can locate your VM in the **IoTSmartCity** Resource group. Open the **LABVM** and select **Connect**.
 
-    ![Click the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
+    ![Press the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 
 2.  Login to the LABVM using the following credentials:
 
@@ -139,7 +139,7 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Select No when asked whether you want to allow your PC to be discoverable by other PCs and devices on this network.](images/Setup/image10.png 'Network pop-up')
 
-5.  Once logged in - Docker Desktop will need to be started. Double-click the *Docker Desktop* icon to start the program. This will take a couple of minutes. You can click in the taskbar to ensure that is reads "Docker is Starting".
+5.  Once logged in - Docker Desktop will need to be started. Double-click the *Docker Desktop* icon to start the program. This will take a couple of minutes. You can see the status by pressing the Docker icon in the taskbar to ensure that is reads "Docker is Starting".
 
     ![Double-Click the Docker Desktop icon to start the program.](images/Setup/docker-icon.png)
     
