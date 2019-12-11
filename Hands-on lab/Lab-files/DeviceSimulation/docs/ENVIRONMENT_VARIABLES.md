@@ -81,7 +81,7 @@ In MacOS you can also use `launchctl setenv`.
 ### Environment variables when using Visual Studio
 
 Global variables still apply, however it's possible to store environment
-variables in the the startup project settings.
+variables in the startup project settings.
 
 Right-click on the WebService project, select Properties. Environment
 variables can be set in `Debug` section.
