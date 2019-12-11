@@ -4,7 +4,7 @@
 
 Storage Adapter Overview
 ========================
-This service allows management of of key-values, abstracting the storage service semantic and presenting a simple interface to store data of any format using [Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/).
+This service allows management of key-values, abstracting the storage service semantic and presenting a simple interface to store data of any format using [Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/).
 
 Values are organized in collections, it is possible to work on individual values and to fetch entire collections. Complex data structures are serialized by the clients and managed as simple text payload.
 
@@ -43,7 +43,7 @@ are configured. See the [Configuration and Environment variables](#configuration
     a. If you already have Visual Studio installed, then ensure you have [.NET Core Tools for Visual Studio 2017](https://www.microsoft.com/net/core#windowsvs2017) installed.
 1. Create your [Azure Cosmos DB account](https://ms.portal.azure.com/#create/Microsoft.DocumentDB) with API type **DocumentDB**
 1. Open the solution in Visual Studio or VS Code
-1. Define the following environment variables. See [Configuration and Environment variables](#configuration-and-environment-variables) for detailed information for setting these for your enviroment.
+1. Define the following environment variables. See [Configuration and Environment variables](#configuration-and-environment-variables) for detailed information for setting these for your environment.
     * `PCS_STORAGEADAPTER_DOCUMENTDB_CONNSTRING` = {your DocumentDB connection string}
 1. Start the WebService project (e.g. press F5)
 1. Using an HTTP client like [Postman](https://www.getpostman.com),
@@ -85,7 +85,7 @@ This microservice contains the following projects:
 * **WebService.csproj** - C# web service exposing REST interface for storage
 functionality
 * **WebService.Test.csproj** - Unit tests for web services functionality
-* **Services.csproj** - C# assembly containining business logic for interacting 
+* **Services.csproj** - C# assembly containing business logic for interacting 
 with Azure Cosmoze account with type DocumentDb
 * **Services.Test.csproj** - Unit tests for services functionality
 * **Solution/scripts** - contains build scripts, docker container creation scripts, 
@@ -141,7 +141,7 @@ you can set the value directly in the file.
 Depending on the OS and the IDE used, there are several ways to manage environment variables.
 
 1. If you're using Visual Studio or Visual Studio for Mac, the environment
-   variables are loaded from the project settings. Right click on WebService,
+   variables are loaded from the project settings. Right-click on WebService,
    and select Options/Properties, and find the section with the list of env
    vars. See [WebService/Properties/launchSettings.json](WebService/Properties/launchSettings.json).
 1. Visual Studio Code loads the environment variables from
@@ -159,7 +159,7 @@ Depending on the OS and the IDE used, there are several ways to manage environme
 
 Contributing to the solution
 ============================
-Please follow our [contribution guildelines](CONTRIBUTING.md).  We love PRs too.
+Please follow our [contribution guidelines](CONTRIBUTING.md).  We love PRs too.
 
 Troubleshooting
 ===============

@@ -62,7 +62,7 @@ in the different contexts.
 
 Environment variables can be set globally via the Control Panel. From the
 Start menu search "environment variables" and open the first result
-("Edit the system environment variables"). In the Advanced tab, click the
+("Edit the system environment variables"). In the Advanced tab, press the
 "Environment Variables" button to open the window where you can add/edit
 variables. 
 
@@ -81,9 +81,9 @@ In MacOS you can also use `launchctl setenv`.
 ### Environment variables when using Visual Studio
 
 Global variables still apply, however it's possible to store environment
-variables in the the startup project settings.
+variables in the startup project settings.
 
-Right click on the WebService project, select Properties. Environment
+Right-click on the WebService project, select Properties. Environment
 variables can be set in `Debug` section.
 
 These can be found also in the `WebService/Properties/launchSettings.json` file.
