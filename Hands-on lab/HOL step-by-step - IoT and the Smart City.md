@@ -200,7 +200,7 @@ In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft A
 
     ![A list of available Microsoft solution accelerators is displayed, the Remote Monitoring Solution is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image176.png 'Deploy the Remote Monitoring Solution')
 
-4. This will bring you to a description screen for the Remote Monitoring Accelerator. This screen provides details surrounding the benefits of the template, the documentation, github links, and the Azure Services that will be provisioned. Provisioning of these Azure Services is automated. Press the **Try Now** button to start the provisioning process.
+4. This will bring you to a description screen for the Remote Monitoring Accelerator. This screen provides details surrounding the benefits of the template, the documentation, GitHub links, and the Azure Services that will be provisioned. Provisioning of these Azure Services is automated. Press the **Try Now** button to start the provisioning process.
 
 5. The first step in provisioning the accelerator is to provide a deployment name. Enter **iot-remote-monitoring**, select the desired Azure subscription, for Deployment Options, select **C# Microservices**, then select the Azure Location nearest you. Finally, press the **Create** button.
 
@@ -332,7 +332,7 @@ In this task, you will provision a new Service Bus queue that will be used for r
 
     - **Container**: alarms
 
-      - **Description**: This is the container that holds all IoTHub messages that the remote monitoring solution receives
+      - **Description**: This is the container that holds all IoTHub messages that the remote monitoring solution receives.
 
 3. Select **New Container**.
 
@@ -488,7 +488,7 @@ Later in this lab, we will be making use of the Azure Key Vault. This vault is c
 
 4. At the bottom of the next screen, copy and store the secret value. We will be using this value later on in the lab.
 
-    ![A textbox is displayed beneath the Show Secret Value button, a copy button to the right of this textbox is selected](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image246.png 'Copy the secret value for aadAppId')
+    ![A textbox is displayed beneath the Show Secret Value button, a copy button to the right of this textbox is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image246.png 'Copy the secret value for aadAppId')
 
 5. Repeat steps 2-4 for the following key: **aadAppSecret**.
 
@@ -566,7 +566,7 @@ In this task, you will open the device-simulation solution in Visual Studio 2019
     | PCS_AZURE_STORAGE_ACCOUNT                 | *your Azure Storage Connection String*|
     | PCS_STORAGEADAPTER_DOCUMENTDB_CONNSTRING  | *your CosmosDB Connection String*     |
 
-    ![On the WebService project properties, Debug tab is selected, and in the Environment variables section, the previous values are populated in the form](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image187.png 'WebService project debug properties')
+    ![On the WebService project properties, Debug tab is selected, and in the Environment variables section, the previous values are populated in the form.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image187.png 'WebService project debug properties')
 
 6. Save your changes to the file.
 
@@ -602,7 +602,7 @@ In this task, you will finish configuring the device models we have provided for
 
     d. **Longitude**: -73.984165
 
-    ![The properties values are highlighted in the JSON code window](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image46.png)
+    ![The properties values are highlighted in the JSON code window.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image46.png)
 
 4. There are two Telemetry schemas set for this bus. The first one should send telemetry every 10 seconds, while the other one should have an interval of one minute. Complete the Telemetry values according to the following specifications:
 
@@ -1688,7 +1688,7 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
         }
         ```
 
-    - Check the **Set module twins's desired properties** checkbox.
+    - Check the **Set module twins' desired properties** checkbox.
     - Desired properties textbox - remember to replace the **cloudStorageConnectionString** value with your own:
 
         ```javascript
@@ -1794,7 +1794,7 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
     c. **Name**: Unique value for the app name (ensure the green check mark appears).
 
-    d. **Runtime Stack**: select **Node.js**
+    d. **Runtime Stack**: select **Node.js**.
 
     e. **Region**: select the region nearest you.
 
@@ -2355,13 +2355,13 @@ Before you can access the Time Series Insights environment and make changes, you
    
    b. **Source**: Event Hub
    
-   c. **Import option**: Use Event Hub from available subscriptions
+   c. **Import option**: Use Event Hub from available subscriptions.
    
    d. **Subscription**: Select the appropriate subscription
    
-   e. **Event Hub namespace**: Select the event hub namespace with the same suffix as your IoT Hub
+   e. **Event Hub namespace**: Select the event hub namespace with the same suffix as your IoT Hub.
    
-   f. **Event Hub name**: Select **colddatahub**
+   f. **Event Hub name**: Select **colddatahub**.
    
    g. **Timestamp property name**: timestamp
    
@@ -2483,5 +2483,5 @@ In this exercise, attendees will deprovision any Azure resources that were creat
 
     ![The remote monitoring details are displayed along with a delete button selected at the bottom of the screen.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image238.png 'Delete solution')
 
-You should follow all stpes provided *after* attendingthe Hands-on-lab.
+You should follow all steps provided *after* attending the Hands-on-lab.
 
