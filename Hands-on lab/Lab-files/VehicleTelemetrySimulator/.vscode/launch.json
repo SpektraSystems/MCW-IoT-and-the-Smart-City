@@ -28,7 +28,7 @@
       "name": "VehicleTelemetrySimulator Local Debug (.NET Core)",
       "type": "coreclr",
       "request": "launch",
-      "program": "${workspaceRoot}/modules/VehicleTelemetrySimulator/bin/Debug/netcoreapp2.2/VehicleTelemetrySimulator.dll",
+      "program": "${workspaceRoot}/modules/VehicleTelemetrySimulator/bin/Debug/netcoreapp2.1/VehicleTelemetrySimulator.dll",
       "args": [],
       "cwd": "${workspaceRoot}/modules/VehicleTelemetrySimulator",
       "internalConsoleOptions": "openOnSessionStart",
