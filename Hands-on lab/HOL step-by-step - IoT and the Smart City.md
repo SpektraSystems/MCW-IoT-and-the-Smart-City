@@ -214,7 +214,7 @@ In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft A
 
     ![The remote monitoring solution has completed, a link is displayed that will open the deployed remote monitoring solution.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image179.png 'Provisioning Completed')
 
-8. Alternatively, you may access installed accelerators in your account by selecting the **My Solutions** link on the [Azure IoT Solution Accelerators website](https://www.azureiotsolutions.com). Selecting an accelerator from this list will bring you to the screen shown in the previous step, where you can follow the *Go to your solution accelerator* link.
+8. Alternatively, you may access installed accelerators in your account by selecting the **My Solutions** link on the [Azure IoT Solution Accelerators website](https://www.azureiotsolutions.com). Selecting an accelerator from this list will bring you to the screen shown in the previous step, where you can follow the **Go to your solution accelerator** link.
 
     ![The My Solutions button is selected and a list of deployed solution accelerators for the current logged in user is displayed.The IoT Remote Monitoring Solution is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image180.png 'Listing of deployed Azure IoT Accelerators.')
 
