@@ -58,7 +58,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Help references](#help-references-3)
     - [Task 1: Add a new IoT Edge device](#task-1-add-a-new-iot-edge-device)
     - [Task 2: Provision new Linux virtual machine to run as the IoT Edge device](#task-2-provision-new-linux-virtual-machine-to-run-as-the-iot-edge-device)
-    - [Task 3: Create and upload the custom C\# IoT Edge module for vehicle telemetry](#task-3-create-and-upload-the-custom-c-iot-edge-module-for-vehicle-telemetry)
+    - [Task 3: Create and upload the custom C# IoT Edge module for vehicle telemetry](#task-3-create-and-upload-the-custom-c-iot-edge-module-for-vehicle-telemetry)
     - [Task 4: Create the Azure Stream Analytics IoT Edge module](#task-4-create-the-azure-stream-analytics-iot-edge-module)
     - [Task 5: Deploy custom modules to IoT Edge device](#task-5-deploy-custom-modules-to-iot-edge-device)
   - [Exercise 5: Create an Azure Function to add critical engine alerts to the Service Bus Queue](#exercise-5-create-an-azure-function-to-add-critical-engine-alerts-to-the-service-bus-queue)
@@ -214,9 +214,9 @@ In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft A
 
     ![The remote monitoring solution has completed, a link is displayed that will open the deployed remote monitoring solution.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image179.png 'Provisioning Completed')
 
-8. Alternatively, you may access installed accelerators in your account by selecting the **My Solutions** link on the [Azure IoT Solution Accelerators website](https://www.azureiotsolutions.com).
+8. Alternatively, you may access installed accelerators in your account by selecting the **My Solutions** link on the [Azure IoT Solution Accelerators website](https://www.azureiotsolutions.com). Selecting an accelerator from this list will bring you to the screen shown in the previous step, where you can follow the **Go to your solution accelerator** link.
 
-    ![The My Solutions button is selected and a list of deployed solution accelerators for the current logged in user is displayed. The Launch button on the remote monitoring accelerator item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image180.png 'Launch Solution')
+    ![The My Solutions button is selected and a list of deployed solution accelerators for the current logged in user is displayed.The IoT Remote Monitoring Solution is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image180.png 'Listing of deployed Azure IoT Accelerators.')
 
 9. Upon launching the Remote Monitoring accelerator, you may be prompted to consent to accessing the Azure Portal to view the resources provisioned. Simply check the **Consent on behalf of your organization** and press the **Accept** button.
 
