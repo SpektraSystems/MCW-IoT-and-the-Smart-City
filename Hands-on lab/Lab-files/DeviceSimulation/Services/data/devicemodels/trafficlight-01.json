@@ -4,7 +4,7 @@
   "Version": "0.0.1",
   "Name": "Traffic Light",
   "Description": "Traffic light with state and maintenance data",
-  "Protocol": "AMQP",
+  "Protocol": "MQTT",
   "Simulation": {
     "InitialState": {
       "online": true,

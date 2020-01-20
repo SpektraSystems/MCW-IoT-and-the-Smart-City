@@ -20,7 +20,7 @@ The names of manufacturers, products, or URLs are provided for informational pur
 
 © 2019 Microsoft Corporation. All rights reserved.
 
-Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx are trademarks of the Microsoft group of companies. All other trademarks are the property of their respective owners.
+Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are the property of their respective owners.
 
 **Contents**
 
@@ -58,7 +58,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Help references](#help-references-3)
     - [Task 1: Add a new IoT Edge device](#task-1-add-a-new-iot-edge-device)
     - [Task 2: Provision new Linux virtual machine to run as the IoT Edge device](#task-2-provision-new-linux-virtual-machine-to-run-as-the-iot-edge-device)
-    - [Task 3: Create and upload the custom C# IoT Edge module for vehicle telemetry](#task-3-create-and-upload-the-custom-c-iot-edge-module-for-vehicle-telemetry)
+    - [Task 3: Create and upload the custom C\# IoT Edge module for vehicle telemetry](#task-3-create-and-upload-the-custom-c-iot-edge-module-for-vehicle-telemetry)
     - [Task 4: Create the Azure Stream Analytics IoT Edge module](#task-4-create-the-azure-stream-analytics-iot-edge-module)
     - [Task 5: Deploy custom modules to IoT Edge device](#task-5-deploy-custom-modules-to-iot-edge-device)
   - [Exercise 5: Create an Azure Function to add critical engine alerts to the Service Bus Queue](#exercise-5-create-an-azure-function-to-add-critical-engine-alerts-to-the-service-bus-queue)
@@ -103,11 +103,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives
 
-In this hands-on-lab, you will build an end-to-end smart city solution. We will begin with deploying the Azure IoT Remote Monitoring Accelerator. This accelerator is meant to serve as an example of the recommendations set forth in the [Azure IoT Reference Architecture](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/iot/). This accelerator may also serve as a customizable foundation for any real-world Remote Monitoring IoT systems. It has been built with the flexibility to define telemetry schemas, device types, groups, rules, and more. The Remote Monitoring accelerator also supports both simulated and real IoT devices - including an IoT Edge devices. The Remote Monitoring Web application displays all IoT data with charts and alerts based on pre-configured rules for each type of IoT device. You will also use this custom web app to configure IoT devices and send control messages to them via the IoT Hub
+In this hands-on-lab, you will build an end-to-end smart city solution. We will begin with deploying the Azure IoT Remote Monitoring Accelerator. This accelerator is meant to serve as an example of the recommendations set forth in the [Azure IoT Reference Architecture](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/iot/). This accelerator may also serve as a customizable foundation for any real-world Remote Monitoring IoT systems. It has been built with the flexibility to define telemetry schemas, device types, groups, rules, and more. The Remote Monitoring accelerator also supports both simulated and real IoT devices - including an IoT Edge devices. The Remote Monitoring Web application displays all IoT data with charts and alerts based on pre-configured rules for each type of IoT device. You will also use this custom web app to configure IoT devices and send control messages to them via the IoT Hub.
 
-In this lab, we will deploy an Edge Device with a custom built module along with an on-device analytics engine which intelligently filters vehicle telemetry data for anomalies and transmits only this subset of data to IoT Hub thus reducing noise and saving on bandwidth and its associated costs. The telemetry data will also be stored in Time Series Insights, and all critical data will also flow through an Azure Function that routes critical alerts to a Service Bus Queue for separate processing and storage. You will deploy and configure .
-
-We will take a deep dive into the IoT Hub. The IoT Hub is responsible for managing IoT devices and facilitating two-way communication between those devices and Azure services.
+In this lab, we will deploy an Edge Device with a custom built module along with an on-device analytics engine which intelligently filters vehicle telemetry data for anomalies and transmits only this subset of data to IoT Hub thus reducing noise and saving on bandwidth and its associated costs. Non-critical data will be sent to storage on the device and uploaded to the cloud once connectivity is established. All telemetry data will also be stored in Time Series Insights in the cloud and ordered based on the timestamp in the telemetry message. All critical data will also flow through an Azure Function that routes critical alerts to a Service Bus Queue for separate processing and storage.
 
 At the end of this hands-on lab, you will be better able to build an end-to-end IoT solution that processes and analyzes data both in the field and in the cloud.
 
@@ -119,7 +117,14 @@ The IoT and the Smart City hands-on lab is an exercise that will challenge you t
 
 ![The Solution Architecture diagram is described in the text following the diagram.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image2.png 'Solution Architecture diagram')
 
-The solution begins with an **IoT Edge Device** that would be installed on each city bus, which is responsible for reading the vehicle telemetry from the bus, such as speed, fuel level, oil level, engine temperature, etc., generated by **custom C\# module**. A **Stream Analytics module** is loaded on the IoT Edge device to filter the vehicle telemetry data so that only anomalies are sent to **IoT Hub**. A GPS IoT device is separately added to the bus to periodically send location and speed data to IoT Hub. An IoT device is added to various traffic lights to send maintenance-related telemetry, such as voltage readings and whether a light is no longer functional. It is registered as a device in IoT Hub, including properties such as its longitude and latitude and serial number. It can receive cloud-to-device messages through IoT Hub, allowing upstream services to send updates like the timing of its lights based on traffic congestion information. The GPS IoT and traffic light devices are simulated using the IoT Remote Monitoring solution device simulator. An additional consumer group is added to IoT Hub's messages/events endpoint, allowing a **Time Series Insights** instance and an EventProcessor running on a microservice to simultaneously read the incoming data. Time Series Insights is used to store the raw time series data and provides advanced filtering, custom ad-hoc queries, and visualizations that can overlay data from several classes of IoT devices. A custom endpoint is created in Azure IoT Hub that is used to route filtered bus engine-related critical messages to a **Service Bus Queue**. An **Azure Function** is triggered on items being added to the queue, and outputs the critical alerts to a new collection in Cosmos DB. The EventProcessor is used to process incoming messages from IoT Hub to extract GPS and traffic light data, and store the data and any triggered alerts in Cosmos DB. The web app, which is part of the IoT Remote Monitoring solution, connects to Cosmos DB and displays the IoT data on a map, provides real-time charts, and allows you to manage alert rules and device control messages. It is also used to provision new IoT devices and send manual cloud-to-device messages through IoT Hub.
+The solution begins with an **IoT Edge Device** that would be installed on each city bus, which is responsible for reading the vehicle telemetry from the bus, such as speed, fuel level, oil level, engine temperature, etc., generated by **custom C\# module**. A **Stream Analytics module** is loaded on the IoT Edge device to filter the vehicle telemetry data so that only anomalies are sent to **IoT Hub**, all data is also stored locally on the device in the Edge Storage Module. The Edge Storage module is configured to upload data to Azure Blob Storage when adequate connectivity is achieved. A GPS IoT device is separately added to the bus to periodically send location and speed data to IoT Hub.
+
+An IoT device is added to various traffic lights to send timing and voltage telemetry. It is registered as a device in IoT Hub, including properties such as its longitude and latitude and serial number. It can receive cloud-to-device messages through IoT Hub, allowing upstream services to send updates like adjusting the timing of its lights. The bus and traffic light devices are simulated using the IoT Remote Monitoring solution device simulator.
+
+The Azure IoT Hub is configured with multiple consumer groups. This allows multiple downstream services to simultaneously read the incoming data.  **Time Series Insights** instance and an Azure Function running on a microservice will read the incoming data. Time Series Insights is used to store the raw time series data and provides advanced filtering, custom ad-hoc queries, and visualizations that can overlay data from several classes of IoT devices. A second input into Time Series Insights provides the path for non-critical vehicle telemetry to be included from BLOB Storage.
+The *Azure Function* using another consumer group routes filtered bus engine-related critical messages to a **Service Bus Queue**, where another **Azure Function** is triggered and outputs the critical alerts to a new collection in Cosmos DB.
+
+The web app, which is part of the IoT Remote Monitoring solution, uses Device Twin information to display IoT devices on a map, provide real-time charts, and allows you to manage alert rules and device control messages. It is also used to provision new IoT devices and send manual cloud-to-device messages through IoT Hub.
 
 ## Requirements
 
@@ -244,7 +249,7 @@ In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft A
 
     ![In the Azure IoT Suite Remote Monitoring Accelerator solution, the Settings (gear) icon is selected. Simulation Data is set to Stop flowing.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image18.png 'Azure IoT Remote Monitoring window')
 
-4. After stopping the simulation, take a moment to browse through the site. You will notice an interactive map as the centerpiece, provided by the Bing Maps and the Bing Maps API for Enterprise service that was provisioned as part of the solution. This will display each of your IoT devices that have location information.
+4. After stopping the simulation, take a moment to browse through the site. You will notice an interactive map as the centerpiece, provided by the Azure Maps service that was provisioned as part of the solution. This will display each of your IoT devices that have location information.
 
     a. To the left of the map is a count of the devices, as well as the number of alarms and warnings that have been triggered based on pre-configured rules. We will add custom rules later on.
 
@@ -260,7 +265,7 @@ In this exercise, you will take advantage of the 'Remote Monitoring' Microsoft A
 
 **Duration:** 45 minutes
 
-Explore the components automatically provisioned by the Remote Monitoring Accelerator the previous exercise. Use the Azure portal to create services that will be used by the overall IoT solution environment. First, you will create an additional consumer group on the default messages/events IoT Hub endpoint. This will allow us to add more readers that can read the massive amounts of incoming IoT data being ingested by IoT Hub. This will help prevent conflicts from multiple readers attempting to modify the checkpoints and offsets of the partitions holding the messages. Next, you will add a custom endpoint and route to IoT Hub specifically for engine alerts arriving from your IoT Edge device that you will create later. Finally, you will provision a new Azure Time Series Insights instance to collect, filter, and display all-time series data flowing in from your simulated IoT devices as well as your IoT Edge device.
+Use the Azure portal to create services that will be used by the overall IoT solution environment. You will create an additional consumer group on the default messages/events IoT Hub endpoint. This will allow us to add more readers that can read the massive amounts of incoming IoT data being ingested by IoT Hub. This will help prevent conflicts from multiple readers attempting to modify the checkpoints and offsets of the partitions holding the messages. Next, you will review the already provisioned Azure Time Series Insights instance to collect, filter, and display all-time series data flowing in from your simulated IoT devices as well as your IoT Edge device. In this exercise, you will provision a service bus queue to house engine alerts, a container registry to hold the custom Vehicle Telemetry module, and additional storage account containers that are required later in the lab.
 
 ### Help references
 
@@ -272,7 +277,7 @@ Explore the components automatically provisioned by the Remote Monitoring Accele
 
 ### Task 1: Create Service Bus queue
 
-In this task, you will provision a new Service Bus queue that will be used for routing special bus engine-related critical alerts. Afterward, you will create a custom endpoint on your IoT Hub service that will be used to route filtered messages to this queue.
+In this task, you will provision a new Service Bus queue that will be used for routing special bus engine-related critical alerts. Afterward, you will create an Azure Function triggered by incoming IoT Hub messages and route filtered messages to this queue.
 
 1. Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
 
@@ -308,7 +313,7 @@ In this task, you will provision a new Service Bus queue that will be used for r
 
     b. **Max queue size**: 1 GB
 
-    c. Leave the remaining values at their defaults. It is important to note that you must **not** enable duplicate detection or sessions on queues that will be used as custom IoT Hub service endpoints. These settings will cause unexpected results and failures if applied.
+    c. Leave the remaining values at their defaults. It is important to note that you must **not** enable duplicate detection or sessions on queues These settings will cause unexpected results and failures if applied.
 
     ![The Create queue blade displays with the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image23.png 'Create queue blade')
 
@@ -400,7 +405,7 @@ Azure Time Series Insights is the first fully managed time series database on th
 
 ### Task 5: Provision an Azure Container Registry
 
-IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics that runs on the device, Azure Machine Learning, and Azure Functions. Each of these modules is hosted within a Docker container. We will be creating two modules for the IoT Edge device: a custom C\# module, and an Azure Stream Analytics module. In both cases, you will be creating a container image from the files. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
+IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics, Azure Machine Learning, Azure Functions, Azure Storage, and SQL Azure. Each of these modules is hosted within a Docker container. We will be adding three modules for the IoT Edge device: a custom C\# module,an Azure Stream Analytics module, and the Storage Module. Modules are defined with all required files in a container image. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
 
 1. Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
 
@@ -450,7 +455,7 @@ While we are in the storage account, we will need to create two blob containers 
 
 1. The first container we will create is responsible for housing the definition and configuration of the Azure Stream Analytics job that we will have running on an Edge device later in this lab.
 
-   a. Select **Blobs** from the menu to the left.
+   a. From the menu to the left, scroll down to the **Blob service** section and select **Containers**.
 
    b. Select **+ Container** at the top of the Containers blade, then provide the following:
 
@@ -462,7 +467,7 @@ While we are in the storage account, we will need to create two blob containers 
 
 2. The second container will be responsible for holding the 'cold' telemetry data coming in from an Edge device. This data is a history of all telemetry gathered from an Edge device that is not uploaded to the cloud in real time.
 
-   a. Select **Blobs** from the menu to the left.
+   a. From the menu to the left, scroll down to the **Blob service** section and select **Containers**.
 
    b. Select **+ Container** at the top of the Containers blade, then provide the following:
 
@@ -496,9 +501,9 @@ Later in this lab, we will be making use of the Azure Key Vault. This vault is c
 
 **Duration:** 60 minutes
 
-The IoT Remote Monitoring solution allows you to provision and collect telemetry from both simulated and real devices. As part of the process, telemetry schema information is applied to the devices twin through its reported properties. The properties are read as the microservice that's executing the EventProcessor processes incoming messages from IoT Hub. The telemetry metadata is used to write the data to Cosmos DB, then used again later by the Remote Monitoring web ui to extract and display the data in the charts and maps. The metadata is also used to define cloud-to-device messages and actions that can be performed on the device. The web UI uses this information to send control messages to the devices. This metadata is added to simulated and non-simulated devices alike.
+The IoT Remote Monitoring solution allows you to provision and collect telemetry from both simulated and real devices. As part of the process, telemetry schema information is applied to the devices twin through its reported properties. The properties are read as the microservice that's executing the EventProcessor processes incoming messages from IoT Hub. The EventProcessor is an Azure Function that was deployed as part of the Remote Monitoring Accelerator. The telemetry metadata is written to Cosmos DB, and used by the Remote Monitoring web UI to extract and display the data in the charts and maps. The metadata is also used to define cloud-to-device messages and actions that can be performed on the device. The web UI uses this information to send control messages to the devices. This metadata is added to simulated and non-simulated devices alike.
 
-In this exercise, you will define metadata for new device types that will be provisioned, and whose telemetry will be simulated by the solution. Each new device type will have a state script to generate telemetry that changes the device's state, whether speed, location, voltage, or other data that relates to the device. In addition, you will define cloud-to-device messages and actions for the new device types. Then, you will create and run a new simulation locally, using a Visual Studio solution. Finally, you will create new alerts and filters through the web app interface.
+In this exercise, you will define metadata for new device types that will be provisioned, and whose telemetry will be simulated by the solution. Each new device type will have a state script to generate telemetry that changes the device's state, whether speed, location, voltage, or other data that relates to the device. In addition, you will define cloud-to-device messages and actions for the new device types. Then, you will create and run a new simulation locally, using a Visual Studio solution. Finally, you will create new alerts and filters through the Remote Monitoring web app interface.
 
 We have created the following files for you, located within the device-simulation project (Lab-files/DeviceSimulation/Services/data/devicemodels):
 
@@ -823,6 +828,8 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
     | documentDBConnectionString   | *your Cosmos DB Connection String*    |
     | PCS_AAD_APPSECRET            | *the value for aadAppSecret from the Key Vault*     |
 
+    ![WebService Project Properties Debug Settings panel is displayed with the Environment Variables from the table above defined.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image268.png)
+
 7. Save your changes to the file.
 
 8. Right-click the **WebService** project once again, then select **Start new instance** under **Debug**.
@@ -908,7 +915,7 @@ In this task, you will run the Simulator web service locally and send REST-based
 
 The IoT Remote Monitoring web interface enables you to create filters that help group devices by type or other parameters. You can also create alerts that are fired when certain criteria are met, enabling you to see the alerts alongside your device data or on the map. In this task, you will create filters for your buses and traffic lights, then create an alert for traffic lights whose voltage exceed a predefined level.
 
-1. Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is **<https://\[your> solution name\].azurewebsites.net/dashboard**. You may need to refresh the browser window if it has been running for some time and is unresponsive.
+1. Navigate back to the monitoring web app. If you don't remember the path or have closed the previous browser session, the naming convention is **https://[your solution name].azurewebsites.net/dashboard**. You may need to refresh the browser window if it has been running for some time and is unresponsive.
 
 2. One of the first things you may notice is that there are new telemetry data points listed above the graph. You should also see new devices showing up on the map. In the screenshot below, the new fuel level telemetry option is selected, and data for the two new buses appear beneath. (Note: You may need to wait a few minutes with the simulator running in order for the New York data points to appear - zoom out the map to see them.)
 
@@ -1010,9 +1017,9 @@ In this task, you will send a job to one of the traffic light devices, using the
 
 3. Navigate to **Device Explorer** using the left-hand menu.
 
-4. Check the box next to **GUIDVALUE.Trafficlight-01.0** (or whichever the traffic light \#1 is named in your list - the names could be long, so selecting one will open an overview blade displaying the full name of the device).
+4. Check the box next to **GUIDVALUE.Trafficlight-01.1** (or whichever the traffic light \#1 is named in your list - the names could be long, so selecting one will open an overview blade displaying the full name of the device).
 
-5. Select **jobs** in the top menu.
+5. Select **Jobs** in the top menu.
 
 6. Select **Methods** for the job type.
 
@@ -1034,7 +1041,7 @@ In this task, you will send a job to one of the traffic light devices, using the
 
 Azure IoT Edge devices can run on in locations where there is little to no internet connectivity, yet they allow you to run powerful modules locally, enabling you to apply your business logic in place. This is especially powerful when coupled with sensors that generate a lot of data, and you only want to send the most important data to the cloud.
 
-In this scenario, IoT Edge devices will be installed on city buses. You will create a Stream Analytics module to filter the vehicle telemetry data from simulated sensors located within a custom module that you will also build and deploy. When the Stream Analytics module finds behavior consistent with aggressive driving or impending engine failure, the data will be sent to Azure via IoT Hub. The obvious benefit to this is that the massive amount of data can be analyzed locally, only the important data is sent over a slow, unreliable, or expensive cellular data connection.
+In this scenario, IoT Edge devices will be installed on city buses. You will create a Stream Analytics module to filter the vehicle telemetry data from simulated sensors located within a custom module that you will also build and deploy. When the Stream Analytics module finds behavior consistent with aggressive driving or impending engine failure, the data will be sent to Azure via IoT Hub. The obvious benefit to this is that the massive amount of data can be analyzed locally, and only the important data is sent over the expensive cellular data connection. All data is also stored on the Edge Device itself and is uploaded automatically via Blob Storage channels in the cloud once sufficient connectivity is established.
 
 ### Help references
 
@@ -1045,6 +1052,7 @@ In this scenario, IoT Edge devices will be installed on city buses. You will cre
 | Understand the requirements and tools for developing IoT Edge modules |      <https://docs.microsoft.com/en-us/azure/iot-edge/module-development>       |
 | Develop and deploy a C\# IoT Edge module to your simulated device     |    <https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-csharp-module>     |
 | Azure Stream Analytics on IoT Edge                                    | <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-edge> |
+| Azure Blob Storage on IoT Edge | <https://docs.microsoft.com/en-us/azure/iot-edge/how-to-store-data-blob> |
 
 ### Task 1: Add a new IoT Edge device
 
@@ -1145,6 +1153,8 @@ In this task, you will provision a new Linux virtual machine that will be used t
     a. **Subscription**: Select the same subscription you've been using for the lab.
 
     b. **Resource group**: Select the same resource group you've been using.
+
+    c. **Virtual Machine Name**: IoTEdgeVM
 
     c. **Region**: Should be the same as the location of your resource group and other services.
 
@@ -1395,7 +1405,7 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
 
 7. Save your changes.
 
-8. In VS Code, open **module.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value.
+8. In VS Code, open **module.json**, in the repository property, change the URI to **LOGIN SERVER/vehicletelemetrysimulator**, replacing the login server value with your container registry login server value. The login server takes the form of **[container repository name].azurecr.io**.
 
     ![In the JSON editor the image repository property is highlighted showing the repository for the compiled image.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image199.png 'Image Repository property')
 
@@ -1409,15 +1419,19 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
 
     ![The module.json file is right-clicked and the Build IoT Edge Module Image item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image267.png 'Build IoT Edge module')
 
-11. To push the image to the Azure Container Registry, right-click the **module.json** file and select **Build and Push IoT Edge Module Image**.
-
-    ![The module.json file is right-clicked and the Build and Push IoT Edge Module Image item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image89.png 'Build and push IoT Edge module')
-
-12. select **amd64** as the platform of choice. This will create a Linux-based Docker image.
+11. Select **amd64** as the platform of choice. This will create a Linux-based Docker image.
 
     ![amd64 is selected as the platform.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image91.png 'Select Platform')
 
-13. Watch the VS Code terminal window. You should see a success status when the build is complete. **Take note of the tag applied to your vehicle-telemetry-simulator image**. You will need to use this tag when you add the module to your IoT Edge device via the portal later on.
+12. To push the image to the Azure Container Registry, right-click the **module.json** file and select **Build and Push IoT Edge Module Image**.
+
+    ![The module.json file is right-clicked and the Build and Push IoT Edge Module Image item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image89.png 'Build and push IoT Edge module')
+
+13. Once again, select **amd64** as the platform of choice. This will create a Linux-based Docker image.
+
+    ![amd64 is selected as the platform.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image91.png 'Select Platform')
+
+14. Watch the VS Code terminal window. You should see a success status when the build is complete. **Take note of the tag applied to your vehicle-telemetry-simulator image**. You will need to use this tag when you add the module to your IoT Edge device via the portal later on.
 
     ![In a terminal window, next to "Successfully tagged," the tag is value is highlighted.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image92.png 'VS Code terminal window showing a successful build')
 
@@ -1574,7 +1588,7 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ```
 
-21. To test the query with sample data, press the **Upload sample input** button in the bottom pane.
+21. To test the query with sample data, press the **Upload sample input** button in the bottom-right panel toolbar.
 
     ![The edit query form is displayed, beneath the query textbox, the Upload sample input button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image103.png 'Upload sample input')
 
@@ -1588,7 +1602,7 @@ In this task, you will create a Stream Analytics job that filters vehicle teleme
 
     ![In the Query blade, the Test query button is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image105.png 'Test the analytics query with the sample data')
 
-25. At a quick glance, the Alert output should have 85 rows.
+25. In the Outputs list, ensure Alert is selected. The test results should display that there are 85 rows.
 
     ![In the Results section a list of data is displayed, at the top of the list it shows a label indicating it is showing 85 rows form alert.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image106.png 'Test Results section')
 
@@ -1612,7 +1626,7 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
 
     ![The IoT Edge Container Registry connection information form is displayed in the set modules screen. The container name, address, user name and password fields are highlighted and populated with values.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image204.png 'Container Registry connection information')
 
-5. From the **Deployment Modules** section Select **Add** and choose **IoT Edge Module**.
+5. From the **IoT Edge Modules** section Select **Add** and choose **IoT Edge Module**.
 
     ![The Add button is selected, and the IoT Edge Module item is chosen in the Device Details blade.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image109.png 'Device Details blade')
 
@@ -1628,11 +1642,11 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
 
     ![The add module form is displayed populated with the previous values](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image110.png 'IoT Edge Module blade')
 
-7. Select **Save**.
+7. Select **Add**.
 
-8. From the **Deployment Modules** section Select **Add** and choose **Azure Stream Analytics Module**.
+8. From the **IoT Edge Modules** section Select **Add** and choose **Azure Stream Analytics Module**.
 
-    ![The Add button is selected, and the Azure Stream Analytics module item highlighted in the Device Details blade.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image111.png 'Device Details blade')
+    ![The Add button is selected, and the Azure Stream Analytics module item highlighted in the IoT Edge Modules section.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image111.png 'Device Details blade')
 
 9. Select your Azure subscription, then the Stream Analytics job you created in the previous task.
 
@@ -1652,95 +1666,105 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
 
     ![The Stream analytics job form is displayed with the fields set to the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image112.png 'Edge deployment blade')
 
-12. Select **Save**.
+12. Select **Save**, then close the tab that was added to your browser to select the storage account.
 
 13. Return to the Stream Analytics - Edge job blade, and press **Save**, this will publish the module.
 
 14. Once published, copy the name of your Stream Analytics module.
 
-    ![iot-lab-edge is highlighted in the deployment modules list.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image113.png 'Deployment modules list')
+    ![iot-edge-sa is highlighted in the deployment modules list.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image113.png 'Deployment modules list')
 
-15. From the **Deployment Modules** section Select **Add** and choose **IoT Edge Module**.
+15. From the **IoT Edge Modules** section Select **Add** and choose **Marketplace Module**.
 
-16. Once the IoT Edge Custom Modules blade has been opened, configure it as follows:
-    - **Name**: azureblobstorageoniotedge
-    - **ImageUri**: mcr.microsoft.com/azure-blob-storage:latest
-    - **Container Create Options**:
+    ![The add button is selected, and the Marketplace Module item is highlighted in the IoT Edge Modules section.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image269.png)
 
-        ```javascript
-        {
-            "Env": [
-                "LOCAL_STORAGE_ACCOUNT_NAME=edgestorage",
-                "LOCAL_STORAGE_ACCOUNT_KEY=pM8cWFj0L8h+VKRfE8Fy3tVVtdfOR4bCIzX8N/sDiK1X0znhu8iatFwVfjzwjedDKe5ln+2cI7wpy+2eO1vvQQ=="
-            ],
-            "HostConfig": {
-                "Binds": [
+16. In the IoT Edge Module Marketplace, search for **Azure Blob Storage on IoT Edge** and select the module with the same name.
+
+    ![In the IoT Edge Module Marketplace blade, the search term Azure Blob Storage on IoT Edge is entered and the module with the same name is selected in the search results.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image270.png)
+
+17. The AzureBlobStorageonIoTEdge has now been added to the IoT Edge modules list. Select the AzureBlobStorageonIoTEdge item in this list so that we can provide it with the desired configuration.
+  
+    ![The AzureBlobStorageonIoTEdge module is selected in the list of IoT Edge Modules.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image271.png)
+
+18. Once the Update IoT Edge Module blade has been opened, select the **Environment Variables** tab, and enter the following values:
+
+    | Name | Value |
+    |------|-------|
+    | LOCAL_STORAGE_ACCOUNT_NAME | edgestorage |
+    | LOCAL_STORAGE_ACCOUNT_KEY  | pM8cWFj0L8h+VKRfE8Fy3tVVtdfOR4bCIzX8N/sDiK1X0znhu8iatFwVfjzwjedDKe5ln+2cI7wpy+2eO1vvQQ== |
+
+    ![The Update IoT Edge Module screen is displayed and the Environment Variables tab is selected. In textboxes the environment variables referenced in the previous table are displayed.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image275.png)
+
+19. Once the Update IoT Edge Module blade has been opened, select the **Container Create Options** tab, enter the following - then select **Update**:
+
+    ```javascript
+    {
+        "HostConfig":{
+            "Binds": [
                 "/storage/containerdata:/blobroot"
-                ],
-                "PortBindings": {
+            ],
+            "PortBindings": {
                 "11002/tcp": [
                     {
-                    "HostPort": "11002"
+                        "HostPort": "11002"
                     }
                 ]
-                }
             }
         }
-        ```
+    }
+    ```
 
-    - Check the **Set module twins' desired properties** checkbox.
+    ![The Update IoT Edge Module blade is shown with the Container Create Options tab selected with a textbox populated with the JSON based configuration above.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image272.png)
+
+20. In the same Update IoT Edge Module blade, select the **Module Twin Settings** tab.
     - Desired properties textbox - remember to replace the **cloudStorageConnectionString** value with your own:
 
         ```javascript
         {
-            "properties.desired": {
-                "deviceAutoDeleteProperties": {
+            "deviceAutoDeleteProperties": {
                 "deleteOn": false,
                 "retainWhileUploading": true
-                },
-                "deviceToCloudUploadProperties": {
+            },
+            "deviceToCloudUploadProperties": {
                 "uploadOn": true,
                 "uploadOrder": "OldestFirst",
                 "cloudStorageConnectionString": "<Storage Account Connection String>",
                 "storageContainersForUpload": {
                     "telemetry": {
-                    "target": "telemetrysink"
+                        "target": "telemetrysink"
                     }
-                },
-                "deleteAfterUpload": true
                 }
-            }
+            },
+            "deleteAfterUpload": true
         }
         ```
 
-    - Press **Save**.
+        ![The Update IoT Edge Module blade is shown with the Module Twin Settings tab selected with a textbox populated with the JSON based configuration above.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image274.png)
 
-17. Select **Next**.
+21. Press **Update**.
 
-18. Copy the following code to Routes. Replace _{moduleName}_ with the Stream Analytics module name that you copied:
+22. Select **Next: Routes >** underneath the IoT Edge modules list.
 
-    ```javascript
-    {
-        "routes": {
-            "alertsToCloud": "FROM /messages/modules/{moduleName}/outputs/* INTO $upstream",
-            "telemetryToAsa": "FROM /messages/modules/VehicleTelemetry/outputs/* INTO BrokeredEndpoint(\"/modules/{moduleName}/inputs/VehicleTelemetry\")"
-        }
-    }
-    ```
+23. In the **Routes** table add the following. Replace _{moduleName}_ with the Stream Analytics module name that you copied):
 
-    ![The previously designated code displays in the code window on the Specify Routes page.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image114.png 'Set Modules blade, Specify Routes page')
+    | Name | Value |
+    |------|---------|
+    | alertsToCloud | FROM /messages/modules/{moduleName}/outputs/* INTO $upstream |
+    | telemetryToAsa | FROM /messages/modules/VehicleTelemetry/outputs/* INTO BrokeredEndpoint("/modules/{moduleName}/inputs/VehicleTelemetry") |
 
-19. Select **Next**.
+    ![The routes are displayed for the bus1 modules as specified in the previous table above.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image114.png 'Set Modules, Routes page')
 
-20. In the Review Template step, select **Submit**.
+24. Select **Review + Create**.
 
-21. After approximately 4 minutes, return to the device details page. You should see the three new modules running, along with the IoT Edge agent module and the IoT Edge hub.
+25. In the Review screen, select **Create**.
+
+26. After approximately 4 minutes, return to the device details page. You should see the three new modules running, along with the IoT Edge agent module and the IoT Edge hub.
 
     ![On the Deployed Modules tab, under Name, iot-edge-sa, azureblobstorageoniotedge, and VehicleTelemetry modules are called out.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image115.png 'Device Details page Deployed Modules tab')
 
-22. Go back to your Bash shell that is connected to the Linux VM containing your IoT Edge device.
+27. Go back to your Bash shell that is connected to the Linux VM containing your IoT Edge device.
 
-23. Execute the following to make sure all the modules are running in Docker:
+28. Execute the following to make sure all the modules are running in Docker:
 
     ```Bash
     sudo iotedge list
@@ -1748,9 +1772,9 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
 
     ![Bash window displays the list of docker images running in the IoT Edge simulator VM.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image116.png 'Bash shell')
 
-24. You should have five containers running at this point.
+29. You should have five containers running at this point.
 
-25. View the Stream Analytics module logs to see the telemetry it is reading, as well as any outputs it generates based on anomalies. You should see a large degree more vehicle telemetry feeding into the Stream Analytics module than what it sends out. This, of course, is by design. Replace {moduleName} with the Stream Analytics module name. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
+30. View the Stream Analytics module logs to see the telemetry it is reading, as well as any outputs it generates based on anomalies. You should see a large degree more vehicle telemetry feeding into the Stream Analytics module than what it sends out. This, of course, is by design. Replace {moduleName} with the Stream Analytics module name. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
 
     ```Bash
     sudo iotedge logs -f {moduleName}
@@ -1758,17 +1782,17 @@ In this task, you will deploy the vehicle telemetry module, Stream Analytics mod
 
     ![In the Output window, results from the Stream Analytics module logs display.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image206.png 'Output window')
 
-26. View the generated data by viewing the log for the VehicleTelemetry module as follows. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
+31. View the generated data by viewing the log for the VehicleTelemetry module as follows. Press <kbd>Ctrl/Cmd</kbd>+<kbd>c</kbd> to return to the command line.
 
     ```Bash
     sudo iotedge logs -f VehicleTelemetry
     ```
 
-27. Notice the log output as shown below. There are many "Received message Name: \[VehicleTelemetry\]" events, and one output generated (highlighted). The output name is **alert**, matching one of the two outputs we created in the Stream Analytics module. The message content is sent to IoT Hub, including the additional fields added by the Stream Analytics query. In this case, the telemetry data is flagged as aggressive driving (aggressivedriving: 1).
+32. Notice the log output as shown below. There are many "Sending message: \[VehicleTelemetry\]" events, and one output generated (highlighted). The output name is **alert**, matching one of the two outputs we created in the Stream Analytics module. The message content is sent to IoT Hub, including the additional fields added by the Stream Analytics query. In this case, the telemetry data is flagged as aggressive driving (aggressivedriving: 1).
 
     ![In the Bash window, results from the Vehicle Telemetry module logs display.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image207.png 'Bash window')
 
-28. Leave the IoT Edge device running for the remainder of the lab.
+33. Leave the IoT Edge device running for the remainder of the lab.
 
 ## Exercise 5: Create an Azure Function to add critical engine alerts to the Service Bus Queue
 
@@ -1780,9 +1804,9 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
 1. Using a new tab or instance of your browser navigate to the Azure Management portal, <http://portal.azure.com>.
 
-2. Select **+ New**, then type **function app** into the search box on top. Select **Function App** from the results.
+2. Select **Create a new resource**, then type **function app** into the search box on top. Select **Function App** from the results.
 
-    ![The Search field in the New blade is set to Function Ap.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image127.png 'Azure Portal New blade')
+    ![The Search field in the New blade is set to Function App.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image127.png 'Azure Portal New blade')
 
 3. Select the **Create** button on the Function App overview blade.
 
@@ -1796,6 +1820,8 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
     d. **Runtime Stack**: select **Node.js**.
 
+    e. **Publish**: select **Code**.
+
     e. **Region**: select the region nearest you.
 
     ![The Create Function app form is displayed with fields populated with the previously defined settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image128.png 'Create Function App blade')
@@ -1804,9 +1830,7 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
 ### Task 2: Add new Function to process messages received by the IoT Hub
 
-1. Access the Function App provisioned in the Azure Portal, by selecting **Function Apps** in the left-hand menu, then select the Function App that you created in the last task.
-
-   ![Function Apps is selected in the left-hand menu, the provisioned Function App is highlighted.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image215.png 'Accessing the provisioned Function App.')
+1. Open the Function App provisioned in the last task.
 
 2. Underneath the Function App, select the **Functions** item, and press the **New function** button.
 
@@ -1864,9 +1888,8 @@ A Function app is a logical collection of functions on the Azure platform. Each 
     module.exports = function (context, IoTHubMessages) {
         var engineAlerts = [];
         IoTHubMessages.forEach(message => {
-
-            if((message.engineoil && message.engineoil<20) || (message.enginetemperature && message.enginetemperature>400)){
-                context.log("Engine Oil: "+ message.engineoil +" - Engine Temperature: "+ message.enginetemperature);
+            if((message.engineoil && message.engineoil<20) || (message.engineTemperature && message.engineTemperature>400)){
+                context.log("Engine Oil: "+ message.engineoil +" - Engine Temperature: "+ message.engineTemperature);
                 engineAlerts.push(JSON.stringify(message));
             }
         });
@@ -1874,7 +1897,6 @@ A Function app is a logical collection of functions on the Azure platform. Each 
         if(engineAlerts.length > 0) {
             context.bindings.engineAlertOutput = engineAlerts;
         }
-
         context.done();
     };
     ```
@@ -1918,7 +1940,7 @@ As you remember, you created an Azure Service Bus Queue to ingest messages flagg
 
 1. Browse to the Lab-files folder containing the extracted solution files for the lab.
 
-2. Open **ReadEngineAlerts\\ReadEngineAlerts.sln**.
+2. Open **ReadEngineAlerts\\ReadEngineAlerts.sln** with Visual Studio 2019.
 
 3. Open **Program.cs** from the Solution Explorer.
 
@@ -1975,7 +1997,7 @@ The console app is a fast and effortless way to view the critical engine alerts 
     a. **Name**: BusEngineAlert
 
     b. **Service Bus connection**: Select **new**, then find and select your Service Bus in the dialog box.
-    
+
     ![The Connection window displays with service bus selected, and the service bus namespace that we created earlier in the lab selected in the namespace dropdown. There is also a select button to save the connection settings.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image131.png 'Connection window')
 
     c. **Queue name**: alert-q
@@ -1993,12 +2015,16 @@ The console app is a fast and effortless way to view the critical engine alerts 
 2. Select **+ New Output** under **Outputs**.
 
 3. Select **Azure Cosmos DB** from the list.
+  
+4. You may be prompted to install an extension, press **Install** if you see this message.
 
-4. Choose **Select**.
+    ![In the Azure Cosmos DB output form a message is displayed saying extensions are not installed, the Install link is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image276.png)
+
+5. Choose **Select**.
 
     ![Under Outputs, New Output is selected, and below, the Azure Cosmos DB tile is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image134.png 'Integrate Cosmos DB')
 
-5. Provide the following values for the Azure Cosmos DB output:
+6. Provide the following values for the Azure Cosmos DB output:
 
     a. **Document parameter name**: criticalAlertDocument
 
@@ -2006,11 +2032,11 @@ The console app is a fast and effortless way to view the critical engine alerts 
 
     c. **Collection Name**: critical-alerts
 
-    d. **Azure Cosmos DB account connection**: Select the same connection you created for the other output.
+    d. **Azure Cosmos DB account connection**: Select the **new** link and select the CosmosDB that was created as part of the remote monitoring solution.
 
     ![The Azure Cosmos DB output form is displayed with fields set to the previously defined values. The Save button is highlighted.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image137.png 'Azure Cosmos DB output')
 
-6. Select **Save**.
+7. Select **Save**.
 
 ### Task 3: Modify the function code
 
@@ -2020,7 +2046,7 @@ The console app is a fast and effortless way to view the critical engine alerts 
 
 2. The function code is responsible for storing Engine Alert data in Cosmos DB partitioned by the unique VIN value for the device. Earlier, we have already declared the **critical-alerts** collection in Cosmos DB partitioned by the VIN, so all we need to do now is to read the information from the queue and move the data over.
 
-3. The **complete code** is as follows:
+3. The complete code is as follows:
 
     ```javascript
     module.exports = function (context, alert) {
@@ -2035,9 +2061,9 @@ The console app is a fast and effortless way to view the critical engine alerts 
 
 4. **Save** your changes.
 
-5. Select **Run** to view the output logs of the function. You should see successful function completed events.
+5. Select **Logs** to view the output logs of the function. You should see successful function completed events.
 
-    ![Output logs display, with two success messages highlighted.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image140.png 'Output logs')
+    ![Output logs display, with two success messages.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image140.png 'Output logs')
 
 ### Task 4: View data stored by the function in Azure Cosmos DB
 
@@ -2047,9 +2073,9 @@ Apply a query filter on the messages collection to view the critical engine aler
 
     ![Data Explorer is selected in the Azure Cosmos DB account blade.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image211.png 'Azure Cosmos DB account blade')
 
-2. Right-click on the **critical-alerts** collection under pcs-iothub-stream, then select **New SQL Query**.
+2. Press the ellipsis next to the **critical-alerts** collection under the pcs-iothub-stream database, then select **New SQL Query**.
 
-    ![Under Collections, pcs-iothub-stream is expanded, and messages is selected. From its right-click menu, New SQL Query is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image141.png 'Collections section')
+    ![Under Collections, pcs-iothub-stream is expanded, with the critical-alerts collection selected. In a context menu the New SQL Query item is selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image141.png)
 
 3. Enter the following query, then select **Execute Query** to view the results:
 
@@ -2061,7 +2087,7 @@ Apply a query filter on the messages collection to view the critical engine aler
 
 4. Expand the **critical-alerts** collection and select **Items**. Choose one of the items to view. You will see the full message data for the critical alert.
 
-    ![Under Collections, ics-iothub-stream is expanded, Critical-alerts is expanded, and Documents is selected. On the Documents tab, a document id is selected, and the message data for the critical alert displays.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image143.png 'Collections section')
+    ![Under Collections, ics-iothub-stream is expanded, Critical-alerts is expanded, and Items is selected. On the Items tab, a document is selected, and the message data for the critical alert displays.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image143.png 'Collections section')
 
 ## Exercise 8: View critical engine alerts in the IoT Remote Monitoring web interface
 
@@ -2073,9 +2099,9 @@ Navigate back to the monitoring web app. If you don't remember the path or have 
 
 1. From the device groups drop down at the top of the dashboard, select **Buses**.
 
-2. You should see additional telemetry options above the graph at the bottom of the page, indicating availability of data from the new fields that are part of the critical engine alerts. Select **enginetemperature**.
+2. You should see additional telemetry options above the graph at the bottom of the page, indicating availability of data from the new fields that are part of the critical engine alerts. Select **engineTemperature**.
 
-   ![The Monitoring Web App dashboard displays a Telemetry graph of averageenginetemperature 1 for bus1.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image144.png 'Monitoring Web App dashboard')
+   ![The Monitoring Web App dashboard displays a Telemetry graph of engineTemperature for bus1.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image144.png 'Monitoring Web App dashboard')
 
 ### Task 2: Define new alert rules for buses
 

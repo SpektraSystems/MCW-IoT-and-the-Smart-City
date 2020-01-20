@@ -4,7 +4,7 @@
   "Version": "0.0.1",
   "Name": "Traffic Light",
   "Description": "Failing traffic light with voltage too high",
-  "Protocol": "AMQP",
+  "Protocol": "MQTT",
   "Simulation": {
     "InitialState": {
       "online": true,
