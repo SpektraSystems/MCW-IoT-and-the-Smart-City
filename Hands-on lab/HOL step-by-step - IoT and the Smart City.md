@@ -405,7 +405,7 @@ Azure Time Series Insights is the first fully managed time series database on th
 
 ### Task 5: Provision an Azure Container Registry
 
-IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics, Azure Machine Learning, Azure Functions, Azure Storage, and SQL Azure. Each of these modules is hosted within a Docker container. We will be adding three modules for the IoT Edge device: a custom C\# module,an Azure Stream Analytics module, and the Storage Module. Modules are defined with all required files in a container image. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
+IoT Edge devices use one or more modules to perform a series of actions locally on the device before sending data up to the cloud. Modules include custom modules written in a language like C\#, Azure Stream Analytics, Azure Machine Learning, Azure Functions, Azure Storage, and SQL Azure. Each of these modules is hosted within a Docker container. We will be adding three modules for the IoT Edge device: a custom C\# module, an Azure Stream Analytics module, and the Storage Module. Modules are defined with all required files in a container image. The images are then pushed to a registry that stores and manages them. The final step is to deploy the images from the registry onto your IoT Edge devices. Two popular Docker registry services available in the cloud are Azure Container Registry and Docker Hub. We will be using Azure Container Registry to manage and deploy the IoT Edge modules.
 
 1. Using a new tab or instance of your browser navigate to the **Azure Management** portal, <http://portal.azure.com>.
 
@@ -558,7 +558,7 @@ In this task, you will open the device-simulation solution in Visual Studio 2019
 
    ![The Web Service context menu is displayed with the Set as StartUp Project option selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image264.png)
 
-4. In the Visual Studio toolbar, ensure the start up item is the WebService project.
+4. In the Visual Studio toolbar, ensure the startup item is the WebService project.
 
     ![The Visual Studio Taskbar is displayed, the start up item drop down list is expanded with the WebService item selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image265.png)
 
@@ -811,7 +811,7 @@ The Storage Adapter project (pcs-storage-adapter) is another microservice that c
 
    ![The Web Service context menu is displayed with the Set as StartUp Project option selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image264.png)
 
-4. In the Visual Studio toolbar, ensure the start up item is the WebService project.
+4. In the Visual Studio toolbar, ensure the startup item is the WebService project.
 
     ![The Visual Studio Taskbar is displayed, the start up item drop down list is expanded with the WebService item selected.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image265.png)
 
@@ -2157,7 +2157,7 @@ Navigate back to the monitoring web app. If you don't remember the path or have 
 
 ## Exercise 9: Add a tag to IoT Edge Device Twin
 
-In this exercise, you will create the following tag that will be saved to the device twin: Name: isEdgeDevice, Value: Y. You will then use this tag as the basis for a new device filter in the web UI for displaying Edge devices.
+In this exercise, you will create the following tag that will be saved to the device twin: Name: IsEdgeDevice, Value: Y. You will then use this tag as the basis for a new device filter in the web UI for displaying Edge devices.
 
 ### Task 1: Create the tag update job
 
