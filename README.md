@@ -4,7 +4,7 @@ Fabrikam City council has conducted a six-month study of new and emerging techno
 
 At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
-December 2019
+January 2020
 
 ## Target audience
 - Application developer
@@ -26,7 +26,7 @@ At the end of this whiteboard design session, you will be better able to design 
 
 ### Hands-on lab
 
-In this hands-on-lab, you will build an end-to-end smart city solution, beginning with IoT Edge devices deployed with modules that you create which intelligently filters vehicle telemetry data for anomalies and transmits the related data to IoT Hub. IoT Hub is responsible for managing IoT devices and facilitating two-way communication between those devices and Azure services. The telemetry data will be stored in Time Series Insights, and all critical data will also flow through an Azure Function that routes critical alerts to a Service Bus Queue for separate processing and storage. You will deploy and configure a remote monitoring accelerator solution that includes a web portal that displays all IoT data on a map and displays alerts based on preconfigured rules for each type of IoT device. You will also use this portal to configure IoT devices and send control messages to them via IoT Hub.
+In this hands-on-lab, you will build an end-to-end smart city solution, beginning with IoT Edge devices deployed with modules that you create which intelligently filters vehicle telemetry data for anomalies and transmits the related data to IoT Hub. IoT Hub is responsible for managing IoT devices and facilitating two-way communication between those devices and Azure services. The telemetry data will be stored in Time Series Insights, and all critical data will also flow through an Azure Function that routes critical alerts to a Service Bus Queue for separate processing and storage. You will deploy and configure a remote monitoring accelerator solution that includes a web portal that displays all IoT data on a map and displays alerts based on pre-configured rules for each type of IoT device. You will also use this portal to configure IoT devices and send control messages to them via IoT Hub.
 
 At the end of this hands-on lab, you will be better able to build an end-to-end IoT solution that processes and analyzes data both in the field and in the cloud.
 

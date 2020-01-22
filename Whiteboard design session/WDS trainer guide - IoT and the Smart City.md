@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-December 2019
+January 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -196,13 +196,11 @@ Fabrikam City council has conducted a six-month study of new and emerging techno
 
 At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
-They realize that IoT offers cities revolutionary ways to gather this vital data. Analyzing this information to understand how a city operates will improve response times for everyday purposes and acute emergencies. This wave of change will enable innovation, new services, and cost savings. However, if Fabrikam City is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
+They realize that IoT offers cities revolutionary ways to gather this vital data. This wave of change will enable innovation, new services, and cost savings. However, if Fabrikam City is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
 
-Fabrikam City buses are widely used throughout the many boroughs, such as Northwind, Contoso, and the Tailwind. It would make sense to somehow attach IoT devices to those buses to perform a number of functions such as preventive maintenance and tracking driver performance. It would be great if only the most important information is sent off over the internet instead of constantly sending a lot of data over expensive cellular connectivity. The most important information could be described as anomalies, like impending mechanical breakdowns or reckless driving. The buses will periodically send their location information that can be used to track their progress on their route. All of the information can be uploaded once the bus arrives at its home station where it has Wi-Fi connectivity. The full data could then be used for accounting and analysis of the data collected throughout the day.
+Fabrikam City buses are widely used throughout the many boroughs, such as Northwind, Contoso, and Tailwind. It would make sense to somehow attach IoT devices to those buses to perform a number of functions such as preventive maintenance and tracking driver performance. It would be great if only the most important information is sent off over the internet instead of constantly sending a lot of data over expensive cellular connectivity. The most important information could be described as anomalies, like impending mechanical breakdowns or reckless driving. The buses will periodically send their location information that can be used to track their progress on their route. All of the information can be uploaded once the bus arrives at its home station where it has Wi-Fi connectivity. The full data could then be used for accounting and analysis of the data collected throughout the day.
 
-Because these buses are so prevalent on all the major roads, they should be able to act as traffic bellwethers, using that information along with their location to inform the timing of traffic lights. These traffic lights contain control boxes that can be remotely controlled.
-
-Fabrikam city council would also like to increase the intelligence of the traffic lights and reduce physical inspections by adding IoT devices with sensors that can detect maintenance and performance issues, such as when a bulb is out, if the light sequence is stuck in a continuous cycle loop outside of normal parameters, voltage irregularities, etc. Unlike the city buses, these traffic lights are always connected to the internet and can send and receive command and control information as often as needed.
+In regards to traffic lights, Fabrikam city council would also like reduce physical inspections by adding IoT devices with sensors that can detect maintenance and performance issues, such as if the light sequence is stuck in a continuous cycle loop outside of normal parameters, voltage irregularities, etc. Unlike the city buses, these traffic lights are always connected to the internet and can send and receive command and control information as often as needed.
 
 Relecloud has been contracted to build a cloud-based architecture based on these requirements. They have researched IoT-related service offerings from various cloud providers and are interested in recent capabilities added to Azure for storing and evaluating time series data, as well as building IoT devices that run on the edge for localized data transformation and processing.
 
@@ -220,15 +218,13 @@ Following this same mandate of ease of use and future flexibility without overta
 
 4.  Store the bus telemetry data locally when offline and send when internet connectivity is available.
 
-5.  Send regular location updates of city buses that can be used to display on a map, update bus routes, and track traffic conditions.
+5.  Send regular location updates of city buses that can be used to display on a map and update bus route status.
 
-6.  Use the traffic information from the buses to help inform the timing of traffic lights.
+6.  Install IoT devices on traffic lights for maintenance purposes.
 
-7.  Install IoT devices on traffic lights for maintenance purposes.
+7.  Easily combine all of the time series data in a single pane of view, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added.
 
-8.  Easily combine all of the time series data in a single pane of view, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added.
-
-9.  Have a web portal to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
+8.  Have a web portal to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
 
 ### Customer objections
 
@@ -286,13 +282,11 @@ _Data and visualization_
 
 3.  Describe how the custom web application will be hosted, as well as how it will access the stored telemetry including displaying location information on a map, manage reference data (speed limit information, speed alert thresholds, vehicle information, etc.), alerts, and device control messages. Also, describe how you will use it to provision new IoT devices and send manual cloud-to-device messages.
 
-4.  What would you recommend using to combine bus and traffic light information, filtering the data by the close proximity of both types of IoT devices, then by average bus speed information based on predefined speed thresholds for detecting slow traffic near the traffic lights? How can this data be used to send alerts and cloud-to-device traffic light timing change messages?
+4.  What would you recommend using to combine bus and traffic light information, filtering the data by the close proximity of both types of IoT devices, then by average bus speed information based on predefined speed thresholds?
 
 _Location-based data and mapping_
 
 1.  Relecloud wants to integrate map visualization to show the location of buses, traffic lights, and other devices. They would like to use a mapping service that does not require them to send data to an external resource, can be used with other Azure services like Stream Analytics, and supports data privacy and compliance when needed.
-
-2.  How would you perform reverse geocode queries to find addresses and cross streets based on latitude/longitude? They would also like to view the posted speed limit and road use, such as local road use, limited access, etc.
 
 **Prepare**
 
@@ -420,7 +414,7 @@ _High-level architecture_
 
     ![The Solution Architecture diagram is described in the text following the diagram.](images/Whiteboarddesignsessiontrainerguide-IoTandtheSmartCityimages/media/image3.png 'Solution Architecture diagram')
 
-    The solution begins with an IoT Edge device installed on each city bus, which is responsible for reading the vehicle telemetry from the bus, such as speed, fuel level, oil level, engine temperature, etc. A trained Azure Machine Learning predictive maintenance module is loaded on the IoT Edge device to detect anomalies and potential issues. An Azure Stream Analytics module is added to the IoT Edge device to filter the output of the predictive maintenance module and send only the anomaly data to IoT Hub. A GPS IoT device is separately added to the bus to periodically send location and speed data to IoT Hub. An IoT device is added to various traffic lights to send maintenance-related telemetry, such as voltage readings and whether a light is no longer functional. It is registered as a device in IoT Hub, including properties such as its longitude and latitude and serial number. It can receive cloud-to-device messages through IoT Hub, allowing upstream services to send updates like the timing of its lights based on traffic congestion information. An additional consumer group is added to IoT Hubs messages/events endpoint, allowing a Time Series Insights instance and a Stream Analytics instance to simultaneously read the incoming data. Time Series Insights is used to store the raw time series data and provides advanced filtering, custom ad-hoc queries, and visualizations that can overlay data from several classes of IoT devices. Stream Analytics is used to collect the bus GPS and traffic light data, joining the two using geospatial queries to find buses within close proximity to traffic lights, and using reference data to filter the data based on average bus speeds. The filtered data indicating traffic congestion is sent to Azure Functions to evaluate the data and compare it against traffic data stored in Cosmos DB. If it appears traffic congestion is changing, the function updates Cosmos DB accordingly. Another function is triggered when traffic timing control messages appear in a Cosmos DB collection, whether automatically added by the previous function, or manually added by the web portal. It sends a cloud-to-device control message to IoT Hub to send a timing change request to a specific traffic light if needed. Stream Analytics also inserts unfiltered bus location data to Cosmos DB. Time Series Insights displays a custom view of the captured IoT data. The remote accelerator solution web application plots the devices on a map. The web app connects to Cosmos DB to manage alert rules and device control messages. It is also used to provision new IoT devices and send manual cloud-to-device messages through IoT Hub. At the bottom of the diagram is the Stream Analytics reference data update process, orchestrated by Azure Data Factory. The reference data stores speed limit information and speed alert threshold data for the traffic lights.
+    The solution begins with an IoT Edge device installed on each city bus, which is responsible for reading the vehicle telemetry from the bus, such as speed, fuel level, oil level, engine temperature, etc. A trained Azure Machine Learning model is used in the vehicle telemetry module on the IoT Edge device to detect driver anomalies. An Azure Stream Analytics module is added to the IoT Edge device to filter the output of the vehicle telemetry module and send only the anomaly data to IoT Hub. A GPS IoT device is separately added to the bus to periodically send location and speed data to IoT Hub. An IoT device is added to various traffic lights to send maintenance-related telemetry, such as voltage readings and timing. It is registered as a device in IoT Hub, including properties such as its longitude and latitude and serial number. It can receive cloud-to-device messages through IoT Hub, allowing upstream services to send updates like the timing of its lights. An additional consumer group is added to IoT Hubs messages/events endpoint, allowing a Time Series Insights instance and a Stream Analytics instance to simultaneously read the incoming data. Time Series Insights is used to store the raw time series data and provides advanced filtering, custom ad-hoc queries, and visualizations that can overlay data from several classes of IoT devices. Stream Analytics is used to collect the bus GPS and traffic light data. Cloud-to-device control message can be queued from the Web Application to the IoT Hub to send a timing change request to a specific traffic light if needed. Time Series Insights displays a custom view of the captured IoT data. The remote accelerator solution web application plots the devices on a map. The web app connects to Cosmos DB to manage alert rules and device control messages. It is also used to provision new IoT devices and send manual cloud-to-device messages through IoT Hub. 
 
 > **Note**: The preferred solution is only one of many possible, viable approaches.
 
@@ -432,15 +426,15 @@ _IoT Devices_
 
 2.  How will you process the vehicle telemetry data locally to only send important data about driver performance or potential mechanical issues while the bus is in transit, with limited data connectivity?
 
-    Azure IoT Edge can be used to shift the data analytics responsibility from the cloud to each bus, and only send that data up to Azure when an anomaly is detected. This helps dramatically cut down on the amount of data that needs to be sent out, meeting their requirement for minimizing cellular data usage. Create an IoT Edge device with a custom module to ingest the vehicle telemetry. Use Azure Machine Learning to train a model that evaluates the vehicle telemetry and conducts predictive analysis to detect mechanical issues and driver performance. Load the trained model to the IoT Edge device to detect anomalies locally. Add a Stream Analytics module that filters the output of the machine learning module and send only the anomaly data to IoT Hub. Routes are used to allow modules to send data to each other, then send the final filtered data upstream to IoT Hub. All data is stored locally while offline and can be sent when internet connectivity is available.
+    Azure IoT Edge can be used to shift the data analytics responsibility from the cloud to each bus, and only send that data up to Azure when an anomaly is detected. This helps dramatically cut down on the amount of data that needs to be sent out, meeting their requirement for minimizing cellular data usage. Create an IoT Edge device with a custom module to ingest the vehicle telemetry. Use a trained ML.NET model that evaluates the vehicle telemetry and determines driver performance irregularities locally. Add a Stream Analytics module that filters the output of the vehicle telemetry module and send only the anomaly data to IoT Hub. Routes are used to allow modules to send data to each other, then send the final filtered data upstream to IoT Hub. All data is stored locally while offline and can be sent when internet connectivity is available using the Azure Blob Storage on Edge module.
 
 3.  What would you recommend using to separately send bus location and speed data at regular intervals?
 
-    A GPS-enabled IoT device can be added to the bus that regularly sends bus location and speed data through IoT Hub. This data will be used to update bus route information and track average speeds in proximity to traffic lights also containing IoT devices.
+    A GPS-enabled IoT device can be added to the bus that regularly sends bus location through IoT Hub. This data will be used to update bus route information.
 
 4.  Describe how you would send traffic light telemetry, and in turn, have the traffic lights receive commands to update their timing.
 
-    Traffic lights will have IoT devices installed that send maintenance-related telemetry, such as voltage readings, state (which light is currently illuminated), bulb status, etc. When the IoT device is provisioned in IoT Hub, its device twin will contain metadata properties for the serial number, latitude, longitude, and street information. The custom web application will populate this data and handle device provisioning for this and other IoT devices. The device will update its reported properties for its maintenance and state telemetry through device-to-cloud messages. One-way notifications can be sent to the device via cloud-to-device messages sent through IoT Hub that can be used to modify the light timing (how long a light stays green or red). In addition, the back-end service that sends the cloud-to-device message can request feedback from the device, letting it know whether the command was successfully processed. This allows the sender to implement retry or compensation logic.
+    Traffic lights will have IoT devices installed that send maintenance-related telemetry, such as voltage readings, timing, etc. When the IoT device is provisioned in IoT Hub, its device twin will contain metadata properties for the serial number, latitude, and longitude information. The custom web application will populate this data and handle device provisioning for this and other IoT devices. The device will update its reported properties for its maintenance and state telemetry through device-to-cloud messages. One-way notifications can be sent to the device via cloud-to-device messages sent through IoT Hub that can be used to modify the light timing (how long a light stays green or red). In addition, the back-end service that sends the cloud-to-device message can request feedback from the device, letting it know whether the command was successfully processed. This allows the sender to implement retry or compensation logic.
 
 5.  Using your ingest service, how would you handle critical messages separately to route them to custom endpoints based on message properties?
 
@@ -458,125 +452,24 @@ _Data and visualization_
 
 3.  Describe how the custom web application will be hosted, as well as how it will access the stored telemetry including displaying location information on a map, manage reference data (speed limit information, speed alert thresholds, vehicle information, etc.), alerts, and device control messages. Also, describe how you will use it to provision new IoT devices and send manual cloud-to-device messages.
 
-    Host the web application in the Web Apps PaaS service. Alternatively, host it within a series of Docker containers in a microservices architecture for maximum scalability if needed. The custom web application can use Time Series Insights as its back-end service for indexing, storing, and aggregating time series data. This is where any custom visualizations, such as dynamic maps can be built and served to display the data. This is accomplished through Time Series Insight's Query APIs. It will connect to Cosmos DB, the secondary data store in this scenario, to access and store reference data. Build custom forms in the web app to manage this data, as well as alert thresholds and device control message schema information that will be used to either manually send cloud-to-device messages from the web app, or automatically from another service such as Azure Functions. Use the IoT Service SDK to simplify device management. When creating a new device using the SDK's device registry manager, add a new device twin containing custom tags or properties. The service SDK is available for .NET, Java, Node.js, Python, and C. This SDK can also be used to send cloud-to-device messages. The IoT device SDK is used for sending direct messages to the device. It doesn't matter whether the sender is using the same language SDK (.NET, Node.js, etc.) as the client. The IoT service SDK can also be used to send firmware updates to the devices and track the status. If you need to broadcast jobs, such as updating device properties or tags, or invoking direct methods on multiple (potentially millions) of devices, use the IoT service SDK to create a device twin query that selects the affected devices, then broadcast the job to those devices and track progress.
+    Host the Azure Remote Monitoring accelerator web application in the Web Apps PaaS service. Alternatively, host it within a series of Docker containers in a microservices architecture for maximum scalability if needed. The web application can use Time Series Insights as its back-end service for indexing, storing, and aggregating time series data. This is where any custom visualizations, such as dynamic maps can be built and served to display the data. It will connect to Cosmos DB, the secondary data store in this scenario, to access and store reference data. Using the Remote Monitoring web application, define alert thresholds and device control message schema information that will be used to either manually send cloud-to-device messages from the web app, or automatically from another service such as Azure Functions. Use the same Remote Monitoring Accelerator web app to simplify device management and initiate jobs, such as updating device properties or tags, or invoking direct methods on multiple (potentially millions) of devices.
 
-4.  What would you recommend using to combine bus and traffic light information, filtering the data by close proximity of both types of IoT devices, then by average bus speed information based on predefined speed thresholds for detecting slow traffic near the traffic lights? How can this data be used to send alerts and cloud-to-device traffic light timing change messages?
+4.  What would you recommend using to combine bus and traffic light geolocation information, to rate incoming telemetry vs predefined thresholds so that a cloud to device message commanding job may be sent to a traffic light?
 
-    Use Azure Stream Analytics, which will allow you to run SQL-like queries against incoming telemetry data at incredible speeds to combine and filter the data at scale. The first step is to create a new consumer group to IoT Hub's messages/events endpoint, allowing the Time Series Insights instance and Stream Analytics instance to simultaneously read the incoming data. Create a new Stream Analytics input that points to the consumer group. Another input should be added that is used for reference data for bus speed-based alerts in proximity to the traffic lights. This reference data should be stored in Blob storage in CSV, JSON, or Avro format. Create an Azure Data Factory pipeline that uses a copy activity to periodically copy the reference data from Cosmos DB and updates the file in Blob storage that Stream Analytics points to for this second input. Create a Cosmos DB Stream Analytics output for storing unfiltered bus location data, and an Azure Functions output that points to a function invoked with an HTTP trigger and uses the filtered data from Stream Analytics to determine the level of traffic congestion. Create a Stream Analytics query to collect the bus GPS and traffic light data, joining the two using geospatial queries to find buses within close proximity to traffic lights, and using the reference data input to filter the data based on average bus speeds. The filtered data indicating traffic congestion is sent to Azure Functions to evaluate the data and compare it against traffic data stored in Cosmos DB. If it appears as though traffic congestion is changing, the function updates Cosmos DB accordingly. Another function is triggered when traffic timing control messages appear in a Cosmos DB collection, whether automatically added by the previous function, or manually added by the web app. It sends a cloud-to-device control message to IoT Hub to send a timing change request to a specific traffic light if needed. Here is a sample query that can be used:
-
-    ```
-    WITH
-    buses AS (
-        SELECT
-            stream.IoTHub.ConnectionDeviceId AS bus_device_id,
-            stream.latitude AS bus_latitude,
-            stream.longitude AS bus_longitude,
-            stream.vin, stream.speed,
-            stream.IoTHub.EnqueuedTime AS bus_enqueued_time
-        FROM
-            IoTHubStream stream TIMESTAMP BY stream.EventEnqueuedUtcTime
-        WHERE IoTHub.ConnectionDeviceId LIKE 'Simulated.bus%'
-    ),
-    lights AS (
-        SELECT
-            stream.IoTHub.ConnectionDeviceId AS light_device_id,
-            stream.timing, stream.serial_number,
-            stream.latitude AS light_latitude,
-            stream.longitude AS light_longitude
-        FROM
-            IoTHubStream AS stream TIMESTAMP BY stream.EventEnqueuedUtcTime
-        WHERE IoTHub.ConnectionDeviceId LIKE 'Simulated.trafficlight%'
-    )
-    -- Store bus location data in Cosmos DB
-    SELECT
-        *
-    INTO Cosmos
-    FROM buses
-    -- Send traffic congestion data to Azure Functions
-    SELECT
-        System.TimeStamp AS WindowEnd,
-        buses.vin, buses.bus_latitude, buses.bus_longitude,
-        buses.bus_device_id, buses.speed, lights.timing,
-        lights.serial_number, lights.light_device_id,
-        AVG(buses.speed) AS average_speed,
-        buses.bus_enqueued_time, COUNT(*)
-    INTO trafficfunction
-    FROM
-        buses
-    JOIN lights ON
-        ST_DISTANCE(
-            CreatePoint(buses.bus_latitude, buses.bus_longitude),
-            CreatePoint(lights.light_latitude, lights.light_longitude)
-        ) < 200 -- within 200 meters
-    AND DATEDIFF(minute, buses, lights) BETWEEN 0 AND 2
-    JOIN
-        SpeedLimitReference R ON
-    lights.serial_number = R.SerialNumber
-    WHERE buses.speed BETWEEN
-        CAST(R.SpeedMinAlert as float) AND
-        CAST(R.SpeedMaxAlert as float)
-    GROUP BY buses.vin, buses.bus_latitude, buses.bus_longitude,
-    buses.bus_device_id, buses.speed, lights.timing,
-    lights.serial_number, lights.light_device_id,
-    buses.bus_enqueued_time,
-    TumblingWindow(Duration(minute, 2), Offset(millisecond, -1))
-    ```
+    The remote monitoring accelerator provides a map that automatically plots device location based on their latitude and longitude reported properties. The web application also allows for the definition of threshold rules where it will automatically evaluate incoming telemetry and initiating an alert. Users of the web application have the opportunity to review the alerts and to queue a device to cloud message job to control the timing of traffic lights.
 
 _Location-based data and mapping_
 
 1.  Relecloud wants to integrate map visualization to show the location of buses, traffic lights, and other devices. They would like to use a mapping service that does not require them to send data to an external resource, can be used with other Azure services like Stream Analytics, and supports data privacy and compliance when needed.
 
-    Use Azure Location Based Services (LBS), which includes service APIs for Maps, Search, Traffic, and Time Zones. This allows all of the data to stay within Azure and removes an external dependency, allowing the customer to use the same billing, account, and Azure infrastructure as all of the other services in this solution. As a first-class service, LBS supports data privacy and compliance, such as GDPR (General Data Protection Regulation).
+    The remote monitoring accelerator uses the Azure Maps Services to render its map. This allows all of the data to stay within Azure and removes an external dependency, allowing the customer to use the same billing, account, and Azure infrastructure as all of the other services in this solution. As a first-class service, LBS supports data privacy and compliance, such as GDPR (General Data Protection Regulation).
 
-2.  How would you perform reverse geocode queries to find addresses and cross streets based on latitude/longitude? They would also like to view the posted speed limit and road use, such as local road use, limited access, etc.
-
-    Use the Location Based Services Search API. This can be used to perform the reverse geocode queries to display on the custom web app's UI but can also be used to update the reference information for the traffic lights, such as the posted speed limit. This data can easily be retrieved through HTTP REST requests. Here is an example JSON response using the Search API, passing in the coordinates for one of the traffic lights. Notice that it also includes speed limit and road use data:
-
-    ```
-    {
-        "summary": {
-            "queryTime": 16,
-            "numResults": 1
-        },
-        "addresses": [
-            {
-                "address": {
-                    "buildingNumber": "83",
-                    "streetNumber": "83",
-                    "routeNumbers": [],
-                    "street": "W 47th St",
-                    "streetName": "W 47th St",
-                    "streetNameAndNumber": "83 W 47th St",
-                    "countryCode": "US",
-                    "countrySubdivision": "NY",
-                    "countrySubdivisionName": "New York",
-                    "municipality": "New York",
-                    "postalCode": "10036",
-                    "municipalitySubdivision": "Manhattan",
-                    "country": "United States of America",
-                    "countryCodeISO3": "USA",
-                    "freeformAddress": "83 W 47th St, New York NY 10036",
-                    "speedLimit": "25.00MPH",
-                    "boundingBox": {
-                        "northEast": "40.762460,-73.975740",
-                        "southWest": "40.753460,-73.987620",
-                        "entity": "position"
-                    }
-                },
-                "position": "40.757960,-73.981680",
-                "roadUse": [
-                    "LocalStreet"
-                ]
-            }
-        ]
-    }
-    ```
 
 ## Checklist of preferred objection handling
 
 1.  If bus data is collected offline and sent later on, how can we be certain that the time series data is not displayed out of order from when it was captured?
 
-    When you are collecting and storing time series data, the order of events and accurate time stamping is crucial. Use the device.msg.created value for the Time Series Insights timestamp data. This ensures that data received out of order, or sometime in the future long after the event occurred, is accurately reflected in its actual time of event.
+    When you are collecting and storing time series data, the order of events and accurate time stamping is crucial. Configure Time Series Insights to use the vehicle telemetry timestamp to order the data. This ensures that data received out of order, or sometime in the future long after the event occurred, is accurately reflected in its actual time of event.
 
 2.  We would like to be able to have more than one service access the IoT data without leading to reuse by multiple readers, and other negative effects. Is this possible?
 
