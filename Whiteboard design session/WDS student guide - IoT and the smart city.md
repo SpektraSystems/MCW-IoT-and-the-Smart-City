@@ -9,7 +9,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-December 2019
+January 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only, and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third-party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are the property of their respective owners.
 
@@ -29,7 +29,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [IoT and the Smart City whiteboard design session student guide](#iot-and-the-smart-city-whiteboard-design-session-student-guide)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-    - [Customer situation](#customer-situation)
+      - [Customer situation](#customer-situation)
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
@@ -70,13 +70,11 @@ Fabrikam City council has conducted a six-month study of new and emerging techno
 
 At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
-They realize that IoT offers cities revolutionary ways to gather this vital data. Analyzing this information to understand how a city operates will improve response times for everyday purposes and acute emergencies. This wave of change will enable innovation, new services, and cost savings. However, if Fabrikam City is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
+They realize that IoT offers cities revolutionary ways to gather this vital data. This wave of change will enable innovation, new services, and cost savings. However, if Fabrikam City is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
 
-Fabrikam City buses are widely used throughout the many boroughs, such as Northwind, Contoso, and the Tailwind. It would make sense to somehow attach IoT devices to those buses to perform a number of functions such as preventive maintenance and tracking driver performance. It would be great if only the most important information is sent off over the internet instead of constantly sending a lot of data over expensive cellular connectivity. The most important information could be described as anomalies, like impending mechanical breakdowns or reckless driving. The buses will periodically send their location information that can be used to track their progress on their route. All of the information can be uploaded once the bus arrives at its home station where it has Wi-Fi connectivity. The full data could then be used for accounting and analysis of the data collected throughout the day.
+Fabrikam City buses are widely used throughout the many boroughs, such as Northwind, Contoso, and Tailwind. It would make sense to somehow attach IoT devices to those buses to perform a number of functions such as preventive maintenance and tracking driver performance. It would be great if only the most important information is sent off over the internet instead of constantly sending a lot of data over expensive cellular connectivity. The most important information could be described as anomalies, like impending mechanical breakdowns or reckless driving. The buses will periodically send their location information that can be used to track their progress on their route. All of the information can be uploaded once the bus arrives at its home station where it has Wi-Fi connectivity. The full data could then be used for accounting and analysis of the data collected throughout the day.
 
-Because these buses are so prevalent on all the major roads, they should be able to act as traffic bellwethers, using that information along with their location to inform the timing of traffic lights. These traffic lights contain control boxes that can be remotely controlled.
-
-Fabrikam city council would also like to increase the intelligence of the traffic lights and reduce physical inspections by adding IoT devices with sensors that can detect maintenance and performance issues, such as when a bulb is out, if the light sequence is stuck in a continuous cycle loop outside of normal parameters, voltage irregularities, etc. Unlike the city buses, these traffic lights are always connected to the internet and can send and receive command and control information as often as needed.
+In regard to traffic lights, Fabrikam city council would also like reduce physical inspections by adding IoT devices with sensors that can detect maintenance and performance issues, such as if the light sequence is stuck in a continuous cycle loop outside of normal parameters, voltage irregularities, etc. Unlike the city buses, these traffic lights are always connected to the internet and can send and receive command and control information as often as needed.
 
 Relecloud has been contracted to build a cloud-based architecture based on these requirements. They have researched IoT-related service offerings from various cloud providers and are interested in recent capabilities added to Azure for storing and evaluating time series data, as well as building IoT devices that run on the edge for localized data transformation and processing.
 
@@ -94,15 +92,13 @@ Following this same mandate of ease of use and future flexibility without overta
 
 4.  Store the bus telemetry data locally when offline and send when internet connectivity is available.
 
-5.  Send regular location updates of city buses that can be used to display on a map, update bus routes, and track traffic conditions.
+5.  Send regular location updates of city buses that can be used to display on a map and update bus routes status.
 
-6.  Use the traffic information from the buses to help inform the timing of traffic lights.
+6.  Install IoT devices on traffic lights for maintenance purposes.
 
-7.  Install IoT devices on traffic lights for maintenance purposes.
+7.  Easily combine all of the time series data in a single pane of view, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added.
 
-8.  Easily combine all of the time series data in a single pane of view, with advanced querying and filtering options, and that can automatically handle schema changes of incoming telemetry and new device types as they are added.
-
-9.  Have a web portal to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
+8.  Have a web portal to view the buses and traffic lights on a map, manage device provisioning, alert rules, reference data, and control messages.
 
 ### Customer objections
 
@@ -160,13 +156,11 @@ _Data and visualization_
 
 3.  Describe how the custom web application will be hosted, as well as how it will access the stored telemetry including displaying location information on a map, manage reference data (speed limit information, speed alert thresholds, vehicle information, etc.), alerts, and device control messages. Also, describe how you will use it to provision new IoT devices and send manual cloud-to-device messages.
 
-4.  What would you recommend using to combine bus and traffic light information, filtering the data by the close proximity of both types of IoT devices, then by average bus speed information based on predefined speed thresholds for detecting slow traffic near the traffic lights? How can this data be used to send alerts and cloud-to-device traffic light timing change messages?
+4.  What would you recommend using to combine bus and traffic light information, filtering the data by the close proximity of both types of IoT devices, then by average bus speed information based on predefined speed thresholds?
 
 _Location-based data and mapping_
 
 1.  Relecloud wants to integrate map visualization to show the location of buses, traffic lights, and other devices. They would like to use a mapping service that does not require them to send data to an external resource, can be used with other Azure services like Stream Analytics, and supports data privacy and compliance when needed.
-
-2.  How would you perform reverse geocode queries to find addresses and cross streets based on latitude/longitude? They would also like to view the posted speed limit and road use, such as local road use, limited access, etc.
 
 **Prepare**
 
