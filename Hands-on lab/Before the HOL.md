@@ -63,9 +63,13 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     - <https://docs.docker.com/engine/installation/>
 
-  - .NET Core 2.2 SDK
+  - .NET Core 2.1 SDK
+   
+    - <https://dotnet.microsoft.com/download/dotnet-core>
+  
+  - .NET Framework 4.6.1 Dev Pack
 
-    - <https://dotnet.microsoft.com/download>
+    - <https://dotnet.microsoft.com/download/dotnet-framework>
 
   - Visual Studio Community 2019 or greater, version 16.2.5 or higher
 

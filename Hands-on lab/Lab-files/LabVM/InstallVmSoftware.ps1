@@ -20,7 +20,7 @@ $Packages = 'googlechrome',`
             'visualstudio2019-workload-azure',`
             'visualstudio2019-workload-manageddesktop',`
             'visualstudio2019-workload-netweb',`
-            'dotnetcore-sdk'
+            'dotnetcore-sdk --version=2.1.805'            
 
 #Install Packages
 ForEach ($PackageName in $Packages)
