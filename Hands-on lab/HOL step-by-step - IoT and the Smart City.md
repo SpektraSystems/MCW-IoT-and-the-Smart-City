@@ -1851,7 +1851,7 @@ A Function app is a logical collection of functions on the Azure platform. Each 
 
 4. On the **New Function** blade **Details** tab, name the function **IoTHub_CriticalAlerts**, and enter **queuefuncconsumergroup** in the **Event Hub consumer group** textbox.
 
-   ![The New Function blade is shown populated with the previous values.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image218.png 'Install Extension')
+   ![The New Function blade is shown populated with the previous values.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image218.png)
 
 5. Beneath the **Event Hub connection** field, press **New** and select **IoT Hub**, then select the IoT Hub being used for this lab. Ensure the **Endpoint** is set to **Events (built-in endpoint)**.
 
