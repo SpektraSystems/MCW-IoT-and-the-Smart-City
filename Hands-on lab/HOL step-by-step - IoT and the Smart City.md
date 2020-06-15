@@ -1265,7 +1265,7 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
     a. The first item to complete is to add the device connection string.
 
     ```C#
-     //TODO: 1 - set device connection string for the device client 
+     //TODO: 1 - set device connection string for the device client
     //static string _deviceConnectionString = "<device connection string goes here>";
     ```
 
@@ -1294,7 +1294,7 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
    e. Use the device client to retrieve the desired properties from the Device Twin in the cloud. Use these values to populate the initial state of the current device.
 
    ```C#
-   // TODO: 5 - initialize device instance with values obtained from the device twin desired properties       
+   // TODO: 5 - initialize device instance with values obtained from the device twin desired properties
     // var twin = await _deviceClient.GetTwinAsync();
     // var desired = twin.Properties.Desired;
     // await UpdateDeviceInstanceFromDesiredProperties(desired);
@@ -1303,7 +1303,7 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
     f. Initialize local edge blob storage.
 
     ```C#
-    // TODO: 6 - initialize iot edge storage 
+    // TODO: 6 - initialize iot edge storage
         // _storageAccount = CloudStorageAccount.Parse(_storageConnectionString);
         // _blobClient = _storageAccount.CreateCloudBlobClient();
         // _blobContainer = _blobClient.GetContainerReference("telemetry");
@@ -1370,7 +1370,7 @@ Additionally, all telemetry obtained from the bus sensors is saved in local blob
     k. Populate the input model with the current state data of the bus. This information will be used by the prediction engine to determine if the bus driver is driving dangerously.
 
     ```C#
-        // TODO 14: Create input for the machine learning prediction engine by setting the 
+        // TODO 14: Create input for the machine learning prediction engine by setting the
         //         device current latitude, longitude, and speed limit
         // var mlInput = new ModelInput()
         // {
@@ -2498,4 +2498,3 @@ In this exercise, attendees will deprovision any Azure resources that were creat
     ![The remote monitoring details are displayed along with a delete button selected at the bottom of the screen.](images/Hands-onlabstep-by-step-IoTandtheSmartCityimages/media/image238.png 'Delete solution')
 
 You should follow all steps provided *after* attending the Hands-on-lab.
-
