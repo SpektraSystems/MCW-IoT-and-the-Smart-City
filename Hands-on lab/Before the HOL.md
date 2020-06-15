@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-January 2020
+June 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -101,29 +101,29 @@ In this exercise, you will set up your environment you will use for the rest of 
 
 In this task you will perform a deployment of a the VM that will be used during this lab.
 
-1.  Open a new private or incognito tab in your web browser, and then connect to [the lab VM](./Lab-files/LabVM/README.md).
+1. Open a new private or incognito tab in your web browser, and then connect to [the lab VM](./Lab-files/LabVM/README.md).
 
-2.  Press the **Deploy to Azure** button.
+2. Press the **Deploy to Azure** button.
 
     ![The IoT and the Smart City LABVM repo on GitHub.com is shown. The Deploy to Azure button has been selected.](images/Setup/image3.png 'IoT and the Smart City LABVM')
 
-3.  You will need to then authenticate with Azure.
+3. You will need to then authenticate with Azure.
 
     ![Use the sign in form to authenticate with your Azure account.](images/Setup/image4.png 'Authentication dialog')
 
-4.  On the Custom Deployment page, choose to create a new resource group, enter **IoTSmartCity** as the Resource name and select a Location close to you.
-   
-5.  Next, update the LABVM DNS Name providing a globally unique name 3-24 alpha-numeric characters which are lowercase. Check the I agree to the terms and conditions stated above and then press the Purchase button.
+4. On the Custom Deployment page, choose to create a new resource group, enter **IoTSmartCity** as the Resource name and select a Location close to you.
+
+5. Next, update the LABVM DNS Name providing a globally unique name 3-24 alpha-numeric characters which are lowercase. Check the I agree to the terms and conditions stated above and then press the Purchase button.
 
     ![LabVM form](images/Setup/image6.png 'LAVM Form')
 
 > **Note**: The VM will take about 45 minutes to provision. You will need to wait for this deployment to complete prior to continuing.
 
-1.  Once the Deployment completes, you can locate your VM in the **IoTSmartCity** Resource group. Open the **LABVM** and select **Connect**.
+1. Once the Deployment completes, you can locate your VM in the **IoTSmartCity** Resource group. Open the **LABVM** and select **Connect**.
 
     ![Press the Connect link within the LABVM virtual machine Overview blade.](images/Setup/image7.png 'LABVM connect button')
 
-2.  Login to the LABVM using the following credentials:
+2. Login to the LABVM using the following credentials:
 
     - **Username**: demouser
 
@@ -131,29 +131,31 @@ In this task you will perform a deployment of a the VM that will be used during 
 
     ![Enter demouser as the username, and Password.1!! as the password.](images/Setup/image8.png 'Login credential fields')
 
-3.  A Remote Desktop Warning will appear. Select **Don't ask me again for connections to this computer** and then select **Yes**.
+3. A Remote Desktop Warning will appear. Select **Don't ask me again for connections to this computer** and then select **Yes**.
 
     ![Check the Don't ask me again for connections to this computer, then select Yes on the Remote Desktop Connection Warning dialog.](images/Setup/image9.png 'Remote Desktop Connection warbubg dialog box')
 
-4.  You will receive a message about allowing your PC to be discoverable. Select **No**.
+4. You will receive a message about allowing your PC to be discoverable. Select **No**.
 
     ![Select No when asked whether you want to allow your PC to be discoverable by other PCs and devices on this network.](images/Setup/image10.png 'Network pop-up')
 
-5.  Once logged in - Docker Desktop will need to be started. Double-click the *Docker Desktop* icon to start the program. This will take a couple of minutes. You can see the status by pressing the Docker icon in the taskbar to ensure that is reads "Docker is Starting".
+5. Once logged in - Docker Desktop will need to be started. Double-click the *Docker Desktop* icon to start the program. This will take a couple of minutes. You can see the status by pressing the Docker icon in the taskbar to ensure that is reads "Docker is Starting".
 
     ![Double-Click the Docker Desktop icon to start the program.](images/Setup/docker-icon.png)
-    
+
     ![Double-click the Docker Icon within the Windows taskbar to ensure Docker has started.](images/Setup/image12.png 'Windows taskbar docker icon')
 
-6.  When Docker for Windows is up and running you will receive the following message:
+6. When Docker for Windows is up and running you will receive the following message:
 
     ![When Docker is open and displayed, it should say "Docker is now up and running!".](images/Setup/image13.png 'Docker Welcome page')
 
 ### Task 2: Validate connectivity to Azure
 
-1.  From within the virtual machine, launch **Visual Studio** and validate that you can log in with your Microsoft Account when prompted.
+1. From within the virtual machine, launch **Visual Studio** and validate that you can log in with your Microsoft Account when prompted.
 
-2.  Validate connectivity to your Azure subscription. Launch Visual Studio, open **Server Explorer** from the View menu, and ensure that you can connect to your Azure subscription.
+2. Validate connectivity to your Azure subscription. Launch Visual Studio, open **Server Explorer** from the View menu, and ensure that you can connect to your Azure subscription.
+
+  ![The Server Explorer is displayed with an Azure Subscription in the listing.](media/bhol_serverexplorer.png)
 
 ### Task 3: Download lab artifacts
 
@@ -161,7 +163,7 @@ There are several artifacts that will be used in this hands-on lab. All of these
 
 1. From your LABVM, obtain all artifacts by downloading a .zip copy of the IoT and the Smart City GitHub repo.
 
-2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City). 
+2. In a web browser, navigate to the [IoT and the Smart City MCW repo](https://github.com/Microsoft/MCW-IoT-And-The-Smart-City).
 
 3. On the repo page, select **Clone or download**, then select **Download ZIP**.
 

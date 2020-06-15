@@ -2,7 +2,7 @@
     "$schema-version": "0.0.1",
     "description": "",
     "image": {
-        "repository": "<enter container server url here>/vehicletelemetrysimulator",
+        "repository": "cpiotssregistry.azurecr.io/vehicletelemetrysimulator",
         "tag": {
             "version": "0.0.1",
             "platforms": {
