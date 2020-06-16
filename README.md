@@ -4,7 +4,7 @@ Fabrikam City council has conducted a six-month study of new and emerging techno
 
 At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and is becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
-January 2020
+June 2020
 
 ## Target audience
 - Application developer
