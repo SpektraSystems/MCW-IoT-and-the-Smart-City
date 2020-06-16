@@ -9,7 +9,7 @@ Whiteboard design session student guide
 </div>
 
 <div class="MCWHeader3">
-January 2020
+June 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -68,7 +68,7 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 Fabrikam City council has conducted a six-month study of new and emerging technologies that can improve the lives of its citizens. Being the largest city in the US, the challenges most cities face are compounded by scale. Many of these challenges revolve around city traffic and public transportation.
 
-At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and are becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
+At the conclusion of their study, the city council realized that the Internet of Things (IoT) is widely available and is becoming more integrated into our daily lives. Fabrikam City can capitalize on the wide availability and affordability of IoT devices. This means physical things like traffic lights and vehicles will be able to collect and share data by connecting to the Internet. Through analytics, cities can turn this data into intelligent information that will change the way the world works.
 
 They realize that IoT offers cities revolutionary ways to gather this vital data. This wave of change will enable innovation, new services, and cost savings. However, if Fabrikam City is going to be \"smart\" (that is, IoT-connected), it needs to devise a strategy for deploying technologies rather than allowing 1,000 ad-hoc systems to take root without forethought. A proactive strategy will maximize the return on an IoT investment.
 

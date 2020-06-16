@@ -12,7 +12,7 @@ namespace ReadEngineAlerts
             var count = 1;
             ConsoleColor[] colors = { ConsoleColor.White, ConsoleColor.Cyan, ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow };
             Console.WriteLine("Receive critical messages. Ctrl-C to exit.\n");
-            var connectionString = "<Your ConnectionString goes here> ";
+            var connectionString = "{YOUR-CONNECTION-STRING}";
             var queueName = "alert-q";
 
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);

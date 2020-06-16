@@ -26,14 +26,14 @@
       }
     ]
   },
+  /*
   "Properties": {
-    /*
     "Type": "Bus",
     "Location": "Contoso",
     "Latitude": 40.755086,
     "Longitude": -73.984165
-   */
   },
+  */
   "Telemetry": [
     {
       "Interval": "00:00:10",
@@ -49,27 +49,25 @@
           "longitude": "double",
           "speed": "double",
           "speed_unit": "text",
-          "vin": "text"
-          
-        }
-       */
+          "vin": "text"          
+        } 
+        */
       }
     },
     {
       "Interval": "00:01:00",
       /*
-      "MessageTemplate": "{\"fuellevel\":${fuellevel},\"fuellevel_unit\":\"${fuellevel_unit}\"}",
-  */
+      "MessageTemplate": "{\"fuellevel\":${fuellevel},\"fuellevel_unit\":\"${fuellevel_unit}\"}",  
+      */
       "MessageSchema": {
         "Name": "bus-sensors;v1",
         "Format": "JSON",
-/*
+        /*
         "Fields": {
           "fuellevel": "double",
-          "fuellevel_unit": "text"
-          
+          "fuellevel_unit": "text"          
         }
-      */
+        */
       }
     }
   ],
