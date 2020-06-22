@@ -1,0 +1,59 @@
+[
+    {
+      "Name": "IoT and the Smart City",
+      "Language": "English",
+      "Files": [
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/lab-overview.md",
+          "Order": 1  
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/01.md",
+          "Order": 2
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/02.md",
+          "Order": 3
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/03.md",
+          "Order": 4
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/04.md",
+          "Order": 5
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/05.md",
+          "Order": 6
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/06.md",
+          "Order": 7
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/07.md",
+          "Order": 8
+        },    {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/08.md",
+          "Order": 9
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/09.md",
+          "Order": 10
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/10.md",
+          "Order": 11
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/11.md",
+          "Order": 12
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/SpektraSystems/MCW-IoT-and-the-Smart-City/master/Hands-on%20lab/lab-completed.md",
+          "Order": 13
+        }
+      ]
+    }
+  ]
